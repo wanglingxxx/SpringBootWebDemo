@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-thymeleaf:1.4.0.RELEASE">
+    <CLASSES>
+      <root url="jar://D:/Software/gradle-2.2.1/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.0.RELEASE/1b830e4a75516582fe76b673ff62b7e338c79056/spring-boot-starter-thymeleaf-1.4.0.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/Software/gradle-2.2.1/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-thymeleaf/1.4.0.RELEASE/1d843d90650c26ea6c9c94b3c1e2c2629bef8c82/spring-boot-starter-thymeleaf-1.4.0.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

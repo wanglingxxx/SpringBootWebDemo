@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .mainList{
+        text-align: center;
+        margin:10px auto;
+        width: 70%;
+        min-height: 400px;
+
+    }
+    .checkbox{
+        width:25px;
+        height:20px;
+    }
+    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<h1>欢迎进入陈鹏个人主页</h1>
+
+
+
+<form id="mulSearchForm" method="post">
+
+    <tr>
+        <td>用户ID<input type="text" name="user_id" id="user_id"></td>
+        <td>汽车名称<input type="text" name="name" id="name" ></td>
+        <td>车辆品牌<input type="text" name="brand" id="brand"></td>
+        <td>车辆车系<input type="text" name="audi" id="audi"></td>
+        <td><button type="button" onclick="mulSearchBtn();">确定</button>
+        <button type="reset" >重置</button> </td>
+    </tr>
+
+</form>
+
+<div class="mainList">
+    <form>
+        <table class="table table-striped table-hover">
+
+            <tbody id="showList">
+
+            </tbody>
+        </table>
+
+        <div class="pagination" style="margin-bottom: 20px;" id="pagination">
+            <ul class="pagination">
+                <li class='disablepage' >
+                    <a href= '#'><< 首页</a></li>
+                <li class='disablepage'  >
+                    <a href= '#'><< 上一页</a></li>
+
+                <li><a href='#'>1</a></li>
+                <li><a href='#'>2</a></li>
+                <li><a href='#'>3</a></li>
+                <li><a href='#'>4</a></li>
+                <li><a href='#'>5</a></li>
+
+                <li class='nextpage'  >
+                    <a href= '#'>下一页 >></a></li>
+                <li class='nextpage'  >
+                    <a href= '#'>尾页 >></a></li>
+            </ul>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<div >
+    <!-- 添加窗口DIV -->
+    <!-- data-target触发模态弹出窗元素 -->
+    <button class="btn btn-primary" id="car_carinfo_saveBtn" data-toggle="modal" data-target="#car_carinfo_saveModal-data" type="button" style="display:none;">通过data-target触发</button>
+      <!-- 模态弹出窗内容 -->
+    <div class="modal fade data-keyboard='false' " id="car_carinfo_saveModal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"   aria-hidden="true">
+        <div class="modal-dialog modal-sm" id="example">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h4 class="modal-title">添加</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="" id="car_carinfo_save_form"
+                          action="http://localhost:8887/car_carinfo/save" method="post" enctype="multipart/form-data">
+
+                        <!-- 	没有该隐藏域
+                        <input type="hidden" class="form-control"  id="addid"  name="id" value="" >
+                             -->
+
+                        <div class="form-group">
+                            <label  >用户id</label>
+                            <input type="text" name="user_id" class="form-control" id="car_carinfo_save_user_id" placeholder="请输入用户id">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_car_name">汽车名称</label>
+                            <input type="text" name="name" class="form-control" id="car_carinfo_save_car_name"  placeholder="请输入汽车名称">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_brand">车辆品牌:</label>
+                            <input type="text" id="car_carinfo_save_brand" name="brand" class="form-control"  placeholder="请输入车辆品牌">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_audi">车辆车系</label>
+                            <input type="text"  name="audi" class="form-control" id="car_carinfo_save_audi"  placeholder="请输入车辆车系">
+                        </div>
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_price">车辆价格</label>
+                            <input type="text" name="price" class="form-control" id="car_carinfo_save_price" placeholder="请输入车辆价格">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_cost_price">车辆原价</label>
+                            <input type="text" name="cost_price" class="form-control" id="car_carinfo_save_cost_price"  placeholder="请输入车辆原价">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_mileage">里程数:</label>
+                            <input type="text" id="car_carinfo_save_mileage" name="mileage" class="form-control"  placeholder="请输入里程数">
+                        </div>
+
+                        <div class="form-group">
+                            <label   for="car_carinfo_save_buy_date">购买时间</label>
+                            <input type="date"  name="buy_date" class="form-control" id="car_carinfo_save_buy_date"  placeholder="请输入购买时间">
+                        </div>
+                        <div class="form-group">
+                            <label>车辆图片</label>
+                            <input type="file"  name="photo" class="form-control" id="car_carinfo_save_photo"  placeholder="请输入车辆图片">
+                            <input type="hidden" class="form-control"  id="car_carinfo_save_photo1"  name="photo" value="" >
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="car_carinfo_save_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="add_car_carinfo();" >保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/car_carinfo/car_carinfo.js"></script>
+</body>
+<script type="text/javascript">
+$(function(){
+initList();
+});
+
+/**
+ * 实现全选 反选
+ */
+var a = 0;
+function checkbox(){
+    //$(":checkbox").attr("checked",isChecked);
+    if(a == 1){
+        //$(":checkbox").removeAttr("checked");
+        $("input[name='checkbox']").prop("checked", false);
+
+        a=0;
+    }else{
+        $("input[name='checkbox']").prop("checked", true);
+        //$(":checkbox").attr("checked",true);
+
+        a=1;
+    }
+}
+</script>
+</html>
