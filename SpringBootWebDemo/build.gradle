@@ -8,8 +8,10 @@ sourceCompatibility = 1.5
 
 
 repositories {
-    mavenCentral(url:"http://repo1.maven.org/maven2")
-    jcenter()
+    mavenLocal()
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
 }
 
 dependencies {
