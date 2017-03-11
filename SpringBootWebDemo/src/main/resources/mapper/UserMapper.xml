@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chen.mapper.UserMapper" >
+<mapper namespace="com.research.mapper.UserMapper" >
 
 
-  <resultMap id="BaseResultMap" type="com.chen.model.User" >
+  <resultMap id="BaseResultMap" type="com.research.model.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
@@ -29,7 +29,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.chen.model.User" >
+  <insert id="insert" parameterType="com.research.model.User" >
     insert into tb_user (id, name, age,
     adress, email, create_time,
     status)
@@ -38,7 +38,7 @@
     #{status,jdbcType=INTEGER})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.chen.model.User" >
+  <insert id="insertSelective" parameterType="com.research.model.User" >
     insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -88,7 +88,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.chen.model.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.research.model.User" >
     update tb_user
     <set >
       <if test="name != null" >
@@ -113,7 +113,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.chen.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.research.model.User" >
     update tb_user
     set name = #{name,jdbcType=VARCHAR},
     age = #{age,jdbcType=INTEGER},

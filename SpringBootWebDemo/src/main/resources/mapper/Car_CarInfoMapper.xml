@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="com.chen.dao.StudentMapper"> -->
-<mapper namespace="com.chen.mapper.Car_CarInfoMapper">
+<mapper namespace="com.research.mapper.Car_CarInfoMapper">
   <!-- 开启redis 缓存 -->
   <!--<cache />-->
 
-  <resultMap type="com.chen.model.Car_CarInfo" id="Car_CarInfoResult">
+  <resultMap type="com.research.model.Car_CarInfo" id="Car_CarInfoResult">
     <id property="id" column="id"/>
     <result property="user_id" column="user_id"  jdbcType="INTEGER"/>
     <result property="name" column="name"  jdbcType="VARCHAR"/>
