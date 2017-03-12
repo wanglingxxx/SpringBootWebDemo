@@ -31,10 +31,18 @@
 
     <update id="updateUserById" parameterType="com.research.model.User">
       UPDATE research_user
-      SET title = #{title}, author = #{author}, origin = #{origin},
-      content_file = #{contentFile}, `date` = #{date},
+      SET username = #{username}, password = #{password}, name = #{name},
+      sex = #{sex}, `id_card` = #{idCard},enable= #{enable},
       created_date = #{createdDate}, lastUpdated = #{lastUpdated}
     </update>
+
+
+    <select id="login" resultMap="UserResult">
+        SELECT id, username, password, `name`, sex, id_card, enable,
+        created_date, last_updated
+        FROM research_user
+        WHERE username = #{username} and  password = #{password}
+    </select>
 
     <select id="getUserById" resultMap="UserResult">
       SELECT id,title, author, origin, content_file, `date`,
@@ -44,8 +52,8 @@
     </select>
 
     <select id="getUser" resultMap="UserResult">
-      SELECT id,title, author, origin, content_file, `date`,
-      created_date, last_updated
+      SELECT id, username, password, `name`, sex, id_card, enable,
+        created_date, last_updated
       FROM research_user
       LIMIT #{pageIndex}, #{pageSize}
     </select>

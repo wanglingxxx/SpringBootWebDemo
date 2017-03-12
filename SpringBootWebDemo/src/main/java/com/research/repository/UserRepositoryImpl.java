@@ -4,16 +4,21 @@ import com.research.mapper.UserMapper;
 import com.research.model.Pagination;
 import com.research.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class UserRepositoryImpl implements UserRepository{
 
     @Autowired
     UserMapper userMapper;
 
+
+    public User login(User user) {
+        return userMapper.login(user);
+    }
 
     public int insertUser(User user) {
         return userMapper.insertUser(user);

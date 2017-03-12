@@ -22,7 +22,7 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<a href="javascript:;" id="name">请登录</a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
@@ -42,35 +42,37 @@
 		</div>
 	</header>
 	<div class="content container">
-		<form action="#">
+		<form action="/project/" id="researchProjectInsertForm" enctype="multipart/form-data" method="POST">
 			<div class="form-group">
 			    <label for="project-name">项目名称：</label>
-			    <input type="text" class="form-control text" id="project-name" placeholder="name...">
+			    <input type="text" name="title" class="form-control text" id="project-name" placeholder="name...">
 			</div>
 			<div class="form-group">
 			    <label for="project-introduce" class="area">项目简介：</label>
-			    <textarea name="" class="form-control" id="project-introduce" placeholder="简介........" rows="10" cols="80"></textarea>
+			    <textarea name="" name="summary" class="form-control" id="project-introduce" placeholder="简介........" rows="10" cols="80"></textarea>
 			</div>
 			<div class="form-group">
 			    <label for="project-declare-name">项目申报人：</label>
-			    <input type="text" class="form-control text" id="project-declare-name" placeholder="name..">
+			    <input type="text" name="applicant" class="form-control text" id="project-declare-name" placeholder="name..">
 			</div>
 			<div class="form-group">
 			    <label for="project-declare-company">项目申报单位：</label>
-			    <input type="text" class="form-control text" id="project-declare-company" placeholder="company...">
+			    <input type="text" name="declareUnits" class="form-control text" id="project-declare-company" placeholder="company...">
 			</div>
 			<div class="form-group">
 			    <label for="project-remark" class="area">备注：</label>
-			    <textarea name="" class="form-control" id="project-remark" placeholder="备注......." rows="10" cols="80"></textarea>
+			    <textarea name="remark" class="form-control" id="project-remark" placeholder="备注......." rows="10" cols="80"></textarea>
 			</div>
 
 			<div class="form-group">
 			    <label for="inputFile">项目文件上传：</label>
-			    <input type="file" id="inputFile">    
+			    <input type="file" name="projectFile" id="inputFile">
 			</div>
 			 
-			 <button type="submit" class="btn pull-right">申报</button>
+			 <<button type="button" onclick="research_project_insert()" class="btn pull-right">申报</button>
+
 		</form>
+
 	</div>
 	<footer>
 		<div class="href-1 ">
@@ -80,10 +82,44 @@
 				
 			</div>
 	</footer>
-	
+
+
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src="/js/ajaxfileupload.js"></script>
+
 	<script>
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		window.onload=function(){
+			$("#name").text($.cookie("user_name"));
+		}
+
+		function research_project_insert(){
+			alert("ok")
+			var title =$("#project-name").val();
+			var summary = $("#project-introduce").val();
+			var applicant = $("#project-declare-name").val();
+			var declareUnits = $("#project-declare-company").val();
+			var remark = $("#project-remark").val();
+			alert("bbb  " + title)
+			$.ajaxFileUpload({
+						url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark,
+						type:'POST',
+						secureuri: false, //是否需要安全协议，一般设置为false
+						dataType: 'json', //返回值类型 一般设置为json
+						fileElementId:'inputFile',
+						success: function (data, status){
+							alert(123);
+						},
+						error: function (data, status, e)//服务器响应失败处理函数
+						{
+							alert("bbb");
+						}
+					}
+			);
+
 
 		}
 	</script>

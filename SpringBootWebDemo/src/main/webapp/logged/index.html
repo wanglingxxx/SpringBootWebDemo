@@ -13,7 +13,7 @@
 			<div class="container">
 				<!-- <span class="pull-right log"><a href="login.html">登录</a>&nbsp;|&nbsp;<a href="register.html">注册</a></span> -->
 				<div class="pull-right log" id="log">
-					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<a href="javascript:;" id="name">请登录</a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
@@ -153,11 +153,22 @@
 			
 		</div>
 	</div><!-- footer end -->
-		
-		<script>
+
+
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
+
+
+	<script>
 			
 			document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 			window.onload=function(){
+
+				$("#name").text($.cookie("user_name"));
+
 				var foucus = document.getElementById('foucus');
 			    var list = document.getElementById('list');
 			    var buttons = document.getElementById('buttons').getElementsByTagName('span');
@@ -168,6 +179,8 @@
 			    var animated = false;   //用于判断切换是否进行
 			    var interval = 3000;    //自动播放定时器秒数，这里是3秒
 			    var timer;             //定时器
+
+
 
 
 			    function animate (offset) {

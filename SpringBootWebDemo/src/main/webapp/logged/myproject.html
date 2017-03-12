@@ -22,7 +22,7 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<a href="javascript:;" id="name">请登录</a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
@@ -231,10 +231,18 @@
 				
 			</div>
 	</footer><!-- footers end -->
-	
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
 	<script>
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 			window.onload=function(){
+
+				$("#name").text($.cookie("user_name"));
+
+
 				var tbody=document.getElementById('tbody');
 				var atr=tbody.getElementsByTagName('tr');
 				var pages=Math.ceil(atr.length/12);

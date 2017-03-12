@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import com.research.model.Pagination;
 import com.research.model.User;
 import com.research.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     UserService userService;
 
@@ -65,6 +70,29 @@ public class UserController {
 
         return ResponseEntity.ok(user);
     }
+
+    @RequestMapping(value = "/login/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        Preconditions.checkNotNull(username != null && username.length() > 0, "User username is illegal");
+        Preconditions.checkNotNull(password != null && password.length() > 0, "User password is illegal");
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+
+        logger.info("/user/login/ receive params :{}" + user.toJSONObject());
+
+
+        user = userService.login(user);
+        if(user != null) {
+            logger.info("/usr/login return :{}"+ user.toJSONObject());
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+
+    }
+
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getUsers(Pagination pagination) {
         Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");

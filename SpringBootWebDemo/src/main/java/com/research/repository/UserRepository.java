@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface UserRepository {
 
+    User login(User user);
 
     int insertUser(User user);
 

@@ -25,6 +25,6 @@ public class RunApplication {
     @RequestMapping("/home")
     String home() {
         System.out.print("你好 home ");
-        return "index.html";
+        return "redirect：/index.html";
     }
 }
