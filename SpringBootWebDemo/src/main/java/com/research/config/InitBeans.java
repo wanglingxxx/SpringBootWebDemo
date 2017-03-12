@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,7 +21,7 @@ public class InitBeans {
     /**     * mybatis 配置路径     */
     private static String MYBATIS_CONFIG="mybatis-config.xml";
     /**     * mybatis mapper resource 路径     */
-    private static String MAPPER_PATH="/mapper/*.xml";
+    private static String MAPPER_PATH="/com/research/mapper/*.xml";
 
     @Bean
     @ConfigurationProperties(prefix="spring.datasource")
@@ -46,7 +47,7 @@ public class InitBeans {
         /**
          * 配置mybatis.cfg.xml
          */
-        //sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(MYBATIS_CONFIG));
+        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(MYBATIS_CONFIG));
 
 
         return sqlSessionFactoryBean.getObject();

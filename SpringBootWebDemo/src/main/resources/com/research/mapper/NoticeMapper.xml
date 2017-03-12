@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="com.car.dao.StudentMapper"> -->
+<mapper namespace="com.research.mapper.NoticeMapper">
+	<cache></cache>
+
+	<resultMap type="com.research.model.Notice" id="NoticeResult">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="publisher" column="publisher"/>
+		<result property="publishDate" column="publish_date"/>
+		<result property="createdDate" column="created_date"/>
+		<result property="lastUpdated" column="last_updated"/>
+	</resultMap>
+
+	<insert id="insertNotice" parameterType="com.research.model.Notice" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO research_notice (title, content, publisher, publish_date,
+		 created_date, last_updated)
+		VALUES (#{title},#{content},#{publisher},#{publishDate},#{createdDate},#{lastUpdated})
+	</insert>
+
+	<delete id="deleteNoticeById"  parameterType="com.research.model.Notice">
+		DELETE FROM research_notice
+		WHERE id = #{id}
+	</delete>
+
+	<update id="updateNoticeById" parameterType="com.research.model.Notice">
+		UPDATE research_notice
+		SET title = #{title}, content = #{content}, publisher = #{publisher},
+		 publish_date = #{publishDate},
+		created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+	</update>
+
+	<select id="getNoticeById" resultMap="NoticeResult">
+		SELECT id,title, content, publisher, publish_date,
+		 created_date, last_updated
+		FROM research_notice
+		WHERE id = #{id}
+	</select>
+
+	<select id="getNotices" resultMap="NoticeResult">
+		SELECT id,title, content, publisher, publish_date,
+			created_date, last_updated
+		FROM research_notice
+		LIMIT #{pageIndex}, #{pageSize}
+	</select>
+
+	<select id="getNoticeCounts">
+		SELECT count(1)
+		FROM research_notice
+	</select>
+
+</mapper>

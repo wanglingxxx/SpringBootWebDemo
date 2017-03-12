@@ -1,5 +1,6 @@
 package com.research.model;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -48,6 +49,15 @@ public class Pagination implements Serializable{
 		this.total = total;
 		this.pageIndex = pageIndex;
 		this.pageSize = pageSize;
+	}
+
+	@Override
+	public String toString() {
+		return JSONObject.toJSONString(this);
+	}
+
+	public JSONObject toJSONObject(){
+		return JSONObject.parseObject(JSONObject.toJSONString(this));
 	}
 	
 }

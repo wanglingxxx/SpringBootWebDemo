@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>科研时政管理</title>
+      <!-- <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">  -->
+      
+      <link rel="stylesheet" href="../public/css/reset.css">
+      <link rel="stylesheet" href="../public/css/platform_manager.css">
+      <link href="../public/css/markdown.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+    <div class="header-top-bar">
+      
+      <div class="container">
+        <nav>
+          <ul class="nav-ul">
+            <li class="pull-left"><a href="index.html">首页</a></li>      
+            <li class="pull-left"><a href="policy.html">科技时政</a></li>
+            <li class="pull-left"><a href="##">通知公告</a></li>
+            <li class="pull-left"><a href="achievements.html">科研成果</a></li>
+            <li class="pull-left"><a href="project.html">科研项目</a></li>
+            
+            <li class="pull-left"><a href="info.html">了解我们</a></li>
+          </ul>
+        </nav>
+        <div class="pull-right log" id="log">
+          <span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+          
+          <div class="box" id="box">
+            <ul>
+              <li><a href="report.html">申报项目</a></li>
+              <li><a href="myproject.html">我的科研项目</a></li>
+              <li><span></span></li>
+              <li><a href="user_manager.html">用户管理</a></li>
+              <li><a href="review_items.html">审核项目</a></li>
+              <li><a href="platform_manager.html">平台内容管理</a></li>  
+              <li><span></span></li>
+              <li><a href="">修改密码</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </header>
+    
+    <aside>
+      <div class="aside-con"> 
+         <ul>
+           <li><a href="javascript:;" class="nav-li">时政管理</a></li>
+           <li><a href="javascript:;" class="nav-li">通知公告管理</a></li>
+           <li><a href="javascript:;" class="nav-li">科研成果管理</a></li>
+           <li><a href="javascript:;" class="nav-li">科研项目管理</a></li>
+         </ul>
+      </div>
+
+    </aside>
+
+
+    <!-- 时政管理 -->
+    <div class="pannal-nav pannal-nav-1 show">
+        <div class="position">位置><a href="##">时政管理</a></div>
+        <div class="con-nav">
+          <ul>
+            <li><a href="javascript:;" class="policy-title-li">添加时政内容</a></li>
+            <li><a href="javascript:;" class="policy-title-li">时政管理</a></li>
+            
+          </ul>
+        </div>
+        <div class="con">
+          <div class="pannal-policy pannal-policy-1 show">
+            
+              <div class="form-group">
+                  <label for="inputFile">文章标题：</label>
+                  <input type="text" class="con-text">   
+              </div>
+             
+
+              <div class="form-group">
+                  <label for="inputFile">必要内容文件上传：</label>
+                  <input type="file" id="inputFile">    
+              </div>
+              <div class="form-group">
+              
+                <div class="markdown">
+                  <label>内容编辑区：</label>
+                  <div class="edit">
+                    <textarea id="text-input-1" oninput="this.editor.update()"
+                            rows="15" cols="170" ></textarea>
+                  </div>
+                  <label>结果在这儿：</label>
+                  <div id="preview-1" class="preview"> </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="project-remark" class="area">备注：</label>
+                  <textarea name="" class="form-control" id="project-remark" placeholder="备注......." rows="2" cols="80"></textarea>
+              </div>
+              <button type="submit" class="btn">发布</button>
+                
+          </div>
+           <div class="pannal-policy pannal-policy-2 hidden">
+              <form action="#" class="search">
+                  <div class="form-group">
+                    <!-- <input type="text" class="form-control pull-left" placeholder="按条件查询..."> -->
+                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <datalist id="conditions">
+                      <option value="所有">
+                      <option value="最近一月"> 
+                    
+                    </datalist>
+                  </div>
+                  <button type="submit" class="btn">查询</button> 
+             
+
+              </form> 
+             <table class="table" id="table" >
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>发布时间</th>
+                    <th>文章标题</th>
+                    <th>发布人</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody1">
+                  
+                   <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging" id="paging1">
+      
+              </div>
+           </div>
+        </div>
+    </div>
+    <!-- 通知公告管理 -->
+    <div class="pannal-nav pannal-nav-2 hidden" id="notice">
+        <div class="position">位置><a href="##">通知公告管理</a></div>
+        <div class="con-nav">
+          <ul>
+            <li><a href="javascript:;" class="notice-title-li">编辑通知公告</a></li>
+            <li><a href="javascript:;" class="notice-title-li">通知公告管理</a></li>
+            
+          </ul>
+        </div>
+        <div class="con">
+          <div class="pannal-notice pannal-notice-1 show">
+            
+              <div class="form-group">
+                  <label for="inputFile">文章标题：</label>
+                  <input type="text" class="con-text">   
+              </div>
+              <div class="form-group">
+              
+                <div class="markdown">
+                  <label>内容编辑区：</label>
+                  <div class="edit">
+                    <textarea id="text-input-2" oninput="this.editor.update()"
+                            rows="15" cols="170" ></textarea>
+                  </div>
+                  <label>结果在这儿：</label>
+                  <div id="preview-2" class="preview"> </div>
+                </div>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  通知
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  公告
+                </label>
+              </div>
+
+              <button type="submit" class="btn">发布</button>
+        </div>
+        <div class="pannal-notice pannal-notice-2 hidden">
+              <form action="#" class="search">
+                  <div class="form-group">
+                    
+                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <datalist id="conditions">
+                      <option value="所有"></option>
+                      <option value="最近一月"> </option>
+                    </datalist>
+                  </div>
+                  <button type="submit" class="btn">查询</button> 
+              </form> 
+             <table class="table" id="table" >
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>发布时间</th>
+                    <th>标题</th>
+                    <th>发布者</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody2">
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>李三</td>
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paging" id="paging2"></div>
+         
+          </div>
+        </div>
+    </div>
+
+    <!-- 科研成果管理 -->
+    <div class="pannal-nav pannal-nav-3 hidden">
+        <div class="position">位置><a href="##">科技成果文章管理</a></div>
+        <div class="con-nav">
+          <ul>
+            <li><a href="javascript:;" class="ach-title-li">编辑科技成果文章</a></li>
+            <li><a href="javascript:;" class="ach-title-li">科技成果文章管理</a></li>
+            
+          </ul>
+        </div>
+        <div class="con">
+          <div class="pannal-ach pannal-ach-1 show">
+            
+              <div class="form-group">
+                  <label for="inputFile">文章标题：</label>
+                  <input type="text" class="con-text">   
+              </div>
+              <div class="form-group">
+              
+              <div class="form-group">
+                  <label for="inputFile">必要内容文件上传：</label>
+                  <input type="file" id="inputFile">    
+              </div>
+                <div class="markdown">
+                  <label>内容编辑区：</label>
+                  <div class="edit">
+                    <textarea id="text-input-3" oninput="this.editor.update()"
+                            rows="15" cols="170" ></textarea>
+                  </div>
+                  <label>结果在这儿：</label>
+                  <div id="preview-3" class="preview" > </div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="inputFile">获奖情况：</label>
+                  <input type="text">   
+              </div>
+
+              <button type="submit" class="btn">发布</button>
+          </div>
+          <div class="pannal-ach pannal-ach-2 hidden">
+              <form action="#" class="search">
+                  <div class="form-group">
+                    
+                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <datalist id="conditions">
+                      <option value="所有"></option>
+                      <option value="最近一月"> </option>
+                    </datalist>
+                  </div>
+                  <button type="submit" class="btn">查询</button> 
+              </form> 
+             <table class="table" id="table" >
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>发布时间</th>
+                    <th>标题</th>
+                    <th>获奖情况  </th>
+                    <th>项目组人员</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody3">
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td>  </td>
+                    <td>李三，王二</td>
+
+                    <td>
+                      <button type="submit" class="btn edit">修改</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+              <div class="paging" id="paging3"></div>
+         
+          </div>
+        </div>
+    </div>
+    <!-- 项目管理 -->
+    <div class="pannal-nav pannal-nav-4 hidden">
+            <div class="position">位置><a href="##">项目管理</a></div>
+            <form action="#" class="search">
+                  <div class="form-group">
+                    
+                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <datalist id="conditions">
+                      <option value="所有"></option>
+                      <option value="最近一月"> </option>
+                    </datalist>
+                  </div>
+                  <button type="submit" class="btn">查询</button> 
+              </form> 
+             <table class="table" id="table" >
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>发布时间</th>
+                    <th>项目名称</th>
+                    <th>项目文件</th>
+                    <th>项目申请者</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody4">
+                  <tr>
+                    <td></td>
+                    <td>2016-12-13</td>
+                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
+                    <td><a href="##"><span class="download" title="下载"></span></a></td>
+                    <td>李三，王二</td>
+                    
+                    <td>
+                      <button type="submit" class="btn check">审阅</button>
+                      <button type="submit" class="btn del">删除</button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+              <div class="paging" id="paging4"></div>
+    </div>
+
+
+
+
+
+
+   
+    <script src="../public/js/markdown.js"></script>
+    <script src='../public/js/paging1.js'></script>
+     <script src='../public/js/tab2.js'></script>
+     <script src='../public/js/tab1.js'></script>
+     <script src='../public/js/tab3.js'></script>
+     <script src='../public/js/paging2.js'></script>
+     <script src='../public/js/tab4.js'></script>
+     <script src='../public/js/paging3.js'></script>
+     <script src='../public/js/paging4.js'></script>
+    <script type="text/javascript">
+         document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+         window.onload=function(){
+            function Editor(input, preview) {
+              this.update = function () {
+                preview.innerHTML = markdown.toHTML(input.value);
+              };
+              input.editor = this;
+               this.update();
+        }
+
+        var $ = function (id) { return document.getElementById(id); };
+            new Editor($("text-input-1"), $("preview-1"));
+            new Editor($("text-input-2"), $("preview-2"));
+            new Editor($("text-input-3"), $("preview-3")); 
+         
+        
+
+
+        function fixed(){
+            var aside=document.getElementsByTagName('aside')[0];
+            var aCon=document.getElementsByClassName('con');
+            for(var i=0;i<aCon.length;i++){
+              aCon[i].style.height=document.documentElement.clientHeight-125+'px';
+            }
+            aside.style.height=document.documentElement.clientHeight-36+'px';
+            window.onresize=function(){
+              aside.style.height=document.documentElement.clientHeight-36+'px';
+              for(var i=0;i<aCon.length;i++){
+              aCon[i].style.height=document.documentElement.clientHeight-125+'px';
+            }
+            }
+          }
+          fixed();
+
+      }
+      </script>
+  </body>
+</html>

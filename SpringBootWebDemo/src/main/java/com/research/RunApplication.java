@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Adm on 2016/12/11.
@@ -13,16 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("com.research.mapper")
+@MapperScan("com.research")
+@RestController
 public class RunApplication {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(RunApplication.class, args);
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     String home() {
         System.out.print("你好 home ");
-        return "redirect:index.html";
+        return "index.html";
     }
 }

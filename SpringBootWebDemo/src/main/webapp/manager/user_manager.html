@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户管理</title>
+	<link rel="stylesheet" href="../public/css/reset.css">
+	<link rel="stylesheet" href="../public/css/user_manager.css">
+</head>
+<body>
+	<header>
+		<div class="header-top-bar">
+			
+			<div class="container">
+				<nav>
+					<ul class="nav-ul">
+						<li class="pull-left"><a href="index.html">首页</a></li>			
+						<li class="pull-left"><a href="policy.html">科技时政</a></li>
+						<li class="pull-left"><a href="notice.html">通知公告</a></li>
+						<li class="pull-left"><a href="achievements.html">科研成果</a></li>
+						<li class="pull-left"><a href="##">科研项目</a></li>
+						<li class="pull-left"><a href="info.html">了解我们</a></li>
+					</ul>
+				</nav>
+				<div class="pull-right log" id="log">
+					<span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					
+					<div class="box" id="box">
+						<ul>
+							<li><a href="report.html">申报项目</a></li>
+							<li><a href="myproject.html">我的科研项目</a></li>
+							<li><span></span></li>
+							<li><a href="##">用户管理</a></li>
+							<li><a href="review_items.html">审核项目</a></li>
+							<li><a href="platform_manager.html">平台内容管理</a></li>
+							<li><span></span></li>
+							<li><a href="">修改密码</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="head">
+			<div class="container">
+				<div class="head-title"><p>用户管理</p></div>
+			</div>
+		</div>
+	</header><!-- header end -->
+	
+	<div class="content container">
+		<div class="position">
+			<span>位置></span>
+			<a href="">用户管理</a>
+		</div>
+		<form action="#" class="search">
+	        <div class="form-group">
+	          <!-- <input type="text" class="form-control pull-left" placeholder="按条件查询..."> -->
+	          <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+	          <datalist id="conditions">
+			  <option value="查询所有">
+			  	  
+			</datalist>
+	        </div>
+	        <button type="submit" class="btn">查询</button>	
+		</form>
+	</div><!-- header end -->
+	
+	<div class="content-table container">
+		<table class="table" id="table" >
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>用户名</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>权限管理</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>user</td>
+					<td>李三</td>
+					<td>男</td>
+					<td>
+						<form action="#">
+							<div class="checkbox one pull-left">
+							    <label>
+							      <input type="checkbox"> 用户权限
+							    </label>
+							</div>
+							<div class="checkbox two">
+							    <label>
+							      <input type="checkbox"> 管理员权限
+							    </label>
+							</div>
+						</form>
+					</td>
+					<td>
+						<button type="submit" class="btn save">保存</button>
+						<button type="submit" class="btn del">删除</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="paging" id="paging">
+			
+		</div>
+	</div>
+
+
+	<footer>
+		<div class="href-1 ">
+				<p>友情链接</p>
+			</div>
+			<div class="foot-1">
+				
+			</div>
+	</footer><!-- footers end -->
+	
+	<script>
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+		document.write( "<script language=javascript src='../public/js/paging.js'><\/script>");
+			window.onload=function(){
+			}
+			
+	</script>
+</body>
+</html>

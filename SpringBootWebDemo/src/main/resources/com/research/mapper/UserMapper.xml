@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.research.mapper.UserMapper" >
+    <cache></cache>
+
+    <resultMap type="com.research.model.User" id="UserResult">
+      <id property="id" column="id"/>
+      <result property="username" column="username"/>
+      <result property="password" column="password"/>
+      <result property="name" column="name"/>
+      <result property="sex" column="sex"/>
+      <result property="idCard" column="id_card"/>
+      <result property="enable" column="enable"/>
+      <result property="createdDate" column="created_date"/>
+      <result property="lastUpdated" column="last_updated"/>
+    </resultMap>
+
+    <insert id="insertUser" parameterType="com.research.model.User" useGeneratedKeys="true" keyProperty="id">
+      <selectKey keyProperty="id" order="AFTER" resultType="int">
+        select LAST_INSERT_ID() AS id
+      </selectKey>
+      INSERT INTO research_user (username, password, `name`, sex,
+      id_card, enable, created_date,last_updated)
+      VALUES (#{username},#{password},#{name},#{sex},#{idCard}, #{enable},#{createdDate},#{lastUpdated})
+    </insert>
+
+    <delete id="deleteUserById"  parameterType="com.research.model.User">
+      DELETE FROM research_user
+      WHERE id = #{id}
+    </delete>
+
+    <update id="updateUserById" parameterType="com.research.model.User">
+      UPDATE research_user
+      SET title = #{title}, author = #{author}, origin = #{origin},
+      content_file = #{contentFile}, `date` = #{date},
+      created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+    </update>
+
+    <select id="getUserById" resultMap="UserResult">
+      SELECT id,title, author, origin, content_file, `date`,
+      created_date, last_updated
+      FROM research_user
+      WHERE id = #{id}
+    </select>
+
+    <select id="getUser" resultMap="UserResult">
+      SELECT id,title, author, origin, content_file, `date`,
+      created_date, last_updated
+      FROM research_user
+      LIMIT #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="getUserCounts">
+      SELECT count(1)
+      FROM research_user
+    </select>
+
+</mapper>

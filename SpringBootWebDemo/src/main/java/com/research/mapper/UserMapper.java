@@ -1,22 +1,24 @@
 package com.research.mapper;
 
-
+import com.research.model.Pagination;
 import com.research.model.User;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
 
-    int insertSelective(User record);
+    int insertUser(User user);
 
-    User selectByPrimaryKey(Integer id);
+    int deleteUserById(Integer id);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateUserById(User user);
 
-    int updateByPrimaryKey(User record);
+    User getUserById(Integer id);
 
-    List<User> queryUser();
+    List<User> getUsers(Pagination pagination);
+
+    Integer getUserCounts();
 }

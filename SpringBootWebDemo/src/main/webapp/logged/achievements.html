@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>科技时政</title>
+	<link rel="stylesheet" href="../public/css/reset.css">
+	<link rel="stylesheet" href="../public/css/achievements.css">
+
+</head>
+<body>
+	<header>
+		<div class="header-top-bar">
+			
+			<div class="container">
+				<nav>
+					<ul class="nav-ul">
+						<li class="pull-left"><a href="index.html">首页</a></li>			
+						<li class="pull-left"><a href="policy.html">科技时政</a></li>
+						<li class="pull-left"><a href="notice.html">通知公告</a></li>
+						<li class="pull-left"><a href="##">科研成果</a></li>
+						<li class="pull-left"><a href="project.html">科研项目</a></li>
+						<li class="pull-left"><a href="info.html">了解我们</a></li>
+					</ul>
+				</nav>
+				<div class="pull-right log" id="log">
+					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					
+					<div class="box" id="box">
+						<ul>
+							<li><a href="report.html">申报项目</a></li>
+							<li><a href="myproject.html">我的科研项目</a></li>
+							<li><span></span></li>
+							<li><a href="">修改密码</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="head">
+			<div class="container">
+				<div class="head-title"><p>科技成果</p></div>
+			</div>
+		</div>
+	</header>
+	<div class="content container">
+		
+		<div class="new-achievements">
+			<div class="new-achievements-title">
+				<p class="pull-left title">最新发布</p>
+				<a class="pull-right more" href="">更多>></a>
+			</div>
+			<div class="new-achievements-content">
+				<ul>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="all-achievements">
+			<div class="all-achievements-title">
+				<p class="pull-left title">科研成果展示</p>
+				
+			</div>
+			<div class="all-achievements-content">
+				<ul>
+					<li><a href="javascript::"><img src="" alt="图1"><span class="hidden">介绍</span></a></li>
+					<li><a href="javascript::"><img src="" alt="图2"><span class="hidden">介绍</span></a></li>
+					<li><a href="javascript::"><img src="" alt="图3"><span class="hidden">介绍</span></a></li>
+					<li><a href="javascript::"><img src="" alt="图4"><span class="hidden">介绍</span></a></li>
+					<li><a href="javascript::"><img src="" alt="图5"><span class="hidden">介绍</span></a></li>
+					<li><a href="javascript::"><img src="" alt="图6"><span class="hidden">介绍</span></a></li>
+					
+				</ul>
+			</div>
+		</div>
+		<button class="get-more" type="button">
+				加载更多
+			</button>
+	</div><!-- content end -->
+	<footer>
+		<div class="href-1 ">
+				<p>友情链接</p>
+			</div>
+			<div class="foot-1">
+				
+			</div>
+	</footer>
+	
+	<script>
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+		window.onload=function(){
+			var oAll=document.getElementsByClassName('all-achievements-content')[0];
+			
+			var aLi=oAll.getElementsByTagName('li');
+			var aSpan=oAll.getElementsByTagName('span');
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].index=i;
+				aLi[i].onmouseover=function(){
+					for(var j=0;j<aSpan.length;j++){
+						aSpan[j].className="hidden";
+					}
+					aSpan[this.index].className='show';
+				}
+				aLi[i].onmouseout=function(){
+					for(var j=0;j<aSpan.length;j++){
+						aSpan[j].className="hidden";
+					}
+					
+				}
+			}
+		}
+	</script>
+</body>
+</html>

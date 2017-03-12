@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
+/**
+ * 科研时政表
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Politics implements Serializable{
 

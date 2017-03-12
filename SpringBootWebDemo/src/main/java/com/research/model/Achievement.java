@@ -6,7 +6,9 @@ import java.util.Date;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+/**
+ * 科研成果
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Achievement implements Serializable{
 

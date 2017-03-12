@@ -6,6 +6,9 @@ import java.util.Date;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * 用户表
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable{
 

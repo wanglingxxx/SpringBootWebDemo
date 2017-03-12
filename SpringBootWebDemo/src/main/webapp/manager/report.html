@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>项目申报</title>
+	<link rel="stylesheet" href="../public/css/reset.css">
+	<link rel="stylesheet" href="../public/css/report.css">
+</head>
+<body>
+	<header>
+		<div class="header-top-bar">
+			
+			<div class="container">
+				<nav>
+					<ul class="nav-ul">
+						<li class="pull-left"><a href="index.html">首页</a></li>			
+						<li class="pull-left"><a href="policy.html">科技时政</a></li>
+						<li class="pull-left"><a href="notice.html">通知公告</a></li>
+						<li class="pull-left"><a href="achievements.html">科研成果</a></li>
+						<li class="pull-left"><a href="project.html">科研项目</a></li>
+						<li class="pull-left"><a href="info.html">了解我们</a></li>
+					</ul>
+				</nav>
+				<div class="pull-right log" id="log">
+					<span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					
+					<div class="box" id="box">
+						<ul>
+							<li><a href="report.html">申报项目</a></li>
+							<li><a href="myproject.html">我的科研项目</a></li>
+							<li><span></span></li>
+							<li><a href="user_manager.html">用户管理</a></li>
+							<li><a href="review_items.html">审核项目</a></li>
+							<li><a href="platform_manager.html">平台内容管理</a></li>
+							<li><span></span></li>
+							<li><a href="">修改密码</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="head">
+			<div class="container">
+				<div class="head-title"><p>项目申报</p></div>
+			</div>
+		</div>
+	</header>
+	<div class="content container">
+		<form action="#">
+			<div class="form-group">
+			    <label for="project-name">项目名称：</label>
+			    <input type="text" class="form-control text" id="project-name" placeholder="name...">
+			</div>
+			<div class="form-group">
+			    <label for="project-introduce" class="area">项目简介：</label>
+			    <textarea name="" class="form-control" id="project-introduce" placeholder="简介........" rows="10" cols="80"></textarea>
+			</div>
+			<div class="form-group">
+			    <label for="project-declare-name">项目申报人：</label>
+			    <input type="text" class="form-control text" id="project-declare-name" placeholder="name..">
+			</div>
+			<div class="form-group">
+			    <label for="project-declare-company">项目申报单位：</label>
+			    <input type="text" class="form-control text" id="project-declare-company" placeholder="company...">
+			</div>
+			<div class="form-group">
+			    <label for="project-remark" class="area">备注：</label>
+			    <textarea name="" class="form-control" id="project-remark" placeholder="备注......." rows="10" cols="80"></textarea>
+			</div>
+
+			<div class="form-group">
+			    <label for="inputFile">项目文件上传：</label>
+			    <input type="file" id="inputFile">    
+			</div>
+			 
+			 <button type="submit" class="btn pull-right">申报</button>
+		</form>
+	</div>
+	<footer>
+		<div class="href-1 ">
+				<p>友情链接</p>
+			</div>
+			<div class="foot-1">
+				
+			</div>
+	</footer>
+	
+	<script>
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+		window.onload=function(){
+
+		}
+	</script>
+</body>
+</html>

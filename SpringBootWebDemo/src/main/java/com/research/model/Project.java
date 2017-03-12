@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
+/**
+ * 项目表
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project implements Serializable{
 
