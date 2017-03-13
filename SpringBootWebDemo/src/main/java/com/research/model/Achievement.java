@@ -12,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Achievement implements Serializable{
 
-	private static final long serialVersionUID = -2812955151724211938L;
+
+	private static final long serialVersionUID = 6959563326456833653L;
 	//主键
 	private int id;
 	//项目名

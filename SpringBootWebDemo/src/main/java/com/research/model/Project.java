@@ -13,8 +13,9 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project implements Serializable{
 
-	private static final long serialVersionUID = 983901479974122447L;
-    //主键
+
+	private static final long serialVersionUID = -5088847674368360596L;
+	//主键
     private int id;
     //标题
     private String title;

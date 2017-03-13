@@ -1,5 +1,6 @@
 package com.research.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.google.common.base.Preconditions;
 import com.research.model.Project;
 import com.research.model.Pagination;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,7 +29,7 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> insertProject(@RequestParam("title") String title,
                                     @RequestParam("summary") String summary,
                                     @RequestParam("applicant") String applicant,
@@ -34,29 +37,38 @@ public class ProjectController {
                                     @RequestParam("remark") String remark,
             @RequestParam("projectFile") MultipartFile projectFile) {
 
-        Preconditions.checkNotNull(projectFile != null, "Project file is null");
+        Preconditions.checkNotNull(!StringUtils.isEmpty(title), "Project title is null");
+        Preconditions.checkNotNull(!StringUtils.isEmpty(summary), "Project summary is null");
+        Preconditions.checkNotNull(!StringUtils.isEmpty(applicant), "Project applicant is null");
+        Preconditions.checkNotNull(!StringUtils.isEmpty(declareUnits), "Project declareUnits is null");
+        Preconditions.checkNotNull(!StringUtils.isEmpty(remark), "Project remark is null");
 
         String fileName = projectFile.getOriginalFilename();
-        System.out.println(fileName);
         Project project = new Project();
         project.setApplicant(applicant);
         project.setTitle(title);
+        project.setSummary(summary);
+        project.setDeclareUnits(declareUnits);
+        project.setRemark(remark);
+        project.setProjectFile(fileName);
+        project.setAuditState("未通过");
 
+        project.setDeclareTime(new Date());
+        project.setLastUpdated(new Date());
+        project.setCreatedDate(new Date());
 
         String saveFileName = fileName.substring(0,fileName.indexOf(".")) + "_"+project.getApplicant()+"_"+
                 System.currentTimeMillis()+fileName.substring(fileName.indexOf("."));
 
-        System.out.println("filename " + saveFileName + "     title : " + project.getTitle());
 
 
         try {
             File directory = new File("");//参数为空
             String filePath = directory.getCanonicalPath() +"\\src\\main\\webapp\\upload\\project\\"+project.getApplicant()+"\\"+saveFileName;
-           // String path=new File(getClass().getClassLoader().getResource("/main/webapp/upload").toURI()).getPath();
-            logger.info("pasth "  + filePath);
 
             File targetFile = new File(filePath);
 
+            logger.info("/project/add insertProject filePath, fileName:{} ",targetFile,saveFileName);
 
             if (!targetFile.exists()) {
                 targetFile.getParentFile().mkdirs();
@@ -71,11 +83,15 @@ public class ProjectController {
 
         int count = projectService.insertProject(project);
 
+
         if(count == 0) {
+            logger.info("/project/add noContent build!");
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(projectFile);
+            logger.info("/project/add result : {}",project);
+            return ResponseEntity.ok(project);
         }
+
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})

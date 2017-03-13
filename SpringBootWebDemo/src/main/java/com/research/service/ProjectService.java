@@ -1,8 +1,8 @@
 package com.research.service;
 
+import com.research.mapper.ProjectMapper;
 import com.research.model.Pagination;
 import com.research.model.Project;
-import com.research.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,29 +11,29 @@ import java.util.List;
 @Service
 public class ProjectService {
     @Autowired
-    ProjectRepository projectRepository;
+    ProjectMapper projectMapper;
 
     public int insertProject(Project project) {
-        return projectRepository.insertProject(project);
+        return projectMapper.insertProject(project);
     }
 
     public int deleteProjectById(Integer id) {
-        return projectRepository.deleteProjectById(id);
+        return projectMapper.deleteProjectById(id);
     }
 
     public int updateProjectById(Project project) {
-        return projectRepository.updateProjectById(project);
+        return projectMapper.updateProjectById(project);
     }
 
     public Project getProjectById(Integer id) {
-        return projectRepository.getProjectById(id);
+        return projectMapper.getProjectById(id);
     }
 
     public List<Project> getProjects(Pagination pagination) {
-        return projectRepository.getProjects(pagination);
+        return projectMapper.getProjects(pagination);
     }
 
     public Integer getProjectCounts() {
-        return projectRepository.getProjectCounts();
+        return projectMapper.getProjectCounts();
     }
 }

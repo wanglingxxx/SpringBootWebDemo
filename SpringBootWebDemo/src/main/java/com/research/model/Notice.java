@@ -11,8 +11,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notice  implements Serializable{
-	
-	private static final long serialVersionUID = -8607524527592548159L;
+
+
+	private static final long serialVersionUID = -431820144800021547L;
 	//主键
 	private int id;
 	//题名

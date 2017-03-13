@@ -97,13 +97,19 @@
 		}
 
 		function research_project_insert(){
-			alert("ok")
+
 			var title =$("#project-name").val();
 			var summary = $("#project-introduce").val();
 			var applicant = $("#project-declare-name").val();
 			var declareUnits = $("#project-declare-company").val();
 			var remark = $("#project-remark").val();
-			alert("bbb  " + title)
+
+			if(title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
+				alert("所输入参数不能为空!");
+				location.href="report.html"
+			}
+
 			$.ajaxFileUpload({
 						url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark,
 						type:'POST',
@@ -111,14 +117,30 @@
 						dataType: 'json', //返回值类型 一般设置为json
 						fileElementId:'inputFile',
 						success: function (data, status){
-							alert(123);
+							alert("aaa")
+							alert(data)
+							if(data != null) {
+								alert("申报成功!")
+								location.href="logged/myproject.html";
+							} else {
+								alert("申报失败!")
+							}
 						},
 						error: function (data, status, e)//服务器响应失败处理函数
 						{
-							alert("bbb");
+							alert("error!");
 						}
+
 					}
 			);
+			if(title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
+
+			} else {
+				alert("申报成功!")
+				location.href="myproject.html";
+			}
+
 
 
 		}

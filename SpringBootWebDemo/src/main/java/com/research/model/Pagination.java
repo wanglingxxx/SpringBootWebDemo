@@ -8,8 +8,8 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pagination implements Serializable{
 
-	private static final long serialVersionUID = 8328302837899004998L;
-	
+
+	private static final long serialVersionUID = 1871202257627262259L;
 	private Integer total;
 	
 	private Integer pageIndex;

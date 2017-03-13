@@ -13,7 +13,8 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Politics implements Serializable{
 
-	private static final long serialVersionUID = 5199497161224049562L;
+
+	private static final long serialVersionUID = 8664396454189682824L;
 	//主键
 	private int id;
 	//标题

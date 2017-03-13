@@ -12,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable{
 
-    private static final long serialVersionUID = 6902702777401204196L;
+
+    private static final long serialVersionUID = 8592793420919182931L;
     //主键
     private int id;
     //用户名
