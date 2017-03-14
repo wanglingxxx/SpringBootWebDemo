@@ -1,5 +1,6 @@
 package com.research.service;
 
+import com.research.mapper.AchievementMapper;
 import com.research.model.Achievement;
 import com.research.model.Pagination;
 import com.research.repository.AchievementRepository;
@@ -11,29 +12,29 @@ import java.util.List;
 @Service
 public class AchievementService {
     @Autowired
-    AchievementRepository achievementRepository;
+    AchievementMapper achievementMapper;
 
     public int insertAchievement(Achievement achievement) {
-        return achievementRepository.insertAchievement(achievement);
+        return achievementMapper.insertAchievement(achievement);
     }
 
     public int deleteAchievementById(Integer id) {
-        return achievementRepository.deleteAchievementById(id);
+        return achievementMapper.deleteAchievementById(id);
     }
 
     public int updateAchievementById(Achievement achievement) {
-        return achievementRepository.updateAchievementById(achievement);
+        return achievementMapper.updateAchievementById(achievement);
     }
 
     public Achievement getAchievementById(Integer id) {
-        return achievementRepository.getAchievementById(id);
+        return achievementMapper.getAchievementById(id);
     }
 
     public List<Achievement> getAchievements(Pagination pagination) {
-        return achievementRepository.getAchievements(pagination);
+        return achievementMapper.getAchievements(pagination);
     }
 
     public Integer getAchievementCounts() {
-        return achievementRepository.getAchievementCounts();
+        return achievementMapper.getAchievementCounts();
     }
 }

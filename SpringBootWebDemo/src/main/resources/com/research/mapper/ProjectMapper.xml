@@ -9,7 +9,7 @@
 		<result property="title" column="title"/>
 		<result property="summary" column="summary"/>
 		<result property="applicant" column="applicant"/>
-		<result property="declateUnits" column="declare_units"/>
+		<result property="declareUnits" column="declare_units"/>
 		<result property="remark" column="remark"/>
 		<result property="declareTime" column="declare_time"/>
 		<result property="auditPassTime" column="audit_pass_time"/>

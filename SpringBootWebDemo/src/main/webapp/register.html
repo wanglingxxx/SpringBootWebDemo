@@ -33,8 +33,8 @@
 			</div>
 			<div class="form-group">
 			    <label for="user-password">性别：</label>
-			    <label for=""><input type="radio" class="form-control radio" id="sex" name="sex" checked="1">&nbsp;男</label>
-			    <label for=""><input type="radio" class="form-control radio" id="sex" name="sex" >&nbsp;女</label>
+			    <label for=""><input type="radio" class="form-control radio" id="user-sex" value="男" name="sex" checked="1">&nbsp;男</label>
+			    <label for=""><input type="radio" class="form-control radio" id="user-sex" value="女" name="sex" >&nbsp;女</label>
 			</div>
 			<div class="form-group">
 			    <label for="IDC">身份证号：</label>
@@ -44,9 +44,9 @@
 			    <label for="visited-number">邀请码：</label>
 			    <input type="text" class="form-control text" id="visited-number" placeholder="邀请码...">
 			</div>
-			<button type="rset" class="btn btn-reset">重置</button>
-			<button type="submit" class="btn btn-sub">注册</button>
-		
+			<button type="reset" class="btn btn-reset">重置</button>
+			<button type="button" onclick="research_user_register()" class="btn btn-sub">注册</button>
+
 		</form>
 	</div>
 	<footer>
@@ -54,5 +54,69 @@
 			
 		</div>
 	</footer>
+
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
+	<script type="application/javascript">
+		function research_user_register() {
+
+			if($("#user-name").val() == null || $("#user-name").val().length == 0 || $("#user-password").val() == null || $("#user-password").val().length == 0 ||
+					$("#true-name").val() == null || $("#true-name").val().length == 0 || $("#user-sex").val() == null || $("#user-sex").val().length == 0 ||
+					$("#IDC").val() == null || $("#IDC").val().length == 0) {
+				alert("请输入完整的信息!");
+			} else if($("#confirm-password").val() != $("#user-password").val()) {
+				alert("两次输入的密码必须一致!");
+				return ;
+			} else {
+				var requestBody = {
+					"username":$("#user-name").val(),
+					"password":$("#user-password").val(),
+					"name":$("#true-name").val(),
+					"sex":$("#user-sex").val(),
+					"idCard":$("#IDC").val()
+				}
+				var url="/user/";
+
+				$.ajax({
+					type: "POST",
+					url: url,
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify(requestBody),
+					dataType: "json",
+					success: function (message) {
+						if(message != null) {
+
+							$.cookie("user_id", message.id, { expires: 7 });
+							$.cookie("user_username", message.username, { expires: 7 });
+							$.cookie("user_password", message.password, { expires: 7 });
+							$.cookie("user_name", message.name, { expires: 7 });
+							$.cookie("user_sex", message.sex, { expires: 7 });
+							$.cookie("user_id_card", message.idCard, { expires: 7 });
+							$.cookie("user_enable", message.enable, { expires: 7 });
+
+							location.href = "/logged/index.html"
+						}else {
+							alert("注册失败!")
+						}
+
+					},
+					error: function (message) {
+						alert("error !")
+					}
+				});
+
+			}
+
+
+
+		}
+
+
+
+
+	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.research.service;
 
+import com.research.mapper.NoticeMapper;
 import com.research.model.Notice;
 import com.research.model.Pagination;
 import com.research.repository.NoticeRepository;
@@ -11,29 +12,29 @@ import java.util.List;
 @Service
 public class NoticeService {
     @Autowired
-    NoticeRepository noticeRepository;
+    NoticeMapper noticeMapper;
 
     public int insertNotice(Notice notice) {
-        return noticeRepository.insertNotice(notice);
+        return noticeMapper.insertNotice(notice);
     }
 
     public int deleteNoticeById(Integer id) {
-        return noticeRepository.deleteNoticeById(id);
+        return noticeMapper.deleteNoticeById(id);
     }
 
     public int updateNoticeById(Notice notice) {
-        return noticeRepository.updateNoticeById(notice);
+        return noticeMapper.updateNoticeById(notice);
     }
 
     public Notice getNoticeById(Integer id) {
-        return noticeRepository.getNoticeById(id);
+        return noticeMapper.getNoticeById(id);
     }
 
     public List<Notice> getNotices(Pagination pagination) {
-        return noticeRepository.getNotices(pagination);
+        return noticeMapper.getNotices(pagination);
     }
 
     public Integer getNoticeCounts() {
-        return noticeRepository.getNoticeCounts();
+        return noticeMapper.getNoticeCounts();
     }
 }

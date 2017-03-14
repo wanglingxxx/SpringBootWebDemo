@@ -30,6 +30,13 @@ public class ProjectService {
     }
 
     public List<Project> getProjects(Pagination pagination) {
+        if(pagination.getPageIndex() == null) {
+            pagination.setPageIndex(0);
+        }
+        if(pagination.getPageSize() == null) {
+            pagination.setPageSize(10);
+        }
+
         return projectMapper.getProjects(pagination);
     }
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,11 +27,19 @@ public class UserController {
 
         Preconditions.checkNotNull(user != null, "User is null");
 
+        user.setCreatedDate(new Date());
+        user.setLastUpdated(new Date());
+        user.setEnable(0);
+        logger.info("/user/ insertUser : {}",user);
+
         int count = userService.insertUser(user);
 
         if(count == 0) {
+            logger.warn("/user/ insertUser return null ");
             return ResponseEntity.noContent().build();
         } else {
+            user.setId(count);
+            logger.info("/user/ insertUser return :{}",user);
             return ResponseEntity.ok(user);
         }
     }

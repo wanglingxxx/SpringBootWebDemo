@@ -129,6 +129,7 @@ public class ProjectController {
 
         return ResponseEntity.ok(project);
     }
+
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getProjects(Pagination pagination) {
         Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
@@ -136,6 +137,18 @@ public class ProjectController {
 
         List<Project> projects = projectService.getProjects(pagination);
 
+        return ResponseEntity.ok(projects);
+    }
+
+    @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> getProjectsAll() {
+
+        Pagination pagination = new Pagination();
+        pagination.setPageSize(100);
+
+        List<Project> projects = projectService.getProjects(pagination);
+
+        logger.info("/project/queryAll return :{}"+projects);
         return ResponseEntity.ok(projects);
     }
 }

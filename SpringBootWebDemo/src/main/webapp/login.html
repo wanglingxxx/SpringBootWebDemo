@@ -43,7 +43,7 @@ function research_user_login() {
 	var username = $("#user-name").val();
 	var password = $("#user-password").val();
 
-	var url="/user/login/";
+	var url="/user/";
 
 	$.get(url, {"username":username,"password":password}, function(data) {
 		if(data != null) {
