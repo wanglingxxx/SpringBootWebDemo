@@ -80,7 +80,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "/login/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/login", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         Preconditions.checkNotNull(username != null && username.length() > 0, "User username is illegal");
         Preconditions.checkNotNull(password != null && password.length() > 0, "User password is illegal");
