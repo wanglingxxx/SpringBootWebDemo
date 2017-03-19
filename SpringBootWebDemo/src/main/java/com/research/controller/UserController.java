@@ -25,7 +25,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> insertUser(@RequestBody User user) {
 
-        Preconditions.checkNotNull(user != null, "User is null");
+        Preconditions.checkArgument(user != null, "User is null");
 
         user.setCreatedDate(new Date());
         user.setLastUpdated(new Date());
@@ -46,7 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> deleteUserById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "User id is illegal");
+        Preconditions.checkArgument(id != 0, "User id is illegal");
 
         int count = userService.deleteUserById(id);
 
@@ -57,9 +57,29 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT,consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> updateUserById(@RequestBody User user) {
-        Preconditions.checkNotNull(user != null && user.getId() != 0, "User id is illegal");
+        Preconditions.checkArgument(user != null && user.getId() != 0, "User id is illegal");
+
+        int count = userService.updateUserById(user);
+
+        if(count == 0) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(user);
+        }
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> updatePasswordById(Integer id,
+            String password) {
+        Preconditions.checkArgument(id != null && id > 0, "User id is illegal");
+        Preconditions.checkArgument(password != null && password.length() != 0, "User password is illegal");
+
+        User user = new User();
+        user.setId(id);
+        user.setPassword(password);
+        user.setLastUpdated(new Date());
 
         int count = userService.updateUserById(user);
 
@@ -72,7 +92,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getUserById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "User id is illegal");
+        Preconditions.checkArgument(id != 0, "User id is illegal");
 
 
         User user = userService.getUserById(id);
@@ -80,10 +100,10 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/login", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        Preconditions.checkNotNull(username != null && username.length() > 0, "User username is illegal");
-        Preconditions.checkNotNull(password != null && password.length() > 0, "User password is illegal");
+        Preconditions.checkArgument(username != null && username.length() > 0, "User username is illegal");
+        Preconditions.checkArgument(password != null && password.length() > 0, "User password is illegal");
 
         User user = new User();
         user.setUsername(username);
@@ -104,8 +124,8 @@ public class UserController {
 
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getUsers(Pagination pagination) {
-        Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
-        Preconditions.checkNotNull(pagination.getPageSize() > 0 ,"PageSize is illegal");
+        Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
+        Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
 
         List<User> users = userService.getUsers(pagination);
 

@@ -40,6 +40,11 @@ public class ProjectService {
         return projectMapper.getProjects(pagination);
     }
 
+    public List<Project> queryProjects(String date, String state) {
+
+        return projectMapper.queryProjects(date, state);
+    }
+
     public Integer getProjectCounts() {
         return projectMapper.getProjectCounts();
     }

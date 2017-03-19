@@ -30,6 +30,7 @@
 							<li><a href="myproject.html">我的科研项目</a></li>
 							<li><span></span></li>
 							<li><a href="">修改密码</a></li>
+							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
 				</div>
@@ -103,43 +104,43 @@
 			var applicant = $("#project-declare-name").val();
 			var declareUnits = $("#project-declare-company").val();
 			var remark = $("#project-remark").val();
+			var inputFile = $("#inputFile").val();
 
-			if(title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+			if(inputFile == null || inputFile.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
 					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
 				alert("所输入参数不能为空!");
-				location.href="report.html"
-			}
-
-			$.ajaxFileUpload({
-						url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark,
-						type:'POST',
-						secureuri: false, //是否需要安全协议，一般设置为false
-						dataType: 'json', //返回值类型 一般设置为json
-						fileElementId:'inputFile',
-						success: function (data, status){
-							alert("aaa")
-							alert(data)
-							if(data != null) {
-								alert("申报成功!")
-								location.href="logged/myproject.html";
-							} else {
-								alert("申报失败!")
-							}
-						},
-						error: function (data, status, e)//服务器响应失败处理函数
-						{
-							alert("error!");
-						}
-
-					}
-			);
-			if(title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
-					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
-
 			} else {
-				alert("申报成功!")
-				location.href="myproject.html";
+				$.ajaxFileUpload({
+							url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark,
+							type:'POST',
+							secureuri: false, //是否需要安全协议，一般设置为false
+							dataType: 'json', //返回值类型 一般设置为json
+							fileElementId:'inputFile',
+							success: function (data, status){
+								if(data != null) {
+									alert("申报成功!")
+									location.href="logged/myproject.html";
+								} else {
+									alert("申报失败!")
+								}
+							},
+							error: function (data, status, e)//服务器响应失败处理函数
+							{
+								alert("error!");
+							}
+
+						}
+				);
+				if(title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+						|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
+
+				} else {
+					alert("申报成功!")
+					location.href="myproject.html";
+				}
 			}
+
+
 
 
 

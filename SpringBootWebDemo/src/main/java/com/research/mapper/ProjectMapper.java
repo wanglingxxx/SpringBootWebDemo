@@ -3,6 +3,7 @@ package com.research.mapper;
 import com.research.model.Pagination;
 import com.research.model.Project;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface ProjectMapper {
     List<Project> getProjects(Pagination pagination);
 
     Integer getProjectCounts();
+
+    List<Project> queryProjects(@Param("date")String date,@Param("state") String state);
 }

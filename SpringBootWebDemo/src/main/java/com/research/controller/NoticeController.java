@@ -19,7 +19,7 @@ public class NoticeController {
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> insertNotice(@RequestBody Notice notice) {
 
-        Preconditions.checkNotNull(notice != null, "Notice is null");
+        Preconditions.checkArgument(notice != null, "Notice is null");
 
         int count = noticeService.insertNotice(notice);
 
@@ -32,7 +32,7 @@ public class NoticeController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> deleteNoticeById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Notice id is illegal");
+        Preconditions.checkArgument(id != 0, "Notice id is illegal");
 
         int count = noticeService.deleteNoticeById(id);
 
@@ -45,7 +45,7 @@ public class NoticeController {
 
     @RequestMapping(value = "/", method = RequestMethod.PUT,consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> updateNoticeById(@RequestBody Notice notice) {
-        Preconditions.checkNotNull(notice != null && notice.getId() != 0, "Notice id is illegal");
+        Preconditions.checkArgument(notice != null && notice.getId() != 0, "Notice id is illegal");
 
         int count = noticeService.updateNoticeById(notice);
 
@@ -58,7 +58,7 @@ public class NoticeController {
 
     @RequestMapping(value = "/{id}/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getNoticeById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Notice id is illegal");
+        Preconditions.checkArgument(id != 0, "Notice id is illegal");
 
 
         Notice notice = noticeService.getNoticeById(id);
@@ -67,8 +67,8 @@ public class NoticeController {
     }
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getNotices(Pagination pagination) {
-        Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
-        Preconditions.checkNotNull(pagination.getPageSize() > 0 ,"PageSize is illegal");
+        Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
+        Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
 
         List<Notice> notices = noticeService.getNotices(pagination);
 

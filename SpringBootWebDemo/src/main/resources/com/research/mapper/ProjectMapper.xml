@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="com.car.dao.StudentMapper"> -->
 <mapper namespace="com.research.mapper.ProjectMapper">
-	<cache></cache>
+
 
 	<resultMap type="com.research.model.Project" id="ProjectResult">
 		<id property="id" column="id"/>
@@ -37,10 +37,49 @@
 
 	<update id="updateProjectById" parameterType="com.research.model.Project">
 		UPDATE research_project
-		SET title = #{title}, summary = #{summary}, applicant = #{applicant},
-		remark = #{remark}, declare_time = #{declareTime}, audit_pass_time = #{auditPassTime},
-		audit_state = #{auditState}, project_file = #{projectFile},
-		created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+		SET
+		<if test="title != null and '' != title">
+			<![CDATA[
+               title = #{title},
+            ]]>
+		</if>
+		<if test="summary != null and '' != summary">
+			<![CDATA[
+               summary = #{summary},
+            ]]>
+		</if>
+		<if test="applicant != null and '' != applicant">
+			<![CDATA[
+               applicant = #{applicant},
+            ]]>
+		</if>
+		<if test="remark != null and '' != remark">
+			<![CDATA[
+               remark = #{remark},
+            ]]>
+		</if>
+		<if test="declareTime != null and '' != declareTime">
+			<![CDATA[
+               declare_time = #{declareTime},
+            ]]>
+		</if>
+		<if test="auditPassTime != null and '' != auditPassTime">
+			<![CDATA[
+               audit_pass_time = #{auditPassTime},
+            ]]>
+		</if>
+		<if test="auditState != null and '' != auditState">
+			<![CDATA[
+               audit_state = #{auditState},
+            ]]>
+		</if>
+		<if test="projectFile != null and '' != projectFile">
+			<![CDATA[
+               project_file = #{projectFile},
+            ]]>
+		</if>
+		last_updated = #{lastUpdated}
+		WHERE id = #{id}
 	</update>
 
 	<select id="getProjectById" resultMap="ProjectResult">
@@ -55,6 +94,24 @@
 		project_file, created_date, last_updated
 		FROM research_project
 		LIMIT #{pageIndex}, #{pageSize}
+	</select>
+
+	<select id="queryProjects" resultMap="ProjectResult">
+		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,
+		project_file, created_date, last_updated
+		FROM research_project
+		WHERE 1 = 1
+		<if test="state != null and '' != state">
+			<![CDATA[
+               AND audit_state = #{state}
+            ]]>
+		</if>
+		<if test="date != null and '' != date">
+			<![CDATA[
+			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
+			]]>
+		</if>
+		ORDER BY created_date
 	</select>
 
 	<select id="getProjectCounts">

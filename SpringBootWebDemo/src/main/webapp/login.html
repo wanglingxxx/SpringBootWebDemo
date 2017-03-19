@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>注册页</title>
+	<title>登录页</title>
 	<link rel="stylesheet" href="public/css/reset.css">
 	<link rel="stylesheet" href="public/css/login.css">
 </head>
@@ -13,7 +13,7 @@
 		</div>
 	</header>
 	<div class="form container">
-		<form action="#" id="researchUserLoginForm">
+		<form action="#" id="researchUserLoginForm" method="get">
 			<p>登录</p>
 			<div class="form-group">
 			    <label for="user-username">用户名：</label>
@@ -39,40 +39,47 @@
 
 <script type="application/javascript">
 
+	window.onload=function(){
+
+		$("#user-username").val($.cookie("user_username"));
+		$("#user-password").val($.cookie("user_password"));
+	}
+
 
 function research_user_login() {
-
 	var username = $("#user-username").val();
 	var password = $("#user-password").val();
 
-	var url="/user/login";
+	if(username.length > 0 && password.length > 0){
 
+		var url="/user/login";
+		$.ajax({
+			type: "GET",
+			url: url,
+			data:$("#researchUserLoginForm").serialize(),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function (data) {
+				if(data != null) {
+					$.cookie("user_id", data.id, { expires: 7 });
+					$.cookie("user_username", data.username, { expires: 7 });
+					$.cookie("user_password", data.password, { expires: 7 });
+					$.cookie("user_name", data.name, { expires: 7 });
+					$.cookie("user_sex", data.sex, { expires: 7 });
+					$.cookie("user_id_card", data.idCard, { expires: 7 });
+					$.cookie("user_enable", data.enable, { expires: 7 });
 
-	$.post(url, $("#researchUserLoginForm").serialize(), function(data) {
-		if(data != null) {
-			$.cookie("user_id", data.id, { expires: 7 });
-			$.cookie("user_username", data.username, { expires: 7 });
-			$.cookie("user_password", data.password, { expires: 7 });
-			$.cookie("user_name", data.name, { expires: 7 });
-			$.cookie("user_sex", data.sex, { expires: 7 });
-			$.cookie("user_id_card", data.idCard, { expires: 7 });
-			$.cookie("user_enable", data.enable, { expires: 7 });
+					location.href = "/logged/index.html";
+				} else {
+					alert("用户名或密码不正确!");
 
-			location.href = "/logged/index.html";
-		} else {
-			alert("用户名或密码不正确!");
+					window.location.href = "/login.html";
+				}
+			}
+		});
 
-			window.location.href = "/login.html";
-		}
-	});
-
-	/*$.ajax({
-		type: "POST",
-		url: url,
-		data: $("#researchUserLoginForm").serialize(),
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		success: function (data) {
+/*
+		$.get(url, $("#researchUserLoginForm").serialize(), function(data) {
 			if(data != null) {
 				$.cookie("user_id", data.id, { expires: 7 });
 				$.cookie("user_username", data.username, { expires: 7 });
@@ -81,15 +88,19 @@ function research_user_login() {
 				$.cookie("user_sex", data.sex, { expires: 7 });
 				$.cookie("user_id_card", data.idCard, { expires: 7 });
 				$.cookie("user_enable", data.enable, { expires: 7 });
-
 				location.href = "/logged/index.html";
 			} else {
 				alert("用户名或密码不正确!");
-
 				window.location.href = "/login.html";
 			}
-		}
-	});*/
+		});*/
+
+	} else {
+		alert("用户名或密码不能为空!")
+	}
+
+
+
 
 }
 

@@ -21,7 +21,7 @@ public class AchievementController {
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> insertAchievement(@RequestBody Achievement achievement) {
 
-        Preconditions.checkNotNull(achievement != null, "Achievement is null");
+        Preconditions.checkArgument(achievement != null, "Achievement is null");
 
         int count = achievementService.insertAchievement(achievement);
 
@@ -34,7 +34,7 @@ public class AchievementController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> deleteAchievementById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Achievement id is illegal");
+        Preconditions.checkArgument(id != 0, "Achievement id is illegal");
 
         int count = achievementService.deleteAchievementById(id);
 
@@ -47,7 +47,7 @@ public class AchievementController {
 
     @RequestMapping(value = "/", method = RequestMethod.PUT,consumes = {"application/json"},produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> updateAchievementById(@RequestBody Achievement achievement) {
-        Preconditions.checkNotNull(achievement != null && achievement.getId() != 0, "Achievement id is illegal");
+        Preconditions.checkArgument(achievement != null && achievement.getId() != 0, "Achievement id is illegal");
 
         int count = achievementService.updateAchievementById(achievement);
 
@@ -60,7 +60,7 @@ public class AchievementController {
 
     @RequestMapping(value = "/{id}/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getAchievementById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Achievement id is illegal");
+        Preconditions.checkArgument(id != 0, "Achievement id is illegal");
 
 
         Achievement achievement = achievementService.getAchievementById(id);
@@ -69,8 +69,8 @@ public class AchievementController {
     }
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getAchievements(Pagination pagination) {
-        Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
-        Preconditions.checkNotNull(pagination.getPageSize() > 0 ,"PageSize is illegal");
+        Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
+        Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
 
         List<Achievement> achievements = achievementService.getAchievements(pagination);
 

@@ -3,7 +3,7 @@
 <!-- <mapper namespace="com.car.dao.StudentMapper"> -->
 <mapper namespace="com.research.mapper.AchievementMapper">
 
-	<cache></cache>
+
 
 	<resultMap type="com.research.model.Achievement" id="AchievementResult">
 			<id property="id" column="id"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.research.mapper.UserMapper" >
-    <cache></cache>
+
 
     <resultMap type="com.research.model.User" id="UserResult">
       <id property="id" column="id"/>
@@ -31,9 +31,27 @@
 
     <update id="updateUserById" parameterType="com.research.model.User">
       UPDATE research_user
-      SET username = #{username}, password = #{password}, name = #{name},
-      sex = #{sex}, `id_card` = #{idCard},enable= #{enable},
-      created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+      SET
+        <if test="username != null and '' != username">
+            username = #{username},
+        </if>
+        <if test="password != null and '' != password">
+            password = #{password},
+        </if>
+        <if test="name != null and '' != name">
+            `name` = #{name},
+        </if>
+        <if test="sex != null and '' != sex">
+            sex = #{sex},
+        </if>
+        <if test="idCard != null and '' != idCard">
+            `id_card` = #{idCard},
+        </if>
+        <if test="enable != null and '' != enable">
+            enable= #{enable},
+        </if>
+        last_updated = #{lastUpdated}
+        WHERE id = #{id}
     </update>
 
 
