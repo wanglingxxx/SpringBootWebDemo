@@ -17,9 +17,9 @@ a{
 }
 .header-top-bar{
 	width:100%;
-	height: 36px;
+	height: 46px;
 	background-color:#5579ae;
-	line-height:36px;
+	line-height:30px;
 	color:#ffffff;
 	
 
@@ -37,7 +37,7 @@ a{
 	line-height: 36px;
 	color:#ffffff;
 	margin-right:50px;
-	width:120px;
+	width:180px;
 }
 .log a{
 	color:#ffffff;

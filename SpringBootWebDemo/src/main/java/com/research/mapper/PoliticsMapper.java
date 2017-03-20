@@ -3,6 +3,7 @@ package com.research.mapper;
 import com.research.model.Pagination;
 import com.research.model.Politics;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface PoliticsMapper {
 
     Integer getPoliticsCounts();
 
+    List<Politics> queryProjects(@Param("date") String date, @Param("state") String state);
 }

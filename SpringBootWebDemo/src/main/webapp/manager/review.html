@@ -5,6 +5,12 @@
 	<title>审阅</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
 	<link rel="stylesheet" href="../public/css/review.css">
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<header>
@@ -42,9 +48,8 @@
 		</div>
 		</header>
 		<div class="content container">
-			<div>
-				
-				<h3>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h3>
+			<div id="tbody">
+				<!--<h3>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h3>
 				<div class="info">
 				<p><span>时间：</span><span>2016-12-13</span><span>申报者：</span><span>李三</span></p>
 				<p><span>申报单位：</span>AAAAAAAAAAAAAAAAA</p>
@@ -63,7 +68,8 @@
 				<div class="rev">
 					<button type="submit" class="pass">审核通过</button>
 					<button type="submit" class="no-pass">审核不通过</button>
-				</div>
+				</div>-->
+
 			</div>
 		</div>
 		
@@ -80,7 +86,84 @@
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		window.onload=function(){
 
+			var id = $.cookie("project_id");
+			var title = $.cookie("project_title");
+			var applicant = $.cookie("project_applicant");
+			var auditState = $.cookie("project_auditState");
+			var declareUnits = $.cookie("project_declareUnits");
+			var summary = $.cookie("project_summary");
+			var projectFile = $.cookie("project_projectFile");
+			var remark = $.cookie("project_remark");
+			var declareTime = $.cookie("project_declareTime");
+			var lastUpdated = $.cookie("project_lastUpdated");
+			var createdDate = $.cookie("project_createdDate");
+
+			if(projectFile == null || id == null || title == null || applicant == null || declareUnits == null || summary == null || remark == null || declareTime == null) {
+				location.href = "review_items.html";
+			} else {
+				$("#tbody").empty();
+
+				var str = "";
+				str += "<h3>"+title+"</h3><div class='info'><p><span>时间：</span><span>"+declareTime+"</span><span>申报者：</span><span>"+applicant+"</span></p>";
+				str += "<p><span>申报单位：</span>"+declareUnits+"</p></div><div class='introduce'><span>【简介】</span><p>"+summary+"</p></div> <div class='remark'><span>【备注】</span><p>"+remark+"</p></div>";
+				str += "<div class='download-file'><a href='/upload/project/"+applicant+"/"+projectFile+"'><img src='/public/images/download.png' alt=''>文件下载</a></div><div class='rev'><button type='button' onclick='auditPassById()' class='pass'>审核通过</button><button type='button' onclick='auditUnPassById()' class='no-pass'>审核不通过</button></div>"
+
+				$("#tbody").append(str);
+
+			}
 		}
+
+		function auditPassById(){
+			var auditState = "通过";
+			var id = $.cookie("project_id");
+			if(id == null || id.length < 0 || id <0) {
+				alert("审核失败!")
+				complete();
+			} else {
+				var url="/project/audit";
+				$.post(url,{id:id, auditState:auditState}, function(data) {
+					if(data != null) {
+						alert("操作通过!")
+						complete();
+					} else {
+						alert("操作失败!");
+						complete();
+					}
+				});
+			}
+		}
+
+		function auditUnPassById(){
+			var auditState = "未通过";
+			var id = $.cookie("project_id");
+			if(id == null || id.length < 0 || id <0) {
+				alert("审核失败!")
+				complete();
+			} else {
+				var url="/project/audit";
+				$.post(url,{id:id, auditState:auditState}, function(data) {
+					if(data != null) {
+						alert("操作成功!")
+						complete();
+					} else {
+						alert("操作失败!");
+						complete();
+					}
+				});
+			}
+		}
+
+		function complete() {
+			var isMana = $.cookie("isManager");
+
+			if(isMana != null) {
+				window.location.href = "/manager/platform_manager.html";
+			}
+			else {
+				window.location.href = "review_items.html";
+			}
+		}
+
 			
 	</script>
 </body>

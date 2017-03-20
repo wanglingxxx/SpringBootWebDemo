@@ -63,17 +63,36 @@
     </select>
 
     <select id="getUserById" resultMap="UserResult">
-      SELECT id,title, author, origin, content_file, `date`,
-      created_date, last_updated
+      SELECT id,username, password, `name`, sex, id_card,
+      enable, created_date, last_updated
       FROM research_user
       WHERE id = #{id}
     </select>
 
-    <select id="getUser" resultMap="UserResult">
-      SELECT id, username, password, `name`, sex, id_card, enable,
-        created_date, last_updated
+    <select id="getUsers" resultMap="UserResult">
+      SELECT id,username, password, `name`, sex, id_card,
+      enable, created_date, last_updated
       FROM research_user
       LIMIT #{pageIndex}, #{pageSize}
+    </select>
+
+
+    <select id="queryUsers" resultMap="UserResult">
+        SELECT id, username, password, `name`, sex, id_card, enable,
+        created_date, last_updated
+        FROM research_user
+        WHERE 1 = 1
+        <if test="enable != null and '' != enable">
+            <![CDATA[
+               AND enable = #{enable}
+            ]]>
+        </if>
+        <if test="date != null and '' != date">
+            <![CDATA[
+			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
+			]]>
+        </if>
+        ORDER BY created_date
     </select>
 
     <select id="getUserCounts">

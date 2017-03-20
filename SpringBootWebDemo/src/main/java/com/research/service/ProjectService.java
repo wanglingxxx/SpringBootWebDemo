@@ -36,7 +36,7 @@ public class ProjectService {
         if(pagination.getPageSize() == null) {
             pagination.setPageSize(10);
         }
-
+        pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
         return projectMapper.getProjects(pagination);
     }
 

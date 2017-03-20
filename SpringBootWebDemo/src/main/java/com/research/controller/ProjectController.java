@@ -51,7 +51,6 @@ public class ProjectController {
         project.setSummary(summary);
         project.setDeclareUnits(declareUnits);
         project.setRemark(remark);
-        project.setProjectFile(fileName);
         project.setAuditState("未通过");
 
         project.setDeclareTime(new Date());
@@ -128,6 +127,27 @@ public class ProjectController {
         }
     }
 
+    @RequestMapping(value = "/audit", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> auditProjectById(@RequestParam("id") Integer id,
+                                        @RequestParam("auditState") String auditState) {
+        Preconditions.checkArgument(id != null && id > 0, "Project id is null");
+        Preconditions.checkArgument(!StringUtils.isEmpty(auditState), "Project auditState is null");
+
+        Project project = new Project();
+        project.setId(id);
+        project.setAuditState(auditState);
+
+        int count = projectService.updateProjectById(project);
+
+        if(count == 0) {
+            logger.info("/project/audit auditProjectById return :{}","");
+            return ResponseEntity.noContent().build();
+        } else {
+            logger.info("/project/audit auditProjectById return :{}",project);
+            return ResponseEntity.ok(project);
+        }
+    }
+
     @RequestMapping(value = "/{id}/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getProjectById(@PathVariable("id") Integer id) {
         Preconditions.checkArgument(id != 0, "Project id is illegal");
@@ -166,6 +186,8 @@ public class ProjectController {
             projects = projectService.queryProjects(condition ,"");
         } else if(conditions.equals("pass")) {
             projects = projectService.queryProjects("", "通过");
+        } else if(conditions.equals("unpass")) {
+            projects = projectService.queryProjects("", "未通过");
         } else {
             logger.info("/project/queryAll return :{}","");
             return ResponseEntity.noContent().build();
@@ -197,6 +219,8 @@ public class ProjectController {
                 targetFile.getParentFile().mkdirs();
                 targetFile.createNewFile();
             }
+
+            project.setProjectFile(saveFileName);
 
             projectFile.transferTo(targetFile);
 

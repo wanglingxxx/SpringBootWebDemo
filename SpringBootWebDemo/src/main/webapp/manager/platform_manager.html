@@ -9,6 +9,10 @@
       <link rel="stylesheet" href="../public/css/reset.css">
       <link rel="stylesheet" href="../public/css/platform_manager.css">
       <link href="../public/css/markdown.css" rel="stylesheet">
+      <link rel="stylesheet" href="/public/css/myproject.css">
+
+      <link rel="stylesheet" href="/css/bootstrap.min.css">
+
   </head>
   <body>
     <header>
@@ -27,7 +31,7 @@
           </ul>
         </nav>
         <div class="pull-right log" id="log">
-          <span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+          <span>管理员：</span><a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
           
           <div class="box" id="box">
             <ul>
@@ -71,53 +75,52 @@
           </ul>
         </div>
         <div class="con">
-          <div class="pannal-policy pannal-policy-1 show">
-            
-              <div class="form-group">
-                  <label for="inputFile">文章标题：</label>
-                  <input type="text" class="con-text">   
-              </div>
-             
 
-              <div class="form-group">
-                  <label for="inputFile">必要内容文件上传：</label>
-                  <input type="file" id="inputFile">    
-              </div>
-              <div class="form-group">
-              
-                <div class="markdown">
-                  <label>内容编辑区：</label>
-                  <div class="edit">
-                    <textarea id="text-input-1" oninput="this.editor.update()"
-                            rows="15" cols="170" ></textarea>
+          <div class="pannal-policy pannal-policy-1 show">
+              <form action="" enctype="multipart/form-data" method="POST">
+                  <div class="form-group">
+                      <label for="inputFile">文章标题：</label>
+                      <input type="text" id="research_politics_add_title" class="con-text">
                   </div>
-                  <label>结果在这儿：</label>
-                  <div id="preview-1" class="preview"> </div>
-                </div>
-              </div>
-              <div class="form-group">
-                  <label for="project-remark" class="area">备注：</label>
-                  <textarea name="" class="form-control" id="project-remark" placeholder="备注......." rows="2" cols="80"></textarea>
-              </div>
-              <button type="submit" class="btn">发布</button>
-                
+
+                  <div class="form-group">
+                      <label for="inputFile">必要内容文件上传：</label>
+                      <input type="file" name="contentFile" id="research_politics_add_content_file">
+                  </div>
+                  <div class="form-group">
+
+                    <div class="markdown">
+                      <label>内容编辑区：</label>
+                      <div class="edit">
+                        <textarea id="research_politics_add_origin" oninput="this.editor.update()"
+                                rows="15" cols="170" ></textarea>
+                      </div>
+                      <label>结果在这儿：</label>
+                      <div id="preview-1" class="preview"> </div>
+                    </div>
+                  </div>
+                  <!--<div class="form-group">
+                      <label for="project-remark" class="area">备注：</label>
+                      <textarea name="" class="form-control" id="project-remark" placeholder="备注......." rows="2" cols="80"></textarea>
+                  </div>-->
+                  <button type="button" onclick="addPolitics()" class="btn">发布</button>
+            </form>
           </div>
            <div class="pannal-policy pannal-policy-2 hidden">
               <form action="#" class="search">
                   <div class="form-group">
                     <!-- <input type="text" class="form-control pull-left" placeholder="按条件查询..."> -->
-                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <input list="conditions" id="condition1" name="condition" class="condition pull-left" placeholder="按条件查询...">
                     <datalist id="conditions">
                       <option value="所有">
-                      <option value="最近一月"> 
-                    
+                      <option value="最近一月">
                     </datalist>
                   </div>
-                  <button type="submit" class="btn">查询</button> 
+                  <button type="button" onclick="getConditions(1)" class="btn">查询</button>
              
 
               </form> 
-             <table class="table" id="table" >
+             <table class="table" >
                 <thead>
                   <tr>
                     <th>序号</th>
@@ -127,6 +130,7 @@
                     <th>操作</th>
                   </tr>
                 </thead>
+
                 <tbody id="tbody1">
                   
                    <tr>
@@ -159,6 +163,8 @@
                       <button type="submit" class="btn del">删除</button>
                     </td>
                   </tr>
+
+
                 </tbody>
               </table>
               <div class="paging" id="paging1">
@@ -215,13 +221,13 @@
               <form action="#" class="search">
                   <div class="form-group">
                     
-                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <input list="conditions" id="condition2" name="condition" class="condition pull-left" placeholder="按条件查询...">
                     <datalist id="conditions">
                       <option value="所有"></option>
                       <option value="最近一月"> </option>
                     </datalist>
                   </div>
-                  <button type="submit" class="btn">查询</button> 
+                  <button type="button" onclick="getConditions(2)" class="btn">查询</button>
               </form> 
              <table class="table" id="table" >
                 <thead>
@@ -295,6 +301,11 @@
                   <label for="inputFile">必要内容文件上传：</label>
                   <input type="file" id="inputFile">    
               </div>
+                  <div class="form-group">
+                      <label for="images">封面上传：</label>
+                      <input type="file" id="images">
+                  </div>
+
                 <div class="markdown">
                   <label>内容编辑区：</label>
                   <div class="edit">
@@ -312,19 +323,20 @@
 
               <button type="submit" class="btn">发布</button>
           </div>
+
           <div class="pannal-ach pannal-ach-2 hidden">
               <form action="#" class="search">
                   <div class="form-group">
                     
-                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <input list="conditions" id="condition3" name="condition" class="condition pull-left" placeholder="按条件查询...">
                     <datalist id="conditions">
                       <option value="所有"></option>
                       <option value="最近一月"> </option>
                     </datalist>
                   </div>
-                  <button type="submit" class="btn">查询</button> 
+                  <button type="button" onclick="getConditions(3)" class="btn">查询</button>
               </form> 
-             <table class="table" id="table" >
+             <table class="table"  >
                 <thead>
                   <tr>
                     <th>序号</th>
@@ -353,24 +365,25 @@
               </table>
               <div class="paging" id="paging3"></div>
          
-          </div>
+            </div>
         </div>
+
     </div>
     <!-- 项目管理 -->
-    <div class="pannal-nav pannal-nav-4 hidden">
+   <div class="pannal-nav pannal-nav-4 hidden">
             <div class="position">位置><a href="##">项目管理</a></div>
             <form action="#" class="search">
                   <div class="form-group">
-                    
-                    <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+                    <input list="conditions" id="condition4" name="condition" class="condition pull-left" placeholder="按条件查询...">
                     <datalist id="conditions">
                       <option value="所有"></option>
                       <option value="最近一月"> </option>
                     </datalist>
                   </div>
-                  <button type="submit" class="btn">查询</button> 
-              </form> 
-             <table class="table" id="table" >
+                  <button type="button" onclick="getConditions(4)" class="btn">查询</button>
+              </form>
+
+             <table class="table" >
                 <thead>
                   <tr>
                     <th>序号</th>
@@ -382,12 +395,13 @@
                   </tr>
                 </thead>
                 <tbody id="tbody4">
+
                   <tr>
                     <td></td>
                     <td>2016-12-13</td>
                     <td>SDSDAFFFASFFFFFASFASFASFF</td>
                     <td><a href="##"><span class="download" title="下载"></span></a></td>
-                    <td>李三，王二</td>
+                    <td>李三，王二小</td>
                     
                     <td>
                       <button type="submit" class="btn check">审阅</button>
@@ -397,7 +411,10 @@
                  
                 </tbody>
               </table>
-              <div class="paging" id="paging4"></div>
+              <div class="paging" id="paging4">
+
+
+              </div>
     </div>
 
 
@@ -415,9 +432,18 @@
      <script src='../public/js/tab4.js'></script>
      <script src='../public/js/paging3.js'></script>
      <script src='../public/js/paging4.js'></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="application/javascript" src="/js/ajaxfileupload.js"></script>
+
     <script type="text/javascript">
          document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
          window.onload=function(){
+             $("#name").text($.cookie("user_name"));
+
+             initData();
+
             function Editor(input, preview) {
               this.update = function () {
                 preview.innerHTML = markdown.toHTML(input.value);
@@ -426,13 +452,10 @@
                this.update();
         }
 
-        var $ = function (id) { return document.getElementById(id); };
-            new Editor($("text-input-1"), $("preview-1"));
-            new Editor($("text-input-2"), $("preview-2"));
-            new Editor($("text-input-3"), $("preview-3")); 
-         
-        
-
+        var text = function (id) { return document.getElementById(id); };
+            new Editor(text("research_politics_add_origin"), text("preview-1"));
+            new Editor(text("text-input-2"), text("preview-2"));
+            new Editor(text("text-input-3"), text("preview-3"));
 
         function fixed(){
             var aside=document.getElementsByTagName('aside')[0];
@@ -449,8 +472,646 @@
             }
           }
           fixed();
-
       }
+
+
+
+         function initData(conditions){
+
+             if(conditions == "最近一月") {
+                 conditions = "recent";
+             } else {
+                 conditions = "all"
+             }
+             var achievementUrl = "/achievement/queryAll"
+             var noticeUrl = "/notice/queryAll"
+
+
+             $("#tbody3").empty();
+             $("#tbody2").empty();
+
+             initProjects(conditions);
+             initPolitics(conditions)
+
+         }
+
+         function initPolitics(conditions) {
+             $("#tbody1").empty();
+
+             var politicsUrl = "/politics/queryAll"
+
+
+             $("#tbody1").empty();
+             $.get(politicsUrl,{conditions:conditions},function(data) {
+                 if(data != null) {
+                     var str = "";
+                     for(var i=0;i<data.length;i++) {
+                         str += "<tr><td></td><td>"+UnixToDate(data[i].date)+"</td><td>"+data[i].title+"</td><td>"+data[i].author+"</td><td><button type='button' onclick=getPoliticsById("+data[i].id+") class='edit'>修改</button> <button type='button' onclick=deletePoliticsById("+data[i].id+") class='del'>删除</button></td></tr>";
+                     }
+                     if(str.length > 0) {
+                         $("#tbody1").append(str);
+                         initPoliticsPages();
+                     }else {
+                         $("#paging1").empty();
+                     }
+
+                 } else {
+                     alert("error!")
+                 }
+             });
+         }
+
+         function initPoliticsPages() {
+             $("#paging1").empty();
+
+             var tbody=document.getElementById('tbody1');
+             var atr=tbody.getElementsByTagName('tr');
+             var pages=Math.ceil(atr.length/12);
+
+             var paging=document.getElementById('paging1');
+             for(var i=0;i<atr.length;i++){
+                 atr[i].firstElementChild.innerHTML=i+1;
+
+             }
+
+             //分页，添加页码
+             for(var i=1;i<=pages;i++){
+
+                 // a[0].style.backgroundColor="";
+                 // a[0].style.color="#252525";
+
+                 if(pages>6){
+
+                     for(var i=1;i<=5;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+
+
+                     var nodeS=document.createElement("span");
+                     var ellipsis=document.createTextNode('...');
+                     nodeS.appendChild(ellipsis);
+                     paging.appendChild(nodeS);
+
+                     var nodeAEnd=document.createElement("a");
+                     var textEnd=document.createTextNode(pages);
+                     nodeAEnd.appendChild(textEnd);
+                     paging.appendChild(nodeAEnd);
+                     break;
+                 }
+                 if(pages<=6){
+                     for(var i=1;i<=pages;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+                     for(var i=12;i<atr.length;i++){
+                         atr[i].style.display='none';
+                     }
+
+                 }
+             }
+
+             function page(){
+                 var a=paging.getElementsByTagName("a");
+
+                 for(var j=0;j<a.length;j++){
+
+                     a[j].onclick=function(){
+                         var num=parseInt(this.innerHTML);
+                         if(num<=5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var num=parseInt(num);
+                                 for(var i=1;i<=5;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+                                 var nodeAEnd=document.createElement("a");
+                                 var textEnd=document.createTextNode(pages);
+                                 nodeAEnd.appendChild(textEnd);
+                                 paging.appendChild(nodeAEnd);
+
+
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+                             else{
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+
+                         }
+                         if(num>=5&&num<=pages-5){
+                             paging.innerHTML='';
+                             var nodeAFirst=document.createElement('a');
+                             var textFirst=document.createTextNode('1');
+                             nodeAFirst.appendChild(textFirst);
+                             paging.appendChild(nodeAFirst);
+
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+
+
+                             for(var i=num-2;i<=num+2;i++){
+                                 var nodeA=document.createElement("a");
+                                 var textNode=document.createTextNode(i);
+                                 nodeA.appendChild(textNode);
+                                 paging.appendChild(nodeA);
+                             }
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+                             var nodeAEnd=document.createElement("a");
+                             var textEnd=document.createTextNode(pages);
+                             nodeAEnd.appendChild(textEnd);
+                             paging.appendChild(nodeAEnd);
+
+                             a[3].style.backgroundColor="#fa3e3e";
+                             a[3].style.color="#ffffff";
+                         }
+
+                         if(num>pages-5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var nodeAFirst=document.createElement('a');
+                                 var textFirst=document.createTextNode('1');
+                                 nodeAFirst.appendChild(textFirst);
+                                 paging.appendChild(nodeAFirst);
+
+
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+
+                                 for(var i=num-5+pages-num;i<=pages;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+
+                                 var index=parseInt(num-1);
+                                 a[7-pages+index].style.backgroundColor="#fa3e3e";
+                                 a[7-pages+index].style.color="#ffffff";
+                             }
+                             if(num==6){
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+
+                                 a[5].style.backgroundColor="#fa3e3e";
+                                 a[5].style.color="#ffffff";
+                             }
+                         }
+                         numTr=atr.length;
+                         if(num===1){
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+                             }
+                             for(var i=12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num>1&&num<numTr){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+
+                             }
+                             for(var i=num*12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num===pages){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<numTr;i++){
+                                 atr[i].style.display='table-row';
+
+                             }
+                         }
+                         page();
+                     }
+
+                 }
+             }
+             page();
+         }
+
+
+         function initProjects(conditions){
+             var projectUrl = "/project/queryAll"
+
+             $("#tbody4").empty();
+             $.get(projectUrl,{conditions:conditions},function(data) {
+                 if(data != null) {
+                     var str = "";
+                     for(var i=0;i<data.length;i++) {
+                         str += "<tr><td></td><td>"+UnixToDate(data[i].declareTime)+"</td><td>"+data[i].title+"</td><td><a href='/upload/project/"+data[i].applicant+"/"+data[i].projectFile+"'><span class='download' title='下载'></span></a></td><td>"+data[i].applicant+"</td><td><button type='button' onclick=getProjectById("+data[i].id+") class='edit'>审阅</button> <button type='button' onclick=deleteProjectById("+data[i].id+") class='del'>删除</button></td></tr>";
+                     }
+                     if(str.length > 0) {
+                         $("#tbody4").append(str);
+                         initProjectPages();
+                     }else {
+                         $("#paging4").empty();
+                     }
+
+                 } else {
+                     alert("error!")
+                 }
+             });
+
+         }
+
+         function initProjectPages() {
+             $("#paging4").empty();
+
+             var tbody=document.getElementById('tbody4');
+             var atr=tbody.getElementsByTagName('tr');
+             var pages=Math.ceil(atr.length/12);
+
+             var paging=document.getElementById('paging4');
+             for(var i=0;i<atr.length;i++){
+                 atr[i].firstElementChild.innerHTML=i+1;
+
+             }
+
+             //分页，添加页码
+             for(var i=1;i<=pages;i++){
+
+                 // a[0].style.backgroundColor="";
+                 // a[0].style.color="#252525";
+
+                 if(pages>6){
+
+                     for(var i=1;i<=5;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+
+
+                     var nodeS=document.createElement("span");
+                     var ellipsis=document.createTextNode('...');
+                     nodeS.appendChild(ellipsis);
+                     paging.appendChild(nodeS);
+
+                     var nodeAEnd=document.createElement("a");
+                     var textEnd=document.createTextNode(pages);
+                     nodeAEnd.appendChild(textEnd);
+                     paging.appendChild(nodeAEnd);
+                     break;
+                 }
+                 if(pages<=6){
+                     for(var i=1;i<=pages;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+                     for(var i=12;i<atr.length;i++){
+                         atr[i].style.display='none';
+                     }
+
+                 }
+             }
+
+             function page(){
+                 var a=paging.getElementsByTagName("a");
+
+                 for(var j=0;j<a.length;j++){
+
+                     a[j].onclick=function(){
+                         var num=parseInt(this.innerHTML);
+                         if(num<=5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var num=parseInt(num);
+                                 for(var i=1;i<=5;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+                                 var nodeAEnd=document.createElement("a");
+                                 var textEnd=document.createTextNode(pages);
+                                 nodeAEnd.appendChild(textEnd);
+                                 paging.appendChild(nodeAEnd);
+
+
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+                             else{
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+
+                         }
+                         if(num>=5&&num<=pages-5){
+                             paging.innerHTML='';
+                             var nodeAFirst=document.createElement('a');
+                             var textFirst=document.createTextNode('1');
+                             nodeAFirst.appendChild(textFirst);
+                             paging.appendChild(nodeAFirst);
+
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+
+
+                             for(var i=num-2;i<=num+2;i++){
+                                 var nodeA=document.createElement("a");
+                                 var textNode=document.createTextNode(i);
+                                 nodeA.appendChild(textNode);
+                                 paging.appendChild(nodeA);
+                             }
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+                             var nodeAEnd=document.createElement("a");
+                             var textEnd=document.createTextNode(pages);
+                             nodeAEnd.appendChild(textEnd);
+                             paging.appendChild(nodeAEnd);
+
+                             a[3].style.backgroundColor="#fa3e3e";
+                             a[3].style.color="#ffffff";
+                         }
+
+                         if(num>pages-5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var nodeAFirst=document.createElement('a');
+                                 var textFirst=document.createTextNode('1');
+                                 nodeAFirst.appendChild(textFirst);
+                                 paging.appendChild(nodeAFirst);
+
+
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+
+                                 for(var i=num-5+pages-num;i<=pages;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+
+                                 var index=parseInt(num-1);
+                                 a[7-pages+index].style.backgroundColor="#fa3e3e";
+                                 a[7-pages+index].style.color="#ffffff";
+                             }
+                             if(num==6){
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+
+                                 a[5].style.backgroundColor="#fa3e3e";
+                                 a[5].style.color="#ffffff";
+                             }
+                         }
+                         numTr=atr.length;
+                         if(num===1){
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+                             }
+                             for(var i=12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num>1&&num<numTr){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+
+                             }
+                             for(var i=num*12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num===pages){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<numTr;i++){
+                                 atr[i].style.display='table-row';
+
+                             }
+                         }
+                         page();
+                     }
+
+                 }
+             }
+             page();
+         }
+
+         /**
+          * @return {string}
+          */
+         function UnixToDate(unixTime) {
+             var time = new Date(unixTime);
+             var ymdhis = "";
+             ymdhis += time.getUTCFullYear() + "-";
+             ymdhis += (time.getUTCMonth()+1) + "-";
+             ymdhis += time.getUTCDate();
+
+             ymdhis += " " + time.getUTCHours() + ":";
+             ymdhis += time.getUTCMinutes() + ":";
+             ymdhis += time.getUTCSeconds();
+             return ymdhis;
+         }
+
+         function getProjectById(id){
+             var url="/project/"+id+"/";
+             $.get(url, function(data) {
+                 if(data != null) {
+
+                     $.cookie("project_id",data.id);
+                     $.cookie("project_title",data.title);
+                     $.cookie("project_applicant",data.applicant);
+                     $.cookie("project_auditState",data.auditState);
+                     $.cookie("project_declareUnits",data.declareUnits);
+                     $.cookie("project_summary",data.summary);
+                     $.cookie("project_remark",data.remark);
+                     $.cookie("project_projectFile",data.projectFile);
+                     $.cookie("project_declareTime",UnixToDate(data.declareTime));
+                     $.cookie("project_lastUpdated",UnixToDate(data.lastUpdated));
+                     $.cookie("project_createdDate",UnixToDate(data.createdDate));
+                     $.cookie("isManager", true,{expires:1});
+                     window.location.href = "review.html";
+                 } else {
+                     alert("该项目不存在");
+
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+
+
+
+         }
+
+         function getPoliticsById(id){
+
+         }
+
+         function deleteProjectById(id){
+             var url="/project/delete";
+             $.post(url,{id:id}, function(data) {
+                 if(data != null) {
+                     initData();
+                 } else {
+                     alert("该项目不存在");
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+         }
+
+         function deletePoliticsById(id){}
+
+         function getConditions(count) {
+             var condition = $("#condition"+count).val();
+             initData(condition);
+         }
+
+         function addPolitics(){
+             var author = $.cookie("user_name");
+             if(author == null) {
+                 location.href="/login.html";
+             }
+             var title =$("#research_politics_add_title").val();
+
+             var origin = $("#research_politics_add_origin").val();
+             var contentFile = $("#research_politics_add_content_file").val();
+
+             if(title == null || title.length == 0 || origin == null || origin.length == 0 || contentFile == null || contentFile.length == 0
+                     || author == null || author.length == 0) {
+                 alert("所输入参数不能为空!");
+             } else {
+                 $.ajaxFileUpload({
+                             url:'/politics/add?title='+title+'&author='+author+'&origin='+origin,
+                             type:'POST',
+                             secureuri: false, //是否需要安全协议，一般设置为false
+                             dataType: 'json', //返回值类型 一般设置为json
+                             fileElementId:'research_politics_add_content_file',
+                             success: function (data, status){
+                                 if(data != null) {
+                                     alert("发布成功!")
+                                     location.href="platform_manager.html";
+                                 } else {
+                                     alert("发布失败!")
+                                 }
+                             },
+                             error: function (data, status, e)//服务器响应失败处理函数
+                             {
+                                 alert("error!");
+                             }
+
+                         }
+                 );
+                 if(title == null || title.length == 0 || origin == null || origin.length == 0 || contentFile == null || contentFile.length == 0
+                         || author == null || author.length == 0) {
+
+                 } else {
+                     alert("申报成功!")
+                     location.href="platform_manager.html";
+                 }
+             }
+         }
+
+
+         function research_project_insert(){
+
+         }
+
       </script>
   </body>
 </html>

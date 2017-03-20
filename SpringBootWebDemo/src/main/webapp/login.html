@@ -69,7 +69,13 @@ function research_user_login() {
 					$.cookie("user_id_card", data.idCard, { expires: 7 });
 					$.cookie("user_enable", data.enable, { expires: 7 });
 
-					location.href = "/logged/index.html";
+					if(data.enable == 1) {
+						location.href = "/manager/index.html";
+					} else {
+						location.href = "/logged/index.html";
+					}
+
+
 				} else {
 					alert("用户名或密码不正确!");
 

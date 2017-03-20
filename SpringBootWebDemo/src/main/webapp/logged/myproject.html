@@ -5,8 +5,8 @@
 	<title>我的项目</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
 	<link rel="stylesheet" href="../public/css/myproject.css">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
 
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
@@ -96,7 +96,6 @@
 			
 		</div>
 	</div>
-
 
 
 	<footer>
@@ -492,7 +491,7 @@
 
 					var str = "";
 					for(var i=0;i<data.length;i++) {
-						str += "<tr><td></td><td>"+data[i].declareTime+"</td><td>"+data[i].title+"</td><td>"+data[i].auditState+"</td><td><button class='edit' onclick=getProjectById("+data[i].id+")>修改</button><button class='del' onclick=deleteProjectById("+data[i].id+")>删除</button></td></tr>";
+						str += "<tr><td></td><td>"+UnixToDate(data[i].declareTime)+"</td><td>"+data[i].title+"</td><td>"+data[i].auditState+"</td><td><button class='edit' onclick=getProjectById("+data[i].id+")>修改</button><button class='del' onclick=deleteProjectById("+data[i].id+")>删除</button></td></tr>";
 
 					}
 					if(str.length > 0) {
@@ -620,6 +619,24 @@
 				});
 			}
 		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+
 	</script>
 </body>
 </html>

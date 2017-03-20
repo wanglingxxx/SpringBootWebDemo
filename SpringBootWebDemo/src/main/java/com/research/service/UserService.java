@@ -32,6 +32,13 @@ public class UserService {
     }
 
     public List<User> getUsers(Pagination pagination) {
+        if(pagination.getPageIndex() == null) {
+            pagination.setPageIndex(0);
+        }
+        if(pagination.getPageSize() == null) {
+            pagination.setPageSize(10);
+        }
+        pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
         return userMapper.getUsers(pagination);
     }
 
@@ -41,5 +48,9 @@ public class UserService {
 
     public User login(User user) {
         return userMapper.login(user);
+    }
+
+    public List<User> queryUsers(String date, String enable) {
+        return userMapper.queryUsers(date, enable);
     }
 }

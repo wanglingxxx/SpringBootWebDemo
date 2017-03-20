@@ -4,7 +4,13 @@
 	<meta charset="UTF-8">
 	<title>用户管理</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
-	<link rel="stylesheet" href="../public/css/user_manager.css">
+	<link rel="stylesheet" href="../public/css/myproject.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<header>
@@ -22,18 +28,18 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<span>管理员：</span><a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
 							<li><a href="report.html">申报项目</a></li>
-							<li><a href="myproject.html">我的科研项目</a></li>
+							<li><a href="user_manager.html">我的科研项目</a></li>
 							<li><span></span></li>
 							<li><a href="##">用户管理</a></li>
 							<li><a href="review_items.html">审核项目</a></li>
 							<li><a href="platform_manager.html">平台内容管理</a></li>
 							<li><span></span></li>
-							<li><a href="">修改密码</a></li>
+							<li><a href="#" onclick="showUpdateUser()">修改密码</a></li>
 							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
@@ -55,13 +61,15 @@
 		<form action="#" class="search">
 	        <div class="form-group">
 	          <!-- <input type="text" class="form-control pull-left" placeholder="按条件查询..."> -->
-	          <input list="conditions" name="condition" class="condition pull-left" placeholder="按条件查询...">
+	          <input list="conditions" id="condition" name="condition" class="condition pull-left" placeholder="按条件查询...">
 	          <datalist id="conditions">
-			  <option value="查询所有">
-			  	  
+				  <option value="查询所有">
+				  <option value="最近一月">
+				  <option value="管理员">
+				  <option value="普通用户">
 			</datalist>
 	        </div>
-	        <button type="submit" class="btn">查询</button>	
+	        <button type="button" onclick="getUsers()" class="btn">查询</button>
 		</form>
 	</div><!-- header end -->
 	
@@ -78,153 +86,27 @@
 				</tr>
 			</thead>
 			<tbody id="tbody">
-				<tr>
+				<!--<tr>
 					<td></td>
 					<td>user</td>
 					<td>李三</td>
 					<td>男</td>
 					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
+						<select>
+							<option name="enable" value="0"> 用户权限</option>
+							<option name="enable" selected="selected" value="1"> 管理员权限</option>
+						</select>
 					</td>
 					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
+						<button type="submit" class="btn save " onclick="research_user_save()"><p>保存</p></button>
+						<button type="submit" class="btn del ">删除</button>
 					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>user</td>
-					<td>李三</td>
-					<td>男</td>
-					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
-					</td>
-					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
-					</td>
-				</tr>
+				</tr>-->
 
-				<tr>
-					<td></td>
-					<td>user</td>
-					<td>李三</td>
-					<td>男</td>
-					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
-					</td>
-					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>user</td>
-					<td>李三</td>
-					<td>男</td>
-					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
-					</td>
-					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>user</td>
-					<td>李三</td>
-					<td>男</td>
-					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
-					</td>
-					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>user</td>
-					<td>李三</td>
-					<td>男</td>
-					<td>
-						<form action="#">
-							<div class="checkbox one pull-left">
-							    <label>
-							      <input type="checkbox"> 用户权限
-							    </label>
-							</div>
-							<div class="checkbox two">
-							    <label>
-							      <input type="checkbox"> 管理员权限
-							    </label>
-							</div>
-						</form>
-					</td>
-					<td>
-						<button type="submit" class="btn save">保存</button>
-						<button type="submit" class="btn del">删除</button>
-					</td>
-				</tr>
 			</tbody>
 		</table>
+
+
 		<div class="paging" id="paging">
 			
 		</div>
@@ -232,6 +114,134 @@
 
 
 	<footer>
+
+		<!-- 按钮触发模态框 -->
+		<button class="btn btn-primary btn-lg" style="display: none;" id="search_update_modal" data-toggle="modal" data-target="#myModal"></button>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">修改用户</h4>
+					</div>
+
+					<div class="modal-body">
+						<form role="form" id="search_project_update_form"
+							  action="" method="post" enctype="multipart/form-data">
+
+							<input type="hidden" class="form-control"  id="research_user_update_id"  name="id" value="" >
+
+							<div class="form-group">
+								<label >用户名:</label>
+								<div>
+									<input type="text" name="title" class="form-control"
+										   id="research_user_update_username"
+										   value=""  placeholder="请输入你的用户名" >
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>密码:</label>
+								<div>
+									<input type="text" name="summary" class="form-control" id="research_user_update_password"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label>姓名:</label>
+								<div>
+									<input type="text" id="research_user_update_name" name="applicant" class="form-control"
+										   value=""  placeholder="请输入你的姓名">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>性别</label>
+								<div>
+									<select id="research_user_update_sex">
+										<option name="enable" selected="selected" value="男">男</option>
+										<option name="enable"  value="女">女</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>身份证:</label>
+								<div>
+									<input type="text" name="remark" class="form-control" id="research_user_update_id_card"
+										   value=""  placeholder="请输入你的身份证" >
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>身份:</label>
+								<div>
+									<select id="research_user_update_enable">
+										<option name="enable" selected="selected" value="0"> 用户权限</option>
+										<option name="enable"  value="1"> 管理员权限</option>
+									</select>
+
+								</div>
+							</div>
+
+						</form>
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="research_user_update_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="saveUserById()">提交更改</button>
+					</div>
+
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
+		<!-- 按钮触发模态框 -->
+		<button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="updateUserModalLabel">修改密码</h4>
+					</div>
+
+					<div class="modal-body">
+						<form role="form" id=""
+							  action="">
+
+							<div class="form-group">
+								<label>新密码:</label>
+								<div>
+									<input type="password" class="form-control" id="research_user_update_old_password"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label>再输一次:</label>
+								<div>
+									<input type="password" id="research_user_update_new_password" name="password" class="form-control"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
+
+
 		<div class="href-1 ">
 				<p>友情链接</p>
 			</div>
@@ -243,9 +253,405 @@
 	<script>
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		document.write( "<script language=javascript src='../public/js/paging.js'><\/script>");
-			window.onload=function(){
+		window.onload=function(){
+			$("#name").text($.cookie("user_name"));
+
+			getUsers();
+
+		}
+
+
+		function initPages() {
+			$("#paging").empty();
+
+			var tbody=document.getElementById('tbody');
+			var atr=tbody.getElementsByTagName('tr');
+			var pages=Math.ceil(atr.length/12);
+
+			var paging=document.getElementById('paging');
+			for(var i=0;i<atr.length;i++){
+				atr[i].firstElementChild.innerHTML=i+1;
+
 			}
-			
+
+			//分页，添加页码
+			for(var i=1;i<=pages;i++){
+
+				// a[0].style.backgroundColor="";
+				// a[0].style.color="#252525";
+
+				if(pages>6){
+
+					for(var i=1;i<=5;i++){
+						var nodeA=document.createElement("a");
+						var textNode=document.createTextNode(i);
+						nodeA.appendChild(textNode);
+						paging.appendChild(nodeA);
+
+					}
+
+					var a=paging.getElementsByTagName('a');
+					a[0].style.backgroundColor="#fa3e3e";
+					a[0].style.color="#ffffff";
+
+
+					var nodeS=document.createElement("span");
+					var ellipsis=document.createTextNode('...');
+					nodeS.appendChild(ellipsis);
+					paging.appendChild(nodeS);
+
+					var nodeAEnd=document.createElement("a");
+					var textEnd=document.createTextNode(pages);
+					nodeAEnd.appendChild(textEnd);
+					paging.appendChild(nodeAEnd);
+					break;
+				}
+				if(pages<=6){
+					for(var i=1;i<=pages;i++){
+						var nodeA=document.createElement("a");
+						var textNode=document.createTextNode(i);
+						nodeA.appendChild(textNode);
+						paging.appendChild(nodeA);
+
+					}
+					var a=paging.getElementsByTagName('a');
+					a[0].style.backgroundColor="#fa3e3e";
+					a[0].style.color="#ffffff";
+					for(var i=12;i<atr.length;i++){
+						atr[i].style.display='none';
+					}
+
+				}
+			}
+
+			function page(){
+				var a=paging.getElementsByTagName("a");
+
+				for(var j=0;j<a.length;j++){
+
+					a[j].onclick=function(){
+						var num=parseInt(this.innerHTML);
+						if(num<=5){
+							if(pages>6){
+								paging.innerHTML='';
+								var num=parseInt(num);
+								for(var i=1;i<=5;i++){
+									var nodeA=document.createElement("a");
+									var textNode=document.createTextNode(i);
+									nodeA.appendChild(textNode);
+									paging.appendChild(nodeA);
+								}
+								var nodeS=document.createElement("span");
+								var ellipsis=document.createTextNode('...');
+								nodeS.appendChild(ellipsis);
+								paging.appendChild(nodeS);
+
+								var nodeAEnd=document.createElement("a");
+								var textEnd=document.createTextNode(pages);
+								nodeAEnd.appendChild(textEnd);
+								paging.appendChild(nodeAEnd);
+
+
+								var index=parseInt(num-1);
+								a[index].style.backgroundColor="#fa3e3e";
+								a[index].style.color="#ffffff";
+							}
+							else{
+								for(var i=0;i<a.length;i++){
+									a[i].style.backgroundColor="";
+									a[i].style.color="#252525";
+								}
+								var index=parseInt(num-1);
+								a[index].style.backgroundColor="#fa3e3e";
+								a[index].style.color="#ffffff";
+							}
+
+						}
+						if(num>=5&&num<=pages-5){
+							paging.innerHTML='';
+							var nodeAFirst=document.createElement('a');
+							var textFirst=document.createTextNode('1');
+							nodeAFirst.appendChild(textFirst);
+							paging.appendChild(nodeAFirst);
+
+
+							var nodeS=document.createElement("span");
+							var ellipsis=document.createTextNode('...');
+							nodeS.appendChild(ellipsis);
+							paging.appendChild(nodeS);
+
+
+
+							for(var i=num-2;i<=num+2;i++){
+								var nodeA=document.createElement("a");
+								var textNode=document.createTextNode(i);
+								nodeA.appendChild(textNode);
+								paging.appendChild(nodeA);
+							}
+
+							var nodeS=document.createElement("span");
+							var ellipsis=document.createTextNode('...');
+							nodeS.appendChild(ellipsis);
+							paging.appendChild(nodeS);
+
+							var nodeAEnd=document.createElement("a");
+							var textEnd=document.createTextNode(pages);
+							nodeAEnd.appendChild(textEnd);
+							paging.appendChild(nodeAEnd);
+
+							a[3].style.backgroundColor="#fa3e3e";
+							a[3].style.color="#ffffff";
+						}
+
+						if(num>pages-5){
+							if(pages>6){
+								paging.innerHTML='';
+								var nodeAFirst=document.createElement('a');
+								var textFirst=document.createTextNode('1');
+								nodeAFirst.appendChild(textFirst);
+								paging.appendChild(nodeAFirst);
+
+
+								var nodeS=document.createElement("span");
+								var ellipsis=document.createTextNode('...');
+								nodeS.appendChild(ellipsis);
+								paging.appendChild(nodeS);
+
+
+								for(var i=num-5+pages-num;i<=pages;i++){
+									var nodeA=document.createElement("a");
+									var textNode=document.createTextNode(i);
+									nodeA.appendChild(textNode);
+									paging.appendChild(nodeA);
+								}
+
+								var index=parseInt(num-1);
+								a[7-pages+index].style.backgroundColor="#fa3e3e";
+								a[7-pages+index].style.color="#ffffff";
+							}
+							if(num==6){
+								for(var i=0;i<a.length;i++){
+									a[i].style.backgroundColor="";
+									a[i].style.color="#252525";
+								}
+
+								a[5].style.backgroundColor="#fa3e3e";
+								a[5].style.color="#ffffff";
+							}
+						}
+						numTr=atr.length;
+						if(num===1){
+							for(var i=(num-1)*12;i<num*12;i++){
+
+								atr[i].style.display='table-row';
+
+							}
+							for(var i=12;i<numTr;i++){
+								atr[i].style.display='none';
+
+							}
+						}
+						if(num>1&&num<numTr){
+							for(var i=0;i<(num-1)*12;i++){
+								atr[i].style.display='none';
+
+							}
+							for(var i=(num-1)*12;i<num*12;i++){
+
+								atr[i].style.display='table-row';
+
+
+							}
+							for(var i=num*12;i<numTr;i++){
+								atr[i].style.display='none';
+
+							}
+						}
+						if(num===pages){
+							for(var i=0;i<(num-1)*12;i++){
+								atr[i].style.display='none';
+
+							}
+							for(var i=(num-1)*12;i<numTr;i++){
+								atr[i].style.display='table-row';
+
+							}
+						}
+						page();
+					}
+
+				}
+			}
+			page();
+		}
+
+
+		function getUsers(){
+
+			var conditions = $("#condition").val();
+			if(conditions == "管理员") {
+				conditions = "1";
+			}
+			else if(conditions == "普通用户") {
+				conditions = "0";
+			}else if(conditions == "最近一月") {
+				conditions = "recent";
+			} else {
+				conditions = "all"
+			}
+
+			var url = "/user/query"
+
+			$("#tbody").empty();
+
+			$.get(url,{conditions:conditions},function(data) {
+				if(data != null) {
+
+					var str = "";
+					for(var i=0;i<data.length;i++) {
+						str += "<tr><td></td><td>"+data[i].username+"</td><td>"+data[i].name+"</td><td>"+data[i].sex+"</td>  ";
+						if(data[i].enable == 1) {
+							str += "<td><select><option name='enable' value='0'> 用户权限</option><option name='enable' selected='selected' value='1'>管理员权限</option> </select></td>";
+						} else {
+							str += "<td><select><option name='enable' selected='selected' value='0'> 用户权限</option><option name='enable' value='1'>管理员权限</option> </select></td>";
+						}
+						str +="	<td><button class='edit' onclick=getUserById("+data[i].id+")>修改</button><button class='del' onclick=deleteUserById("+data[i].id+")>删除</button></td></tr>";
+					}
+					if(str.length > 0) {
+						$("#tbody").append(str);
+						initPages();
+					}else {
+						$("#paging").empty();
+					}
+
+				} else {
+					alert("error!")
+				}
+			});
+		}
+
+		function getUserById(id){
+			var url="/user/"+id+"/";
+			$.get(url, function(data) {
+				if(data != null) {
+
+					$("#research_user_update_id").val(data.id);
+					$("#research_user_update_username").val(data.username);
+					$("#research_user_update_password").val(data.password);
+					$("#research_user_update_name").val(data.name);
+					$("#research_user_update_id_card").val(data.idCard);
+					$("#research_user_update_enable").val(data.enable);
+
+					$("#search_update_modal").click();
+
+				} else {
+					alert("该项目不存在");
+
+					window.location.href = "user_manager.html";
+				}
+			});
+
+
+
+		}
+
+		function saveUserById(){
+
+			var id = $("#research_user_update_id").val();
+			var username = $("#research_user_update_username").val();
+			var password =$("#research_user_update_password").val();
+			var name = $("#research_user_update_name").val();
+			var sex = $("#research_user_update_sex").val();
+			var idCard = $("#research_user_update_id_card").val();
+			var enable = $("#research_user_update_enable").val();
+
+			var url = "/user/update"
+
+			$.post(url,{id:id,username:username, password:password, name:name, sex:sex, idCard:idCard, enable:enable}, function(data) {
+				if(data != null) {
+					$("#research_user_update_close").click();
+					getUsers();
+
+				} else {
+					alert("该项目不存在");
+
+					window.location.href = "user_manager.html";
+				}
+			});
+
+			if(id == null || id.length == 0 || username == null || username.length == 0 || password == null || password.length == 0 ||
+					name == null || name.length == 0 || sex == null || sex.length == 0
+					|| idCard == null || idCard.length == 0 || enable == null || enable.length == 0) {
+				alert("所输入参数不能为空!");
+			} else {
+
+				if(filename == null || filename.length == 0 || id == null || id.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+						|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
+
+				} else {
+					alert("修改成功!")
+					location.href="user_manager.html";
+				}
+			}
+		}
+
+		function deleteUserById(id){
+			var url="/user/delete";
+			$.post(url,{id:id}, function(data) {
+				if(data != null) {
+
+					getUsers();
+				} else {
+					alert("该项目不存在");
+
+					window.location.href = "user_manager.html";
+				}
+			});
+		}
+
+		function showUpdateUser(){
+			$("#search_user_update_modal").click();
+		}
+
+		function updateUserById(){
+			var id = $.cookie("user_id")
+			var oldPassword = $("#research_user_update_old_password").val();
+			var newPassword = $("#research_user_update_new_password").val();
+			if(oldPassword != newPassword) {
+				alert("两次输入密码不一致!")
+			} else {
+				var url="/user/update";
+				$.post(url,{id:id, password:newPassword}, function(data) {
+					if(data != null) {
+
+						window.location.href = "user_manager.html";
+
+					} else {
+						alert("该项目不存在");
+
+						window.location.href = "user_manager.html";
+					}
+				});
+			}
+		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+
 	</script>
 </body>
 </html>

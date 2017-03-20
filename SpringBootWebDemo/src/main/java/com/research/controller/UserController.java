@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +45,8 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> deleteUserById(@PathVariable("id") Integer id) {
+    @RequestMapping(value = "/delete", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> deleteUserById(Integer id) {
         Preconditions.checkArgument(id != 0, "User id is illegal");
 
         int count = userService.deleteUserById(id);
@@ -53,39 +54,50 @@ public class UserController {
         if(count == 0) {
             return ResponseEntity.noContent().build();
         } else {
+            logger.info("/usr/{id}/ deleteUserById return :{}", id);
             return ResponseEntity.ok(id);
         }
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> updateUserById(@RequestBody User user) {
-        Preconditions.checkArgument(user != null && user.getId() != 0, "User id is illegal");
-
-        int count = userService.updateUserById(user);
-
-        if(count == 0) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(user);
-        }
-    }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> updatePasswordById(Integer id,
-            String password) {
+    ResponseEntity<?> updateUserById(@RequestParam(value="id") Integer id,@RequestParam(value="username",required = false)String username,
+                                     @RequestParam(value="name",required = false)String name, @RequestParam(value="sex",required = false)String sex,
+                                     @RequestParam(value="idCard",required = false)String idCard,@RequestParam(value="enable",required = false) Integer enable,
+                                     @RequestParam(value="password",required = false)String password) {
         Preconditions.checkArgument(id != null && id > 0, "User id is illegal");
-        Preconditions.checkArgument(password != null && password.length() != 0, "User password is illegal");
 
         User user = new User();
         user.setId(id);
-        user.setPassword(password);
+        if(username != null && username.length() != 0){
+            user.setUsername(username);
+        }
+        if(name != null && name.length() != 0){
+            user.setName(name);
+        }
+        if(sex != null && sex.length() != 0){
+            user.setSex(sex);
+        }
+
+        if(idCard != null && idCard.length() != 0){
+            user.setIdCard(idCard);
+        }
+        if(enable != null && enable >= 0){
+            user.setEnable(enable);
+        }
+        if(password != null && password.length() != 0){
+            user.setPassword(password);
+        }
+
         user.setLastUpdated(new Date());
 
         int count = userService.updateUserById(user);
 
         if(count == 0) {
+            logger.info("/user/update updateUserById return :{}","");
             return ResponseEntity.noContent().build();
         } else {
+            logger.info("/user/update updateUserById return :{}",user);
             return ResponseEntity.ok(user);
         }
     }
@@ -96,7 +108,7 @@ public class UserController {
 
 
         User user = userService.getUserById(id);
-
+        logger.info("/usr/{id}/ getUserById return :{}"+ user);
         return ResponseEntity.ok(user);
     }
 
@@ -123,12 +135,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> getUsers(Pagination pagination) {
-        Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
-        Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
+    ResponseEntity<?> getUsers(@RequestParam(value = "conditions", defaultValue = "all") String conditions) {
+        //TODO 完成条件查询
+        List<User> users;
+        Pagination pagination = new Pagination();
+        if(conditions.equals("all")) {
+            pagination.setPageSize(100);
+            users = userService.getUsers(pagination);
+        } else if(conditions.equals("recent")) {
+            User project = new User();
+            Date date = new Date();
+            date.setMonth(date.getMonth()-1);
+            SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
+            String condition = formatter.format(date);
+            users = userService.queryUsers(condition ,"");
+        } else if(conditions.equals("1")) {
+            users = userService.queryUsers("", "1");
+        } else if(conditions.equals("0")) {
+            users = userService.queryUsers("", "0");
+        } else {
+            logger.info("/user/query return :{}","");
+            return ResponseEntity.noContent().build();
+        }
 
-        List<User> users = userService.getUsers(pagination);
-
+        logger.info("/user/query return :{}",users);
         return ResponseEntity.ok(users);
     }
 }

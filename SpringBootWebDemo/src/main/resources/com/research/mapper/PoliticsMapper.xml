@@ -19,7 +19,7 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="int">
 			select LAST_INSERT_ID() AS id
 		</selectKey>
-		INSERT INTO research_politics (title, aothor, origin, content_file,
+		INSERT INTO research_politics (title, author, origin, content_file,
 		`date`, created_date, last_updated)
 		VALUES (#{title},#{author},#{origin},#{contentFile},#{date},#{createdDate},#{lastUpdated})
 	</insert>
@@ -48,6 +48,19 @@
 		created_date, last_updated
 		FROM research_politics
 		LIMIT #{pageIndex}, #{pageSize}
+	</select>
+
+	<select id="queryProjects" resultMap="PoliticsResult">
+		SELECT id,title, author, origin, content_file, `date`,
+		created_date, last_updated
+		FROM research_politics
+		WHERE 1 = 1
+		<if test="date != null and '' != date">
+			<![CDATA[
+			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
+			]]>
+		</if>
+		ORDER BY created_date
 	</select>
 
 	<select id="getPoliticsCounts">

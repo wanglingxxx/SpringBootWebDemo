@@ -3,6 +3,7 @@ package com.research.mapper;
 import com.research.model.Pagination;
 import com.research.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface UserMapper {
     List<User> getUsers(Pagination pagination);
 
     Integer getUserCounts();
+
+    List<User> queryUsers(@Param("date")String date, @Param("enable") String enable);
 }

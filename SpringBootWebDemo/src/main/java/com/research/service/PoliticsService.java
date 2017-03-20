@@ -31,10 +31,22 @@ public class PoliticsService {
     }
 
     public List<Politics> getPolitics(Pagination pagination) {
+        if(pagination.getPageIndex() == null) {
+            pagination.setPageIndex(0);
+        }
+        if(pagination.getPageSize() == null) {
+            pagination.setPageSize(10);
+        }
+        pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
         return politicsMapper.getPolitics(pagination);
     }
 
     public Integer getPoliticsCounts() {
         return politicsMapper.getPoliticsCounts();
     }
+
+    public List<Politics> queryProjects(String date, String state) {
+        return politicsMapper.queryProjects(date, state);
+    }
+
 }
