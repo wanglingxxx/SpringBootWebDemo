@@ -18,9 +18,9 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="int">
 			select LAST_INSERT_ID() AS id
 		</selectKey>
-		INSERT INTO research_notice (title, content, publisher, publish_date,
+		INSERT INTO research_notice (title, content, publisher, `type` ,publish_date,
 		 created_date, last_updated)
-		VALUES (#{title},#{content},#{publisher},#{publishDate},#{createdDate},#{lastUpdated})
+		VALUES (#{title},#{content},#{publisher},#{type},#{publishDate},#{createdDate},#{lastUpdated})
 	</insert>
 
 	<delete id="deleteNoticeById"  parameterType="com.research.model.Notice">
@@ -30,9 +30,29 @@
 
 	<update id="updateNoticeById" parameterType="com.research.model.Notice">
 		UPDATE research_notice
-		SET title = #{title}, content = #{content}, publisher = #{publisher},
-		 publish_date = #{publishDate},
-		created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+		SET
+		<if test="title != null and '' != title">
+			<![CDATA[
+               title = #{title},
+            ]]>
+		</if>
+		<if test="content != null and '' != content">
+			<![CDATA[
+               content = #{content},
+            ]]>
+		</if>
+		<if test="publisher != null and '' != publisher">
+			<![CDATA[
+               publisher = #{publisher},
+            ]]>
+		</if>
+		<if test="type != null and '' != type">
+			<![CDATA[
+               type = #{type},
+            ]]>
+		</if>
+		last_updated = #{lastUpdated}
+		WHERE id = #{id}
 	</update>
 
 	<select id="getNoticeById" resultMap="NoticeResult">
@@ -46,7 +66,20 @@
 		SELECT id,title, content, publisher, publish_date,
 			created_date, last_updated
 		FROM research_notice
-		LIMIT #{pageIndex}, #{pageSize}
+			 LIMIT #{pageIndex}, #{pageSize}
+	</select>
+
+	<select id="queryNotices" resultMap="NoticeResult">
+		SELECT id,title, content, publisher, publish_date,
+		created_date, last_updated
+		FROM research_notice
+		WHERE 1 = 1
+		<if test="date != null and '' != date">
+			<![CDATA[
+			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
+			]]>
+		</if>
+		ORDER BY created_date
 	</select>
 
 	<select id="getNoticeCounts">

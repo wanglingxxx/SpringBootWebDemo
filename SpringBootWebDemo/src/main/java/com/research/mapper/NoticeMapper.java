@@ -3,6 +3,7 @@ package com.research.mapper;
 import com.research.model.Notice;
 import com.research.model.Pagination;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface NoticeMapper {
     List<Notice> getNotices(Pagination pagination);
 
     Integer getNoticeCounts();
+
+    List<Notice> queryNotices(@Param("date")String date,@Param("state") String state);
 }

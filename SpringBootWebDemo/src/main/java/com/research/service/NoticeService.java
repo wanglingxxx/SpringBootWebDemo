@@ -31,7 +31,18 @@ public class NoticeService {
     }
 
     public List<Notice> getNotices(Pagination pagination) {
+        if(pagination.getPageIndex() == null) {
+            pagination.setPageIndex(0);
+        }
+        if(pagination.getPageSize() == null) {
+            pagination.setPageSize(10);
+        }
+        pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
         return noticeMapper.getNotices(pagination);
+    }
+
+    public List<Notice> queryNotices(String date, String state) {
+        return noticeMapper.queryNotices(date, state);
     }
 
     public Integer getNoticeCounts() {

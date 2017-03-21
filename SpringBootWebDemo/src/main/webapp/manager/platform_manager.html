@@ -42,13 +42,54 @@
               <li><a href="review_items.html">审核项目</a></li>
               <li><a href="platform_manager.html">平台内容管理</a></li>  
               <li><span></span></li>
-              <li><a href="">修改密码</a></li>
+              <li><a href="#" onclick="showUpdateUser()">修改密码</a></li>
                 <li><a href="/login.html">注销</a></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+
+        <!-- 按钮触发模态框 -->
+        <button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+        <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="updateUserModalLabels">修改密码</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form role="form"  action="">
+
+                            <div class="form-group">
+                                <label>新密码:</label>
+                                <div>
+                                    <input type="password" class="form-control" id="research_user_update_old_password"
+                                           value=""  placeholder="请输入你的密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>再输一次:</label>
+                                <div>
+                                    <input type="password" id="research_user_update_new_password" name="password" class="form-control"
+                                           value=""  placeholder="请输入你的密码">
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
     </header>
     
     <aside>
@@ -143,26 +184,7 @@
                       <button type="submit" class="btn del">删除</button>
                     </td>
                   </tr>
-                  <tr>
-                    <td></td>
-                    <td>2016-12-13</td>
-                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
-                    <td>李三</td>
-                    <td>
-                      <button type="submit" class="btn edit">修改</button>
-                      <button type="submit" class="btn del">删除</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>2016-12-13</td>
-                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
-                    <td>李三</td>
-                    <td>
-                      <button type="submit" class="btn edit">修改</button>
-                      <button type="submit" class="btn del">删除</button>
-                    </td>
-                  </tr>
+
 
 
                 </tbody>
@@ -170,8 +192,65 @@
               <div class="paging" id="paging1">
       
               </div>
+
            </div>
         </div>
+
+
+        <!-- 按钮触发模态框 时政修改-->
+        <button class="btn btn-primary btn-lg" style="display: none;" id="search_politics_update_modal" data-toggle="modal" data-target="#updatePoliticsModal"></button>
+        <div class="modal fade" id="updatePoliticsModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="updateUserModalLabel">修改时政</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form role="form" id=""
+                              action="">
+
+                            <input type="hidden" class="form-control"  id="research_politics_update_id"  name="id" value="" >
+
+                            <div class="form-group">
+                                <label>标题:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="research_politics_update_title"
+                                           name="title" value=""  placeholder="请输入你的标题">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>作者:</label>
+                                <div>
+                                    <input type="text" id="research_politics_update_author" name="author" class="form-control"
+                                           value=""  placeholder="请输入你的作者">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>内容:</label>
+                                <div>
+                                           <textarea  id="research_politics_update_origin" name="origin" class="form-control"
+                                                      rows="15" cols="100"      value=""  placeholder="请输入你的内容"></textarea>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="research_politics_update_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="updatePoliticsById()">提交更改</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+
+
     </div>
     <!-- 通知公告管理 -->
     <div class="pannal-nav pannal-nav-2 hidden" id="notice">
@@ -188,14 +267,14 @@
             
               <div class="form-group">
                   <label for="inputFile">文章标题：</label>
-                  <input type="text" class="con-text">   
+                  <input type="text" id="research_notice_add_title" class="con-text">
               </div>
               <div class="form-group">
               
                 <div class="markdown">
                   <label>内容编辑区：</label>
                   <div class="edit">
-                    <textarea id="text-input-2" oninput="this.editor.update()"
+                    <textarea id="research_notice_add_content" oninput="this.editor.update()"
                             rows="15" cols="170" ></textarea>
                   </div>
                   <label>结果在这儿：</label>
@@ -204,18 +283,18 @@
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  <input type="radio" name="research_notice_add_type"  value="通知" checked>
                   通知
                 </label>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  <input type="radio" name="research_notice_add_type" value="公告" checked>
                   公告
                 </label>
               </div>
 
-              <button type="submit" class="btn">发布</button>
+              <button type="button" onclick="addNotice()" class="btn">发布</button>
         </div>
         <div class="pannal-notice pannal-notice-2 hidden">
               <form action="#" class="search">
@@ -250,32 +329,76 @@
                       <button type="submit" class="btn del">删除</button>
                     </td>
                   </tr>
-                  <tr>
-                    <td></td>
-                    <td>2016-12-13</td>
-                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
-                    <td>李三</td>
-                    <td>
-                      <button type="submit" class="btn edit">修改</button>
-                      <button type="submit" class="btn del">删除</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>2016-12-13</td>
-                    <td>SDSDAFFFASFFFFFASFASFASFF</td>
-                    <td>李三</td>
-                    <td>
-                      <button type="submit" class="btn edit">修改</button>
-                      <button type="submit" class="btn del">删除</button>
-                    </td>
-                  </tr>
+
                 </tbody>
               </table>
               <div class="paging" id="paging2"></div>
          
           </div>
         </div>
+
+        <!-- 按钮触发模态框 时政修改-->
+        <button class="btn btn-primary btn-lg" style="display: none;" id="search_notice_update_modal" data-toggle="modal" data-target="#updateNoticeModal"></button>
+        <div class="modal fade" id="updateNoticeModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="updateNoticeModalLabel">修改通知公告</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form role="form"
+                              action="">
+
+                            <input type="hidden" class="form-control"  id="research_notice_update_id"  name="id" value="" >
+
+                            <div class="form-group">
+                                <label>标题:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="research_notice_update_title"
+                                           name="title" value=""  placeholder="请输入你的标题">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>作者:</label>
+                                <div>
+                                    <input type="text" id="research_notice_update_publisher" name="publisher" class="form-control"
+                                           value=""  placeholder="请输入你的作者">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>内容:</label>
+                                <div>
+                                           <textarea  id="research_notice_update_content" name="content" class="form-control"
+                                                      rows="15" cols="100"      value=""  placeholder="请输入你的内容"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>类型:</label>
+                                <div>
+                                    <select id="research_notice_update_type" name="type">
+                                        <option value="通知" selected="selected">通知</option>
+                                        <option value="公告">公告</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="research_notice_update_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="updateNoticeById()">提交更改</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+
     </div>
 
     <!-- 科研成果管理 -->
@@ -454,7 +577,7 @@
 
         var text = function (id) { return document.getElementById(id); };
             new Editor(text("research_politics_add_origin"), text("preview-1"));
-            new Editor(text("text-input-2"), text("preview-2"));
+            new Editor(text("research_notice_add_content"), text("preview-2"));
             new Editor(text("text-input-3"), text("preview-3"));
 
         function fixed(){
@@ -478,11 +601,7 @@
 
          function initData(conditions){
 
-             if(conditions == "最近一月") {
-                 conditions = "recent";
-             } else {
-                 conditions = "all"
-             }
+
              var achievementUrl = "/achievement/queryAll"
              var noticeUrl = "/notice/queryAll"
 
@@ -491,17 +610,23 @@
              $("#tbody2").empty();
 
              initProjects(conditions);
-             initPolitics(conditions)
+             initPolitics(conditions);
+             initNotice(conditions);
 
          }
 
          function initPolitics(conditions) {
-             $("#tbody1").empty();
+
+             if(conditions == "最近一月") {
+                 conditions = "recent";
+             } else {
+                 conditions = "all"
+             }
 
              var politicsUrl = "/politics/queryAll"
 
-
              $("#tbody1").empty();
+
              $.get(politicsUrl,{conditions:conditions},function(data) {
                  if(data != null) {
                      var str = "";
@@ -745,8 +870,269 @@
              page();
          }
 
+         function initNotice(conditions) {
+
+             if(conditions == "最近一月") {
+                 conditions = "recent";
+             } else {
+                 conditions = "all"
+             }
+
+             $("#tbody2").empty();
+
+             var politicsUrl = "/notice/queryAll"
+
+             $.get(politicsUrl,{conditions:conditions},function(data) {
+                 if(data != null) {
+                     var str = "";
+                     for(var i=0;i<data.length;i++) {
+                         str += "<tr><td></td><td>"+UnixToDate(data[i].publishDate)+"</td><td>"+data[i].title+"</td><td>"+data[i].publisher+"</td><td><button type='button' onclick=getNoticeById("+data[i].id+") class='edit'>修改</button> <button type='button' onclick=deleteNoticeById("+data[i].id+") class='del'>删除</button></td></tr>";
+                     }
+                     if(str.length > 0) {
+                         $("#tbody2").append(str);
+                         initNoticePages();
+                     }else {
+                         $("#paging2").empty();
+                     }
+
+                 } else {
+                     alert("error!")
+                 }
+             });
+         }
+
+         function initNoticePages() {
+             $("#paging2").empty();
+
+             var tbody=document.getElementById('tbody2');
+             var atr=tbody.getElementsByTagName('tr');
+             var pages=Math.ceil(atr.length/12);
+
+             var paging=document.getElementById('paging2');
+             for(var i=0;i<atr.length;i++){
+                 atr[i].firstElementChild.innerHTML=i+1;
+
+             }
+
+             //分页，添加页码
+             for(var i=1;i<=pages;i++){
+
+                 // a[0].style.backgroundColor="";
+                 // a[0].style.color="#252525";
+
+                 if(pages>6){
+
+                     for(var i=1;i<=5;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+
+
+                     var nodeS=document.createElement("span");
+                     var ellipsis=document.createTextNode('...');
+                     nodeS.appendChild(ellipsis);
+                     paging.appendChild(nodeS);
+
+                     var nodeAEnd=document.createElement("a");
+                     var textEnd=document.createTextNode(pages);
+                     nodeAEnd.appendChild(textEnd);
+                     paging.appendChild(nodeAEnd);
+                     break;
+                 }
+                 if(pages<=6){
+                     for(var i=1;i<=pages;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+                     for(var i=12;i<atr.length;i++){
+                         atr[i].style.display='none';
+                     }
+
+                 }
+             }
+
+             function page(){
+                 var a=paging.getElementsByTagName("a");
+
+                 for(var j=0;j<a.length;j++){
+
+                     a[j].onclick=function(){
+                         var num=parseInt(this.innerHTML);
+                         if(num<=5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var num=parseInt(num);
+                                 for(var i=1;i<=5;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+                                 var nodeAEnd=document.createElement("a");
+                                 var textEnd=document.createTextNode(pages);
+                                 nodeAEnd.appendChild(textEnd);
+                                 paging.appendChild(nodeAEnd);
+
+
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+                             else{
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+
+                         }
+                         if(num>=5&&num<=pages-5){
+                             paging.innerHTML='';
+                             var nodeAFirst=document.createElement('a');
+                             var textFirst=document.createTextNode('1');
+                             nodeAFirst.appendChild(textFirst);
+                             paging.appendChild(nodeAFirst);
+
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+
+
+                             for(var i=num-2;i<=num+2;i++){
+                                 var nodeA=document.createElement("a");
+                                 var textNode=document.createTextNode(i);
+                                 nodeA.appendChild(textNode);
+                                 paging.appendChild(nodeA);
+                             }
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+                             var nodeAEnd=document.createElement("a");
+                             var textEnd=document.createTextNode(pages);
+                             nodeAEnd.appendChild(textEnd);
+                             paging.appendChild(nodeAEnd);
+
+                             a[3].style.backgroundColor="#fa3e3e";
+                             a[3].style.color="#ffffff";
+                         }
+
+                         if(num>pages-5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var nodeAFirst=document.createElement('a');
+                                 var textFirst=document.createTextNode('1');
+                                 nodeAFirst.appendChild(textFirst);
+                                 paging.appendChild(nodeAFirst);
+
+
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+
+                                 for(var i=num-5+pages-num;i<=pages;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+
+                                 var index=parseInt(num-1);
+                                 a[7-pages+index].style.backgroundColor="#fa3e3e";
+                                 a[7-pages+index].style.color="#ffffff";
+                             }
+                             if(num==6){
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+
+                                 a[5].style.backgroundColor="#fa3e3e";
+                                 a[5].style.color="#ffffff";
+                             }
+                         }
+                         numTr=atr.length;
+                         if(num===1){
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+                             }
+                             for(var i=12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num>1&&num<numTr){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+
+                             }
+                             for(var i=num*12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num===pages){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<numTr;i++){
+                                 atr[i].style.display='table-row';
+
+                             }
+                         }
+                         page();
+                     }
+
+                 }
+             }
+             page();
+         }
 
          function initProjects(conditions){
+
+             if(conditions == "最近一月") {
+                 conditions = "recent";
+             } else {
+                 conditions = "all"
+             }
+
              var projectUrl = "/project/queryAll"
 
              $("#tbody4").empty();
@@ -1035,19 +1421,55 @@
                  }
              });
 
-
-
          }
 
          function getPoliticsById(id){
+             var url="/politics/"+id+"/";
+             $.get(url, function(data) {
+                 if(data != null) {
 
+                     $("#research_politics_update_id").val(data.id);
+                     $("#research_politics_update_title").val(data.title);
+                     $("#research_politics_update_author").val(data.author);
+                     $("#research_politics_update_origin").val(data.origin);
+
+
+                     $("#search_politics_update_modal").click();
+
+                 } else {
+                     alert("该项目不存在");
+
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+         }
+
+         function getNoticeById(id){
+             var url="/notice/"+id+"/";
+             $.get(url, function(data) {
+                 if(data != null) {
+
+                     $("#research_notice_update_id").val(data.id);
+                     $("#research_notice_update_title").val(data.title);
+                     $("#research_notice_update_publisher").val(data.publisher);
+                     $("#research_notice_update_content").val(data.content);
+
+
+                     $("#search_notice_update_modal").click();
+
+                 } else {
+                     alert("该项目不存在");
+
+                     window.location.href = "platform_manager.html";
+                 }
+             });
          }
 
          function deleteProjectById(id){
              var url="/project/delete";
              $.post(url,{id:id}, function(data) {
                  if(data != null) {
-                     initData();
+                     initProjects();
                  } else {
                      alert("该项目不存在");
                      window.location.href = "platform_manager.html";
@@ -1055,7 +1477,83 @@
              });
          }
 
-         function deletePoliticsById(id){}
+         function deletePoliticsById(id){
+             var url="/politics/delete";
+             $.post(url,{id:id}, function(data) {
+                 if(data != null) {
+                     initPolitics();
+                 } else {
+                     alert("该项目不存在");
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+
+         }
+
+         function deleteNoticeById(id){
+             var url="/notice/delete";
+             $.post(url,{id:id}, function(data) {
+                 if(data != null) {
+                     initNotice();
+                 } else {
+                     alert("该项目不存在");
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+
+         }
+
+         function updatePoliticsById(){
+             var id = $("#research_politics_update_id").val();
+             var title = $("#research_politics_update_title").val();
+             var author = $("#research_politics_update_author").val();
+             var origin = $("#research_politics_update_origin").val();
+
+             if(id <= 0 || title == null || title.length == 0 || author == null || author.length == 0 ||
+                     origin == null || origin.length == 0 ) {
+                 alert("输入参数不能为空!")
+             } else {
+                 var url="/politics/update";
+                 $.post(url,{id:id, title:title, author:author, origin:origin}, function(data) {
+                     if(data != null) {
+                         $("#research_politics_update_close").click();
+                         initPolitics();
+
+                     } else {
+                         alert("该项目不存在");
+
+                         window.location.href = "platform_manager.html";
+                     }
+                 });
+             }
+         }
+
+         function updateNoticeById(){
+             var id = $("#research_notice_update_id").val();
+             var title = $("#research_notice_update_title").val();
+             var publisher = $("#research_notice_update_publisher").val();
+             var content = $("#research_notice_update_content").val();
+             var type = $("#research_notice_update_type").val();
+
+             if(id <= 0 || title == null || title.length == 0 || publisher == null || publisher.length == 0 ||
+                     content == null || content.length == 0 || type == null || type.length == 0 ) {
+                 alert("输入参数不能为空!")
+             } else {
+                 var url="/notice/update";
+                 $.post(url,{id:id, title:title, publisher:publisher, content:content, type:type}, function(data) {
+                     if(data != null) {
+                         $("#research_notice_update_close").click();
+                         initNotice();
+
+                     } else {
+                         alert("该项目不存在");
+
+                         window.location.href = "platform_manager.html";
+                     }
+                 });
+             }
+         }
+
 
          function getConditions(count) {
              var condition = $("#condition"+count).val();
@@ -1107,9 +1605,62 @@
              }
          }
 
+         function addNotice(){
+            var type = $('input[name="research_notice_add_type"]:checked ').val();
+
+            var publisher = $.cookie("user_name");
+            if(publisher == null) {
+            location.href="/login.html";
+            }
+            var title =$("#research_notice_add_title").val();
+            var content =$("#research_notice_add_content").val();
+
+            if(type == null || type.length ==0 || publisher == null || publisher.length ==0 ||
+                    title == null || title.length ==0 || content == null || content.length ==0 ) {
+                alert("输入参数不能为空!");
+            } else {
+                var url = "/notice/add"
+                $.post(url,{title:title, publisher:publisher, type: type, content: content}, function(data) {
+                    if(data != null) {
+                        alert("发布成功!")
+                        location.href="platform_manager.html";
+                    } else {
+                        alert("发布失败!")
+                    }
+                });
+            }
+
+
+         }
 
          function research_project_insert(){
 
+         }
+
+         function updateUserById(){
+             var id = $.cookie("user_id")
+             var oldPassword = $("#research_user_update_old_password").val();
+             var newPassword = $("#research_user_update_new_password").val();
+             if(oldPassword != newPassword) {
+                 alert("两次输入密码不一致!")
+             } else {
+                 var url="/user/update";
+                 $.post(url,{id:id, password:newPassword}, function(data) {
+                     if(data != null) {
+
+                         window.location.href = "platform_manager.html";
+
+                     } else {
+                         alert("该项目不存在");
+
+                         window.location.href = "platform_manager.html";
+                     }
+                 });
+             }
+         }
+
+         function showUpdateUser(){
+             $("#search_user_update_modal").click();
          }
 
       </script>

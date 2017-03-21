@@ -31,9 +31,30 @@
 
 	<update id="updatePoliticsById" parameterType="com.research.model.Politics">
 		UPDATE research_politics
-		SET title = #{title}, author = #{author}, origin = #{origin},
-		content_file = #{contentFile}, `date` = #{date},
-		created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+		SET
+		<if test="title != null and '' != title">
+			<![CDATA[
+               title = #{title},
+            ]]>
+		</if>
+		<if test="author != null and '' != author">
+			<![CDATA[
+               author = #{author},
+            ]]>
+		</if>
+		<if test="origin != null and '' != origin">
+			<![CDATA[
+               origin = #{origin},
+            ]]>
+		</if>
+		<if test="contentFile != null and '' != contentFile">
+			<![CDATA[
+               content_file = #{contentFile},
+            ]]>
+		</if>
+		last_updated = #{lastUpdated}
+		WHERE id = #{id}
+
 	</update>
 
 	<select id="getPoliticsById" resultMap="PoliticsResult">

@@ -30,10 +30,10 @@ public class PoliticsController {
     ResponseEntity<?> insertPolitics(String title, String author, String origin,
                                      @RequestParam("contentFile") MultipartFile contentFile) {
 
-        Preconditions.checkNotNull(contentFile != null && contentFile.getOriginalFilename().length() > 0, "Politics contentFile is null");
-        Preconditions.checkNotNull(title != null, "Politics title is null");
-        Preconditions.checkNotNull(author != null, "Politics author is null");
-        Preconditions.checkNotNull(origin != null, "Politics origin is null");
+        Preconditions.checkArgument(contentFile != null && contentFile.getOriginalFilename().length() > 0, "Politics contentFile is null");
+        Preconditions.checkArgument(title != null, "Politics title is null");
+        Preconditions.checkArgument(author != null, "Politics author is null");
+        Preconditions.checkArgument(origin != null, "Politics origin is null");
 
         String fileName = contentFile.getOriginalFilename();
         Politics politics = new Politics();
@@ -57,45 +57,59 @@ public class PoliticsController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> deletePoliticsById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Politics id is illegal");
+    @RequestMapping(value = "/delete", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> deletePoliticsById(Integer id) {
+        Preconditions.checkArgument(id != 0, "Politics id is illegal");
 
         int count = politicsService.deletePoliticsById(id);
 
         if(count == 0) {
+            logger.info("/politics/delete deletePoliticsById result : {}","");
             return ResponseEntity.noContent().build();
         } else {
+            logger.info("/politics/delete deletePoliticsById result : {}",count);
             return ResponseEntity.ok(id);
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> updatePoliticsById(@RequestBody Politics politics) {
-        Preconditions.checkNotNull(politics != null && politics.getId() != 0, "Politics id is illegal");
+    @RequestMapping(value = "/update", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
+    ResponseEntity<?> updatePoliticsById(Integer id, String title, String author, String origin) {
+        Preconditions.checkArgument(id != null && id > 0, "Politics id is illegal");
+        Preconditions.checkArgument(title != null && title.length() > 0, "Politics title is illegal");
+        Preconditions.checkArgument(author != null && author.length() > 0, "Politics author is illegal");
+        Preconditions.checkArgument(origin != null && origin.length() > 0, "Politics origin is illegal");
+
+        Politics politics = new Politics();
+        politics.setId(id);
+        politics.setTitle(title);
+        politics.setAuthor(author);
+        politics.setOrigin(origin);
+        politics.setLastUpdated(new Date());
 
         int count = politicsService.updatePoliticsById(politics);
 
         if(count == 0) {
+            logger.info("/politics/update updatePoliticsById return :{}", "");
             return ResponseEntity.noContent().build();
         } else {
+            logger.info("/politics/update updatePoliticsById return :{}", politics);
             return ResponseEntity.ok(politics);
         }
     }
 
     @RequestMapping(value = "/{id}/", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getPoliticsById(@PathVariable("id") Integer id) {
-        Preconditions.checkNotNull(id != 0, "Politics id is illegal");
+        Preconditions.checkArgument(id != 0, "Politics id is illegal");
 
 
         Politics politics = politicsService.getPoliticsById(id);
-
+        logger.info("/politics/{id}/ getPoliticsById return :{}"+politics);
         return ResponseEntity.ok(politics);
     }
     @RequestMapping(value = "/query", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getPoliticss(Pagination pagination) {
-        Preconditions.checkNotNull(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
-        Preconditions.checkNotNull(pagination.getPageSize() > 0 ,"PageSize is illegal");
+        Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
+        Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
 
         List<Politics> politicss = politicsService.getPolitics(pagination);
 
