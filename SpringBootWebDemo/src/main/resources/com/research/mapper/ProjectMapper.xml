@@ -15,6 +15,7 @@
 		<result property="auditPassTime" column="audit_pass_time"/>
 		<result property="auditState" column="audit_state"/>
 		<result property="projectFile" column="project_file"/>
+		<result property="userId" column="user_id"/>
 		<result property="createdDate" column="created_date"/>
 		<result property="lastUpdated" column="last_updated"/>
 	</resultMap>
@@ -24,10 +25,10 @@
 			select LAST_INSERT_ID() AS id
 		</selectKey>
 		INSERT INTO research_project (title, summary, applicant, declare_units, remark, declare_time,
-		audit_pass_time, audit_state, project_file,
+		audit_pass_time, audit_state, project_file,user_id,
 	  	created_date, last_updated)
 		VALUES (#{title},#{summary},#{applicant},#{declareUnits},#{remark},#{declareTime},#{auditPassTime},
-		#{auditState}, #{projectFile}, #{createdDate}, #{lastUpdated})
+		#{auditState}, #{projectFile},#{userId}, #{createdDate}, #{lastUpdated})
 	</insert>
 
 	<delete id="deleteProjectById"  parameterType="com.research.model.Project">
@@ -63,11 +64,6 @@
                declare_time = #{declareTime},
             ]]>
 		</if>
-		<if test="auditPassTime != null and '' != auditPassTime">
-			<![CDATA[
-               audit_pass_time = #{auditPassTime},
-            ]]>
-		</if>
 		<if test="auditState != null and '' != auditState">
 			<![CDATA[
                audit_state = #{auditState},
@@ -78,26 +74,27 @@
                project_file = #{projectFile},
             ]]>
 		</if>
+		audit_pass_time = #{auditPassTime},
 		last_updated = #{lastUpdated}
 		WHERE id = #{id}
 	</update>
 
 	<select id="getProjectById" resultMap="ProjectResult">
-		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,
+		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,user_id,
 		project_file, created_date, last_updated
 		FROM research_project
 		WHERE id = #{id}
 	</select>
 
 	<select id="getProjects" resultMap="ProjectResult">
-		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,
+		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,user_id,
 		project_file, created_date, last_updated
 		FROM research_project
 		LIMIT #{pageIndex}, #{pageSize}
 	</select>
 
-	<select id="queryProjects" resultMap="ProjectResult">
-		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,
+	<select id="queryProjects" parameterType="com.research.model.Pagination" resultMap="ProjectResult">
+		SELECT id,title,summary, applicant, declare_units, remark, declare_time, audit_pass_time, audit_state,user_id,
 		project_file, created_date, last_updated
 		FROM research_project
 		WHERE 1 = 1
@@ -111,7 +108,13 @@
 			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
 			]]>
 		</if>
+		<if test="userId != null and '' != userId">
+			<![CDATA[
+			  AND user_id = #{userId}
+			]]>
+		</if>
 		ORDER BY created_date
+		LIMIT #{pageIndex},#{pageSize}
 	</select>
 
 	<select id="getProjectCounts">

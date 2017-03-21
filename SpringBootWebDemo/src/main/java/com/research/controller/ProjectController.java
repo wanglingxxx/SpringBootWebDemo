@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,6 +35,7 @@ public class ProjectController {
                                     @RequestParam("applicant") String applicant,
                                     @RequestParam("declareUnits") String declareUnits,
                                     @RequestParam("remark") String remark,
+                                    @RequestParam("userId") Integer userId,
             @RequestParam("projectFile") MultipartFile projectFile) {
 
         Preconditions.checkArgument(!StringUtils.isEmpty(title), "Project title is null");
@@ -43,6 +43,7 @@ public class ProjectController {
         Preconditions.checkArgument(!StringUtils.isEmpty(applicant), "Project applicant is null");
         Preconditions.checkArgument(!StringUtils.isEmpty(declareUnits), "Project declareUnits is null");
         Preconditions.checkArgument(!StringUtils.isEmpty(remark), "Project remark is null");
+        Preconditions.checkArgument(userId != null && userId > 0, "Project userId is null");
 
         String fileName = projectFile.getOriginalFilename();
         Project project = new Project();
@@ -52,6 +53,7 @@ public class ProjectController {
         project.setDeclareUnits(declareUnits);
         project.setRemark(remark);
         project.setAuditState("未通过");
+        project.setUserId(userId);
 
         project.setDeclareTime(new Date());
         project.setLastUpdated(new Date());
@@ -87,34 +89,30 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> updateProjectById(@RequestParam("title") String title,
-                                        @RequestParam("id") String id,
-                                        @RequestParam("summary") String summary,
-                                        @RequestParam("applicant") String applicant,
-                                        @RequestParam("declareUnits") String declareUnits,
-                                        @RequestParam("remark") String remark,
+    ResponseEntity<?> updateProjectById(
+                                        @RequestParam("id") Integer id,
+                                        @RequestParam(value = "title", required = false) String title,
+                                        @RequestParam(value = "summary", required = false) String summary,
+                                        @RequestParam(value = "applicant",required = false) String applicant,
+                                        @RequestParam(value = "declareUnits",required = false) String declareUnits,
+                                        @RequestParam(value = "remark",required = false) String remark,
                                         @RequestParam("projectFile") MultipartFile projectFile) {
-        Preconditions.checkArgument(!StringUtils.isEmpty(id), "Project id is null");
-        Preconditions.checkArgument(!StringUtils.isEmpty(title), "Project title is null");
-        Preconditions.checkArgument(!StringUtils.isEmpty(summary), "Project summary is null");
-        Preconditions.checkArgument(!StringUtils.isEmpty(applicant), "Project applicant is null");
-        Preconditions.checkArgument(!StringUtils.isEmpty(declareUnits), "Project declareUnits is null");
-        Preconditions.checkArgument(!StringUtils.isEmpty(remark), "Project remark is null");
-
-        String fileName = projectFile.getOriginalFilename();
-        Preconditions.checkArgument(!StringUtils.isEmpty(fileName) && fileName.length() > 0, "Project fileName is null");
+        Preconditions.checkArgument(id != null && id > 0, "Project id is null");
 
         Project project = new Project();
-        project.setId(Integer.valueOf(id));
+        project.setId(id);
         project.setTitle(title);
         project.setSummary(summary);
         project.setApplicant(applicant);
         project.setDeclareUnits(declareUnits);
         project.setRemark(remark);
-        project.setProjectFile(fileName);
         project.setLastUpdated(new Date());
+        String fileName = projectFile.getOriginalFilename();
 
-        saveFile(project, fileName, projectFile);
+        if(!StringUtils.isEmpty(fileName)) {
+
+            saveFile(project, fileName, projectFile);
+        }
 
         int count = projectService.updateProjectById(project);
 
@@ -136,6 +134,7 @@ public class ProjectController {
         Project project = new Project();
         project.setId(id);
         project.setAuditState(auditState);
+        project.setAuditPassTime(new Date());
 
         int count = projectService.updateProjectById(project);
 
@@ -163,30 +162,35 @@ public class ProjectController {
         Preconditions.checkArgument(pagination.getPageIndex() > 0 ,"PageIndex is illegal");
         Preconditions.checkArgument(pagination.getPageSize() > 0 ,"PageSize is illegal");
 
-        List<Project> projects = projectService.getProjects(pagination);
+        List<Project> projects = projectService.queryProjects(pagination);
 
         return ResponseEntity.ok(projects);
     }
 
     @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> getProjectsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions) {
+    ResponseEntity<?> getProjectsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions,
+                    Integer userId) {
 
         List<Project> projects = null;
         Pagination pagination = new Pagination();
+        pagination.setUserId(userId);
 
         if(conditions.equals("all")) {
             pagination.setPageSize(100);
-            projects = projectService.getProjects(pagination);
+            projects = projectService.queryProjects(pagination);
         } else if(conditions.equals("recent")) {
             Date date = new Date();
             date.setMonth(date.getMonth()-1);
             SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
             String condition = formatter.format(date);
-            projects = projectService.queryProjects(condition ,"");
+            pagination.setDate(condition);
+            projects = projectService.queryProjects(pagination);
         } else if(conditions.equals("pass")) {
-            projects = projectService.queryProjects("", "通过");
+            pagination.setState("通过");
+            projects = projectService.queryProjects(pagination);
         } else if(conditions.equals("unpass")) {
-            projects = projectService.queryProjects("", "未通过");
+            pagination.setState("未通过");
+            projects = projectService.queryProjects(pagination);
         } else {
             logger.info("/project/queryAll return :{}","");
             return ResponseEntity.noContent().build();

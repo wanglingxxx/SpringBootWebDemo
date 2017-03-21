@@ -16,6 +16,24 @@ public class Pagination implements Serializable{
 	
 	private Integer pageSize;
 
+	private Integer userId;
+
+	private String date;
+
+	private String state;
+
+	public Pagination(Integer total, Integer pageIndex, Integer pageSize, Integer userId, String date, String state) {
+		this.total = total;
+		this.pageIndex = pageIndex;
+		this.pageSize = pageSize;
+		this.userId = userId;
+		this.date = date;
+		this.state = state;
+	}
+
+	public Pagination() {
+	}
+
 	public Integer getTotal() {
 		return total;
 	}
@@ -40,15 +58,28 @@ public class Pagination implements Serializable{
 		this.pageSize = pageSize;
 	}
 
-	public Pagination() {
-		super();
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public Pagination(Integer total, Integer pageIndex, Integer pageSize) {
-		super();
-		this.total = total;
-		this.pageIndex = pageIndex;
-		this.pageSize = pageSize;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	@Override

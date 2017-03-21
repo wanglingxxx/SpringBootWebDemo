@@ -21,5 +21,5 @@ public interface ProjectMapper {
 
     Integer getProjectCounts();
 
-    List<Project> queryProjects(@Param("date")String date,@Param("state") String state);
+    List<Project> queryProjects(Pagination pagination);
 }

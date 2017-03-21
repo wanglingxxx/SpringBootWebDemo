@@ -41,8 +41,8 @@
 
 	window.onload=function(){
 
-		$("#user-username").val($.cookie("user_username"));
-		$("#user-password").val($.cookie("user_password"));
+		$("#user-username").val($.cookie("login_username"));
+		$("#user-password").val($.cookie("login_password"));
 	}
 
 
@@ -50,10 +50,37 @@ function research_user_login() {
 	var username = $("#user-username").val();
 	var password = $("#user-password").val();
 
+	$.cookie("login_username", username, { expires: 7 });
+	$.cookie("login_password", password, { expires: 7 });
+
+
 	if(username.length > 0 && password.length > 0){
 
 		var url="/user/login";
-		$.ajax({
+
+		$.get(url, $("#researchUserLoginForm").serialize(), function(data) {
+			if(data != null) {
+				$.cookie("user_id", data.id, { expires: 7 });
+				$.cookie("user_username", data.username, { expires: 7 });
+				$.cookie("user_password", data.password, { expires: 7 });
+				$.cookie("user_name", data.name, { expires: 7 });
+				$.cookie("user_sex", data.sex, { expires: 7 });
+				$.cookie("user_id_card", data.idCard, { expires: 7 });
+				$.cookie("user_enable", data.enable, { expires: 7 });
+
+				if(data.enable == 1) {
+					location.href = "/manager/index.html";
+				} else {
+					location.href = "/logged/index.html";
+				}
+			} else {
+				alert("用户名或密码不正确!");
+				window.location.href = "/login.html";
+			}
+		});
+
+
+		/*$.ajax({
 			type: "GET",
 			url: url,
 			data:$("#researchUserLoginForm").serialize(),
@@ -82,24 +109,10 @@ function research_user_login() {
 					window.location.href = "/login.html";
 				}
 			}
-		});
-
-/*
-		$.get(url, $("#researchUserLoginForm").serialize(), function(data) {
-			if(data != null) {
-				$.cookie("user_id", data.id, { expires: 7 });
-				$.cookie("user_username", data.username, { expires: 7 });
-				$.cookie("user_password", data.password, { expires: 7 });
-				$.cookie("user_name", data.name, { expires: 7 });
-				$.cookie("user_sex", data.sex, { expires: 7 });
-				$.cookie("user_id_card", data.idCard, { expires: 7 });
-				$.cookie("user_enable", data.enable, { expires: 7 });
-				location.href = "/logged/index.html";
-			} else {
-				alert("用户名或密码不正确!");
-				window.location.href = "/login.html";
-			}
 		});*/
+
+
+
 
 	} else {
 		alert("用户名或密码不能为空!")

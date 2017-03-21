@@ -28,7 +28,7 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<span>管理员：</span><a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
@@ -85,6 +85,8 @@
 	<script>
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		window.onload=function(){
+
+			$("#name").text($.cookie("user_name"));
 
 			var id = $.cookie("project_id");
 			var title = $.cookie("project_title");
@@ -156,11 +158,11 @@
 		function complete() {
 			var isMana = $.cookie("isManager");
 
-			if(isMana != null) {
+			if(isMana != null && isMana.length > 0) {
 				window.location.href = "/manager/platform_manager.html";
 			}
 			else {
-				window.location.href = "review_items.html";
+				window.location.href = "/manager/review_items.html";
 			}
 		}
 

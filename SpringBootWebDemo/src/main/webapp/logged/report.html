@@ -36,6 +36,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="head">
 			<div class="container">
 				<div class="head-title"><p>项目申报</p></div>
@@ -98,7 +99,7 @@
 		}
 
 		function research_project_insert(){
-
+			var userId = $.cookie("user_id");
 			var title =$("#project-name").val();
 			var summary = $("#project-introduce").val();
 			var applicant = $("#project-declare-name").val();
@@ -106,12 +107,12 @@
 			var remark = $("#project-remark").val();
 			var inputFile = $("#inputFile").val();
 
-			if(inputFile == null || inputFile.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+			if(userId == null || userId.length == 0 || inputFile == null || inputFile.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
 					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
 				alert("所输入参数不能为空!");
 			} else {
 				$.ajaxFileUpload({
-							url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark,
+							url:'http://127.0.0.1/project/add?title='+title+'&summary='+summary+'&applicant='+applicant+'&declareUnits='+declareUnits+'&remark='+remark+"&userId="+userId,
 							type:'POST',
 							secureuri: false, //是否需要安全协议，一般设置为false
 							dataType: 'json', //返回值类型 一般设置为json
@@ -119,7 +120,10 @@
 							success: function (data, status){
 								if(data != null) {
 									alert("申报成功!")
-									location.href="logged/myproject.html";
+									//1秒后执行
+									setTimeout( function(){
+										location.href="/logged/myproject.html";
+									}, 1 * 1000 );
 								} else {
 									alert("申报失败!")
 								}
@@ -145,6 +149,7 @@
 
 
 		}
+
 	</script>
 </body>
 </html>

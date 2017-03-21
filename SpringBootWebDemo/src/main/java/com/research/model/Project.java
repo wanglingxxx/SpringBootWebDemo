@@ -39,13 +39,10 @@ public class Project implements Serializable{
     private Date createdDate;
     //修改时间
     private Date lastUpdated;
-	
-	
-	public Project(int id, String title, String summary, String applicant,
-			String declareUnits, String remark, Date declareTime,
-			Date auditPassTime, String auditState, String projectFile,
-			Date createdDate, Date lastUpdated) {
-		super();
+	//创建者id 关联user表
+	private Integer userId;
+
+	public Project(int id, String title, String summary, String applicant, String declareUnits, String remark, Date declareTime, Date auditPassTime, String auditState, String projectFile, Date createdDate, Date lastUpdated, Integer userId) {
 		this.id = id;
 		this.title = title;
 		this.summary = summary;
@@ -58,6 +55,15 @@ public class Project implements Serializable{
 		this.projectFile = projectFile;
 		this.createdDate = createdDate;
 		this.lastUpdated = lastUpdated;
+		this.userId = userId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public int getId() {

@@ -42,6 +42,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="head">
 			<div class="container">
 				<div style="font-family: 隶书;
@@ -481,8 +482,13 @@
 			} else {
 				conditions = "all"
 			}
+			var userId = $.cookie("user_id");
 
-			var url = "/project/queryAll"
+			if(userId == null || userId.length == 0){
+				location.href = "/login.html";
+			}
+
+			var url = "/project/queryAll?userId="+userId;
 
 			$("#tbody").empty();
 
@@ -544,7 +550,7 @@
 			var filename = $("#research_project_update_projectFile").val();
 
 
-			if(filename == null || filename.length == 0 || id == null || id.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+			if(id == null || id.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
 					|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
 				alert("所输入参数不能为空!");
 			} else {
@@ -569,7 +575,7 @@
 
 						}
 				);
-				if(filename == null || filename.length == 0 || id == null || id.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
+				if(id == null || id.length == 0 || title == null || title.length == 0 || summary == null || summary.length == 0 || applicant == null || applicant.length == 0
 						|| declareUnits == null || declareUnits.length == 0 || remark == null || remark.length == 0) {
 
 				} else {

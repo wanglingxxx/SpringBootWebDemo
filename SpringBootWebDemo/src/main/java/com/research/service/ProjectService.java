@@ -29,20 +29,16 @@ public class ProjectService {
         return projectMapper.getProjectById(id);
     }
 
-    public List<Project> getProjects(Pagination pagination) {
+
+    public List<Project> queryProjects(Pagination pagination) {
         if(pagination.getPageIndex() == null) {
             pagination.setPageIndex(0);
         }
         if(pagination.getPageSize() == null) {
-            pagination.setPageSize(10);
+            pagination.setPageSize(100);
         }
         pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
-        return projectMapper.getProjects(pagination);
-    }
-
-    public List<Project> queryProjects(String date, String state) {
-
-        return projectMapper.queryProjects(date, state);
+        return projectMapper.queryProjects(pagination);
     }
 
     public Integer getProjectCounts() {

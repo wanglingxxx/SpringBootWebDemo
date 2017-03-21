@@ -452,6 +452,9 @@
 					$.cookie("project_declareTime",UnixToDate(data.declareTime));
 					$.cookie("project_lastUpdated",UnixToDate(data.lastUpdated));
 					$.cookie("project_createdDate",UnixToDate(data.createdDate));
+
+					$.cookie("isManager", "",{expires:0});
+
 					window.location.href = "review.html";
 				} else {
 					alert("该项目不存在");
