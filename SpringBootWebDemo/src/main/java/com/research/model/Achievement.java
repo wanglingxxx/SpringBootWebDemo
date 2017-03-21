@@ -32,9 +32,10 @@ public class Achievement implements Serializable{
 	private Date lastUpdated;
 	//图片
 	private String images;
+	//内容
+	private String content;
 
-
-	public Achievement(int id, String projectName, String projectMan, String awardSituation, String contentFile, Date publishDate, Date createdDate, Date lastUpdated, String images) {
+	public Achievement(int id, String projectName, String projectMan, String awardSituation, String contentFile, Date publishDate, Date createdDate, Date lastUpdated, String images, String content) {
 		this.id = id;
 		this.projectName = projectName;
 		this.projectMan = projectMan;
@@ -44,6 +45,15 @@ public class Achievement implements Serializable{
 		this.createdDate = createdDate;
 		this.lastUpdated = lastUpdated;
 		this.images = images;
+		this.content = content;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getImages() {

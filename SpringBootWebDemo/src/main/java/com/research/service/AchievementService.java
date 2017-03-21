@@ -30,11 +30,27 @@ public class AchievementService {
         return achievementMapper.getAchievementById(id);
     }
 
+    public Achievement getAchievementByObject(Achievement achievement) {
+        return achievementMapper.getAchievementByObject(achievement);
+    }
+
     public List<Achievement> getAchievements(Pagination pagination) {
+        if(pagination.getPageIndex() == null) {
+            pagination.setPageIndex(0);
+        }
+        if(pagination.getPageSize() == null) {
+            pagination.setPageSize(10);
+        }
+        pagination.setPageIndex(pagination.getPageIndex() * pagination.getPageSize());
         return achievementMapper.getAchievements(pagination);
     }
 
     public Integer getAchievementCounts() {
         return achievementMapper.getAchievementCounts();
     }
+
+    public List<Achievement> queryAchievements(String date, String state) {
+        return achievementMapper.queryAchievements(date, state);
+    }
+
 }

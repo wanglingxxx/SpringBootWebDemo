@@ -178,7 +178,6 @@ public class ProjectController {
             pagination.setPageSize(100);
             projects = projectService.getProjects(pagination);
         } else if(conditions.equals("recent")) {
-            Project project = new Project();
             Date date = new Date();
             date.setMonth(date.getMonth()-1);
             SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");

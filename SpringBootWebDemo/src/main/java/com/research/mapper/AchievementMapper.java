@@ -5,6 +5,7 @@ import java.util.List;
 import com.research.model.Pagination;
 import org.apache.ibatis.annotations.Mapper;
 import com.research.model.Achievement;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AchievementMapper {
@@ -20,4 +21,8 @@ public interface AchievementMapper {
 	List<Achievement> getAchievements(Pagination pagination);
 
 	Integer getAchievementCounts();
+
+	List<Achievement> queryAchievements(@Param("date")String date, @Param("state") String state);
+
+	Achievement getAchievementByObject(Achievement achievement);
 }

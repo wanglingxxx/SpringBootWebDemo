@@ -11,6 +11,8 @@
 			<result property="projectMan" column="project_man"/>
 			<result property="awardSituation" column="award_situation"/>
 			<result property="contentFile" column="content_file"/>
+			<result property="images" column="images"/>
+			<result property="content" column="content"/>
 			<result property="publishDate" column="publish_date"/>
 			<result property="createdDate" column="created_date"/>
 			<result property="lastUpdated" column="last_updated"/>
@@ -20,9 +22,9 @@
         <selectKey keyProperty="id" order="AFTER" resultType="int">
             select LAST_INSERT_ID() AS id
         </selectKey>
-        INSERT INTO research_achievement (project_name, project_man, award_situation, content_file,
+        INSERT INTO research_achievement (project_name, project_man, award_situation, content_file,images,content,
         publish_date, created_date, last_updated)
-        VALUES (#{projectName},#{projectMan},#{awardSituation},#{contentFile},#{publishDate},#{createdDate},#{lastUpdated})
+        VALUES (#{projectName},#{projectMan},#{awardSituation},#{contentFile},#{images},#{content},#{publishDate},#{createdDate},#{lastUpdated})
     </insert>
     
     <delete id="deleteAchievementById"  parameterType="com.research.model.Achievement">
@@ -32,24 +34,86 @@
     
     <update id="updateAchievementById" parameterType="com.research.model.Achievement">
     	UPDATE research_achievement
-    	SET project_name = #{projectName}, project_man = #{projectMan}, award_situation = #{awardSituation},
-    	content_file = #{contentFile}, publish_date = #{publishDate},
-    	created_date = #{createdDate}, lastUpdated = #{lastUpdated}
+    	SET
+		<if test="projectName != null and '' != projectName">
+			<![CDATA[
+               project_name = #{projectName},
+            ]]>
+		</if>
+		<if test="projectMan != null and '' != projectMan">
+			<![CDATA[
+               project_man = #{projectMan},
+            ]]>
+		</if>
+		<if test="awardSituation != null and '' != awardSituation">
+			<![CDATA[
+               award_situation = #{awardSituation},
+            ]]>
+		</if>
+		<if test="contentFile != null and '' != contentFile">
+			<![CDATA[
+               content_file = #{contentFile},
+            ]]>
+		</if>
+		<if test="images != null and '' != images">
+			<![CDATA[
+               images = #{images},
+            ]]>
+		</if>
+		<if test="content != null and '' != content">
+			<![CDATA[
+               content = #{content},
+            ]]>
+		</if>
+    	 last_updated = #{lastUpdated}
+		WHERE id = #{id}
     </update>
     
     <select id="getAchievementById" resultMap="AchievementResult">
-    	SELECT id,project_name, project_mane, award_situation, conent_file,
-        publish_date, created_date, last_updated
+    	SELECT id, project_name, project_man, award_situation, content_file, publish_date,images,content,
+		created_date, last_updated
         FROM research_achievement
         WHERE id = #{id}
     </select>
     
     <select id="getAchievements" resultMap="AchievementResult">
-    	SELECT id, project_name, project_man, award_situation, content_file, publish_date, 
+    	SELECT id, project_name, project_man, award_situation, content_file, publish_date,images,content,
     	created_date, last_updated
     	FROM research_achievement
     	LIMIT #{pageIndex}, #{pageSize}
     </select>
+
+
+	<select id="getAchievementByObject" parameterType="com.research.model.Achievement" resultMap="AchievementResult">
+		SELECT id, project_name, project_man, award_situation, content_file, publish_date,images,content,
+		created_date, last_updated
+		FROM research_achievement
+		WHERE 1 = 1
+		<if test="projectName != null and '' != projectName">
+			<![CDATA[
+               AND project_name = #{projectName}
+            ]]>
+		</if>
+		<if test="projectMan != null and '' != projectMan">
+			<![CDATA[
+               AND project_man = #{projectMan}
+            ]]>
+		</if>
+		LIMIT 1
+	</select>
+
+	<select id="queryAchievements" resultMap="AchievementResult">
+		SELECT id, project_name, project_man, award_situation, content_file, publish_date,images,content,
+		created_date, last_updated
+		FROM research_achievement
+		WHERE 1 = 1
+		<if test="date != null and '' != date">
+			<![CDATA[
+			  AND DATE_FORMAT(created_date, '%Y-%m-%d') > DATE_FORMAT(#{date}, '%Y-%m-%d')
+			]]>
+		</if>
+		ORDER BY created_date
+	</select>
 	
 	<select id="getAchievementCounts">
 		SELECT count(1)

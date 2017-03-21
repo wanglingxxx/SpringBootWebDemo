@@ -128,7 +128,7 @@ public class NoticeController {
         }
 
 
-        logger.info("/politics/queryAll return :{}"+notices);
+        logger.info("/notice/queryAll return :{}"+notices);
         return ResponseEntity.ok(notices);
     }
 }

@@ -120,12 +120,12 @@
           <div class="pannal-policy pannal-policy-1 show">
               <form action="" enctype="multipart/form-data" method="POST">
                   <div class="form-group">
-                      <label for="inputFile">文章标题：</label>
+                      <label for="research_politics_add_title">文章标题：</label>
                       <input type="text" id="research_politics_add_title" class="con-text">
                   </div>
 
                   <div class="form-group">
-                      <label for="inputFile">必要内容文件上传：</label>
+                      <label for="research_politics_add_content_file">必要内容文件上传：</label>
                       <input type="file" name="contentFile" id="research_politics_add_content_file">
                   </div>
                   <div class="form-group">
@@ -252,6 +252,7 @@
 
 
     </div>
+
     <!-- 通知公告管理 -->
     <div class="pannal-nav pannal-nav-2 hidden" id="notice">
         <div class="position">位置><a href="##">通知公告管理</a></div>
@@ -266,7 +267,7 @@
           <div class="pannal-notice pannal-notice-1 show">
             
               <div class="form-group">
-                  <label for="inputFile">文章标题：</label>
+                  <label for="research_notice_add_title">文章标题：</label>
                   <input type="text" id="research_notice_add_title" class="con-text">
               </div>
               <div class="form-group">
@@ -403,7 +404,7 @@
 
     <!-- 科研成果管理 -->
     <div class="pannal-nav pannal-nav-3 hidden">
-        <div class="position">位置><a href="##">科技成果文章管理</a></div>
+        <div class="position">位置><a href="#">科技成果文章管理</a></div>
         <div class="con-nav">
           <ul>
             <li><a href="javascript:;" class="ach-title-li">编辑科技成果文章</a></li>
@@ -413,38 +414,41 @@
         </div>
         <div class="con">
           <div class="pannal-ach pannal-ach-1 show">
-            
-              <div class="form-group">
-                  <label for="inputFile">文章标题：</label>
-                  <input type="text" class="con-text">   
-              </div>
-              <div class="form-group">
-              
-              <div class="form-group">
-                  <label for="inputFile">必要内容文件上传：</label>
-                  <input type="file" id="inputFile">    
-              </div>
+              <form  id="researchAchievementAddForm" enctype="multipart/form-data" method="POST">
                   <div class="form-group">
-                      <label for="images">封面上传：</label>
-                      <input type="file" id="images">
+                      <label >文章标题：</label>
+                      <input type="text" name="projectName" id="research_achievement_add_project_name" class="con-text">
+                  </div>
+                  <div class="form-group">
+
+                  <div class="form-group">
+                      <label for="research_achievement_add_content_file">必要内容文件上传：</label>
+                      <input type="file" name="contentFile" id="research_achievement_add_content_file">
+                  </div>
+                      <div class="form-group">
+                          <label for="research_achievement_add_images">封面上传：</label>
+                          <input type="file" name="images" id="research_achievement_add_images">
+                      </div>
+
+                    <div class="markdown">
+                      <label>内容编辑区：</label>
+                      <div class="edit">
+                        <textarea id="research_achievement_add_content" name="content" oninput="this.editor.update()"
+                                rows="15" cols="170" ></textarea>
+                      </div>
+                        <label>获奖情况：</label>
+                    <div class="edit">
+                        <textarea id="research_achievement_add_award_situation"
+                                 name="awardSituation" rows="10" cols="170" ></textarea>
+                    </div>
+                      <label>结果在这儿：</label>
+                      <div id="preview-3" class="preview" > </div>
+                    </div>
                   </div>
 
-                <div class="markdown">
-                  <label>内容编辑区：</label>
-                  <div class="edit">
-                    <textarea id="text-input-3" oninput="this.editor.update()"
-                            rows="15" cols="170" ></textarea>
-                  </div>
-                  <label>结果在这儿：</label>
-                  <div id="preview-3" class="preview" > </div>
-                </div>
-              </div>
-              <div class="form-group">
-                  <label for="inputFile">获奖情况：</label>
-                  <input type="text">   
-              </div>
 
-              <button type="submit" class="btn">发布</button>
+                <button type="button" onclick="addAchievement()" class="btn">发布</button>
+             </form>
           </div>
 
           <div class="pannal-ach pannal-ach-2 hidden">
@@ -466,7 +470,6 @@
                     <th>发布时间</th>
                     <th>标题</th>
                     <th>获奖情况  </th>
-                    <th>项目组人员</th>
                     <th>操作</th>
                   </tr>
                 </thead>
@@ -491,7 +494,73 @@
             </div>
         </div>
 
+        <!-- 按钮触发模态框 时政修改-->
+        <button class="btn btn-primary btn-lg" style="display: none;" id="search_achievement_update_modal" data-toggle="modal" data-target="#updateAchievementModal"></button>
+        <div class="modal fade" id="updateAchievementModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="updateAchievementModalLabel">修改科研成果</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data" method="POST">
+
+                            <input type="hidden" class="form-control"  id="research_achievement_update_id"  name="id" value="" >
+
+                            <div class="form-group">
+                                <label>标题:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="research_achievement_update_project_name"
+                                           name="title" value=""  placeholder="请输入你的标题">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>作者:</label>
+                                <div>
+                                    <input type="text" id="research_achievement_update_project_man" name="projectMan" class="form-control"
+                                           value=""  placeholder="请输入你的作者">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>内容:</label>
+                                <div>
+                                       <textarea  id="research_achievement_update_content" name="content" class="form-control"
+                                                  rows="10" cols="100"      value=""  placeholder="请输入你的内容"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>获奖情况:</label>
+                                <div>
+                                       <textarea  id="research_achievement_update_award_situation" name="awardSituation" class="form-control"
+                                                  rows="10" cols="100"      value=""  placeholder="请输入你的获奖情况"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>封面照片:</label>
+                                <div>
+                                    <input type="file" id="research_achievement_update_images" name="images" class="form-control">
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="research_achievement_update_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="updateAchievementById()">提交更改</button>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
     </div>
+
     <!-- 项目管理 -->
    <div class="pannal-nav pannal-nav-4 hidden">
             <div class="position">位置><a href="##">项目管理</a></div>
@@ -578,7 +647,7 @@
         var text = function (id) { return document.getElementById(id); };
             new Editor(text("research_politics_add_origin"), text("preview-1"));
             new Editor(text("research_notice_add_content"), text("preview-2"));
-            new Editor(text("text-input-3"), text("preview-3"));
+            new Editor(text("research_achievement_add_content"), text("preview-3"));
 
         function fixed(){
             var aside=document.getElementsByTagName('aside')[0];
@@ -601,18 +670,10 @@
 
          function initData(conditions){
 
-
-             var achievementUrl = "/achievement/queryAll"
-             var noticeUrl = "/notice/queryAll"
-
-
-             $("#tbody3").empty();
-             $("#tbody2").empty();
-
              initProjects(conditions);
              initPolitics(conditions);
              initNotice(conditions);
-
+             initAchievements(conditions);
          }
 
          function initPolitics(conditions) {
@@ -880,9 +941,9 @@
 
              $("#tbody2").empty();
 
-             var politicsUrl = "/notice/queryAll"
+             var noticeUrl = "/notice/queryAll"
 
-             $.get(politicsUrl,{conditions:conditions},function(data) {
+             $.get(noticeUrl,{conditions:conditions},function(data) {
                  if(data != null) {
                      var str = "";
                      for(var i=0;i<data.length;i++) {
@@ -909,6 +970,261 @@
              var pages=Math.ceil(atr.length/12);
 
              var paging=document.getElementById('paging2');
+             for(var i=0;i<atr.length;i++){
+                 atr[i].firstElementChild.innerHTML=i+1;
+
+             }
+
+             //分页，添加页码
+             for(var i=1;i<=pages;i++){
+
+                 // a[0].style.backgroundColor="";
+                 // a[0].style.color="#252525";
+
+                 if(pages>6){
+
+                     for(var i=1;i<=5;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+
+
+                     var nodeS=document.createElement("span");
+                     var ellipsis=document.createTextNode('...');
+                     nodeS.appendChild(ellipsis);
+                     paging.appendChild(nodeS);
+
+                     var nodeAEnd=document.createElement("a");
+                     var textEnd=document.createTextNode(pages);
+                     nodeAEnd.appendChild(textEnd);
+                     paging.appendChild(nodeAEnd);
+                     break;
+                 }
+                 if(pages<=6){
+                     for(var i=1;i<=pages;i++){
+                         var nodeA=document.createElement("a");
+                         var textNode=document.createTextNode(i);
+                         nodeA.appendChild(textNode);
+                         paging.appendChild(nodeA);
+
+                     }
+                     var a=paging.getElementsByTagName('a');
+                     a[0].style.backgroundColor="#fa3e3e";
+                     a[0].style.color="#ffffff";
+                     for(var i=12;i<atr.length;i++){
+                         atr[i].style.display='none';
+                     }
+
+                 }
+             }
+
+             function page(){
+                 var a=paging.getElementsByTagName("a");
+
+                 for(var j=0;j<a.length;j++){
+
+                     a[j].onclick=function(){
+                         var num=parseInt(this.innerHTML);
+                         if(num<=5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var num=parseInt(num);
+                                 for(var i=1;i<=5;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+                                 var nodeAEnd=document.createElement("a");
+                                 var textEnd=document.createTextNode(pages);
+                                 nodeAEnd.appendChild(textEnd);
+                                 paging.appendChild(nodeAEnd);
+
+
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+                             else{
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+                                 var index=parseInt(num-1);
+                                 a[index].style.backgroundColor="#fa3e3e";
+                                 a[index].style.color="#ffffff";
+                             }
+
+                         }
+                         if(num>=5&&num<=pages-5){
+                             paging.innerHTML='';
+                             var nodeAFirst=document.createElement('a');
+                             var textFirst=document.createTextNode('1');
+                             nodeAFirst.appendChild(textFirst);
+                             paging.appendChild(nodeAFirst);
+
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+
+
+                             for(var i=num-2;i<=num+2;i++){
+                                 var nodeA=document.createElement("a");
+                                 var textNode=document.createTextNode(i);
+                                 nodeA.appendChild(textNode);
+                                 paging.appendChild(nodeA);
+                             }
+
+                             var nodeS=document.createElement("span");
+                             var ellipsis=document.createTextNode('...');
+                             nodeS.appendChild(ellipsis);
+                             paging.appendChild(nodeS);
+
+                             var nodeAEnd=document.createElement("a");
+                             var textEnd=document.createTextNode(pages);
+                             nodeAEnd.appendChild(textEnd);
+                             paging.appendChild(nodeAEnd);
+
+                             a[3].style.backgroundColor="#fa3e3e";
+                             a[3].style.color="#ffffff";
+                         }
+
+                         if(num>pages-5){
+                             if(pages>6){
+                                 paging.innerHTML='';
+                                 var nodeAFirst=document.createElement('a');
+                                 var textFirst=document.createTextNode('1');
+                                 nodeAFirst.appendChild(textFirst);
+                                 paging.appendChild(nodeAFirst);
+
+
+                                 var nodeS=document.createElement("span");
+                                 var ellipsis=document.createTextNode('...');
+                                 nodeS.appendChild(ellipsis);
+                                 paging.appendChild(nodeS);
+
+
+                                 for(var i=num-5+pages-num;i<=pages;i++){
+                                     var nodeA=document.createElement("a");
+                                     var textNode=document.createTextNode(i);
+                                     nodeA.appendChild(textNode);
+                                     paging.appendChild(nodeA);
+                                 }
+
+                                 var index=parseInt(num-1);
+                                 a[7-pages+index].style.backgroundColor="#fa3e3e";
+                                 a[7-pages+index].style.color="#ffffff";
+                             }
+                             if(num==6){
+                                 for(var i=0;i<a.length;i++){
+                                     a[i].style.backgroundColor="";
+                                     a[i].style.color="#252525";
+                                 }
+
+                                 a[5].style.backgroundColor="#fa3e3e";
+                                 a[5].style.color="#ffffff";
+                             }
+                         }
+                         numTr=atr.length;
+                         if(num===1){
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+                             }
+                             for(var i=12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num>1&&num<numTr){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<num*12;i++){
+
+                                 atr[i].style.display='table-row';
+
+
+                             }
+                             for(var i=num*12;i<numTr;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                         }
+                         if(num===pages){
+                             for(var i=0;i<(num-1)*12;i++){
+                                 atr[i].style.display='none';
+
+                             }
+                             for(var i=(num-1)*12;i<numTr;i++){
+                                 atr[i].style.display='table-row';
+
+                             }
+                         }
+                         page();
+                     }
+
+                 }
+             }
+             page();
+         }
+
+         function initAchievements(conditions) {
+
+             if(conditions == "最近一月") {
+                 conditions = "recent";
+             } else {
+                 conditions = "all"
+             }
+
+             $("#tbody3").empty();
+
+             var achievementUrl = "/achievement/queryAll"
+
+             $.get(achievementUrl,{conditions:conditions},function(data) {
+                 if(data != null) {
+                     var str = "";
+                     for(var i=0;i<data.length;i++) {
+                         str += "<tr><td></td><td>"+UnixToDate(data[i].publishDate)+"</td><td>"+data[i].projectName+"</td><td>"+data[i].projectMan+"</td><td><button type='button' onclick=getAchievementById("+data[i].id+") class='edit'>修改</button> <button type='button' onclick=deleteAchievementById("+data[i].id+") class='del'>删除</button></td></tr>";
+                     }
+                     if(str.length > 0) {
+                         $("#tbody3").append(str);
+                         initAchievementsPages();
+                     }else {
+                         $("#paging3").empty();
+                     }
+
+                 } else {
+                     alert("error!")
+                 }
+             });
+         }
+
+         function initAchievementsPages() {
+             $("#paging3").empty();
+
+             var tbody=document.getElementById('tbody3');
+             var atr=tbody.getElementsByTagName('tr');
+             var pages=Math.ceil(atr.length/12);
+
+             var paging=document.getElementById('paging3');
              for(var i=0;i<atr.length;i++){
                  atr[i].firstElementChild.innerHTML=i+1;
 
@@ -1465,6 +1781,39 @@
              });
          }
 
+         function getAchievementById(id){
+             var url="/achievement/"+id+"/";
+             $.get(url, function(data) {
+                 if(data != null) {
+
+                     $("#research_achievement_update_id").val(data.id);
+                     $("#research_achievement_update_project_name").val(data.projectName);
+                     $("#research_achievement_update_project_man").val(data.projectMan);
+                     $("#research_achievement_update_award_situation").val(data.awardSituation);
+                     $("#research_achievement_update_content").val(data.content);
+
+                     $("#search_achievement_update_modal").click();
+
+                 } else {
+                     alert("该项目不存在");
+
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+         }
+
+         function deleteAchievementById(id){
+             var url="/achievement/delete";
+             $.post(url,{id:id}, function(data) {
+                 if(data != null) {
+                     initAchievements();
+                 } else {
+                     alert("该项目不存在");
+                     window.location.href = "platform_manager.html";
+                 }
+             });
+         }
+
          function deleteProjectById(id){
              var url="/project/delete";
              $.post(url,{id:id}, function(data) {
@@ -1526,6 +1875,53 @@
                      }
                  });
              }
+         }
+
+         function updateAchievementById(){
+             var id = $("#research_achievement_update_id").val();
+             var projectName = $("#research_achievement_update_project_name").val();
+             var projectMan = $("#research_achievement_update_project_man").val();
+             var awardSituation = $("#research_achievement_update_award_situation").val();
+             var content = $("#research_achievement_update_content").val();
+             var images = $("#research_achievement_update_images").val();
+
+             if(id <= 0 || projectName == null || projectName.length == 0 || projectMan == null || projectMan.length == 0 ||
+                     awardSituation == null || awardSituation.length == 0 || content.length == 0 || content == null
+                     || images.length == 0 || images == null) {
+                 alert("输入参数不能为空!")
+             } else {
+                 $.ajaxFileUpload({
+                     url: "http://127.0.0.1/achievement/update?id="+id+"&projectMan="+projectMan+"&projectName="+projectName+"&awardSituation="+awardSituation+"&content="+content,
+                     type:'POST',
+                     secureuri: false, //是否需要安全协议，一般设置为false
+                     dataType: 'json', //返回值类型 一般设置为json
+                     fileElementId:'research_achievement_update_images',
+                     success: function (data, status){
+                         if(data != null) {
+                             alert("发布成功!")
+                         } else {
+                             alert("发布失败!")
+                         }
+                     },
+                     error: function (data, status, e)//服务器响应失败处理函数
+                     {
+                         alert("error!");
+                     }
+                 });
+             }
+             if(id <= 0 || projectName == null || projectName.length == 0 || projectMan == null || projectMan.length == 0 ||
+                     awardSituation == null || awardSituation.length == 0 || content.length == 0 || content == null
+                     || images.length == 0 || images == null) {
+
+             } else {
+                 //2秒后执行
+                 setTimeout( function(){
+                     alert("修改成功!");
+                     initAchievements();
+                     $("#research_achievement_update_close").click();
+                 }, 1 * 1000 );
+             }
+
          }
 
          function updateNoticeById(){
@@ -1631,6 +2027,91 @@
             }
 
 
+         }
+
+         function addAchievement(){
+             var projectMan = $.cookie("user_name");
+
+             var projectName =$("#research_achievement_add_project_name").val();
+             var awardSituation =$("#research_achievement_add_award_situation").val();
+             var content =$("#research_achievement_add_content").val();
+             var images = $("#research_achievement_add_images").val();
+             var contentFile = $("#research_achievement_add_content_file").val();
+
+             if(projectMan == null) {
+                 location.href="/login.html";
+             }
+
+             if(images.length == 0 || contentFile.length == 0 || projectMan == null || projectMan.length ==0 || projectName == null || projectName.length ==0 ||
+                     awardSituation == null || awardSituation.length ==0 || content == null || content.length ==0 ) {
+                 alert("输入参数不能为空!");
+             } else {
+                 $.ajaxFileUpload({
+                     url: "http://127.0.0.1/achievement/add?projectName="+projectName+"&projectMan="+projectMan+"&awardSituation="+awardSituation+"&content="+content,
+                     type:'POST',
+                     secureuri: false, //是否需要安全协议，一般设置为false
+                     dataType: 'json', //返回值类型 一般设置为json
+                     fileElementId:'research_achievement_add_content_file',
+                     success: function (data, status){
+                         if(data != null) {
+                             alert("发布成功!")
+                         } else {
+                             alert("发布失败!")
+                         }
+                     },
+                     error: function (data, status, e)//服务器响应失败处理函数
+                     {
+                         alert("error!");
+                     }
+
+                 });
+             }
+
+             if(images.length == 0 || contentFile.length == 0 || projectMan == null || projectMan.length ==0 || projectName == null || projectName.length ==0 ||
+                     awardSituation == null || awardSituation.length ==0 || content == null || content.length ==0 ) {
+                 alert("参数不能为空")
+             } else {
+                 //3秒后执行
+                 setTimeout( function(){
+                     addAchievement1();
+                 }, 3 * 1000 );
+             }
+
+         }
+
+         function addAchievement1(){
+
+             var projectMan = $.cookie("user_name");
+             var projectName =$("#research_achievement_add_project_name").val();
+
+             var url = "/achievement/query"
+             $.get(url, {projectName:projectName, projectMan:projectMan}, function(data) {
+                 if(data != null) {
+                     $.ajaxFileUpload({
+                         url: "http://127.0.0.1/achievement/update?id="+data.id+"&projectMan="+data.projectMan,
+                         type:'POST',
+                         secureuri: false, //是否需要安全协议，一般设置为false
+                         dataType: 'json', //返回值类型 一般设置为json
+                         fileElementId:'research_achievement_add_images',
+                         success: function (data, status){
+                             if(data != null) {
+                                 alert("发布成功!")
+                             } else {
+                                 alert("发布失败!")
+                             }
+                         },
+                         error: function (data, status, e)//服务器响应失败处理函数
+                         {
+                             alert("error!");
+                         }
+                     });
+                 } else {
+                     alert("发布失败!")
+                 }
+             });
+
+             alert("发布成功!!")
+             location.href= "platform_manager.html";
          }
 
          function research_project_insert(){
