@@ -31,21 +31,15 @@
 		</div>
 	</header>
 	<div class="content container">
-		
+
 		<div class="new-project">
 			<div class="new-project-title">
 				<p class="pull-left title">最新发布</p>
 				<a class="pull-right more" href="">更多>></a>
 			</div>
 			<div class="new-project-content">
-				<ul>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+				<ul id="project_new">
+
 				</ul>
 			</div>
 		</div>
@@ -53,51 +47,135 @@
 		<div class="all-project">
 			<div class="all-project-title">
 				<p class="pull-left title">所有项目展示</p>
-				
+
 			</div>
 			<div class="all-project-content">
-				<ul>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					
-					
+				<ul id="project_all">
+
 				</ul>
 			</div>
-		</div>
-		<button class="get-more" type="button">
+			<br>
+			<br>
+			<br>
+
+			<button onclick="showProjectAll()" class="get-more" type="button">
 				加载更多
 			</button>
+		</div>
+
 	</div><!-- content end -->
 	<footer>
 		<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
+			<p>友情链接</p>
+		</div>
+		<div class="foot-1">
+
+		</div>
 	</footer>
+
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
+	<script>
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+		window.onload=function(){
+			$("#name").text($.cookie("user_name"));
+
+			showProjectData();
+			showProjectAll();
+		}
+
+		function showProjectData(){
+			var conditions = "top"
+
+			$("#project_new").empty();
+
+			var noticeUrl = "/project/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions},function(data) {
+				if(data != null) {
+					var str = "";
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><a href='#'  onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].declareTime)+"`,`"+data[i].applicant+"`,`科研项目`,`"+data[i].summary+"`)'>"+data[i].title+"</a><span>"+UnixToDate(data[i].declareTime)+"</span></li>";
+					}
+
+					$("#project_new").append(str);
+
+				} else {
+					alert("error!")
+				}
+			});
+		}
+
+		function showProjectAll(){
+			var tbody=document.getElementById('project_all');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#achievement_images").empty();
+			}
+			var pageSize = 7;
+			var noticeUrl = "/project/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex,pageSize:pageSize},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+
+						str += "<li><a href='#'  onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].declareTime)+"`,`"+data[i].applicant+"`,`科研项目`,`"+data[i].summary+"`)'><p class='title'>"+data[i].title+"</p><p class='con'>"+data[i].summary+"</p></a></li>";
+					}
+
+					$("#project_all").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			/*ymdhis += " " + time.getUTCHours() + ":";
+			 ymdhis += time.getUTCMinutes() + ":";
+			 ymdhis += time.getUTCSeconds();*/
+			return ymdhis;
+		}
+
+		function UnixToDateTime(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+		function pageDetails(title, date, author, origin, content){
+			$.cookie("page_title",title, { expires: 1})
+			$.cookie("page_date",date, { expires: 1})
+			$.cookie("page_author",author, { expires: 1})
+			$.cookie("page_origin",origin, { expires: 1})
+			$.cookie("page_content",content, { expires: 1})
+
+			location.href = "details_page.html";
+		}
+	</script>
 </body>
 </html>

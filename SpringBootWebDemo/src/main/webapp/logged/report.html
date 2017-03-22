@@ -29,7 +29,7 @@
 							<li><a href="##">申报项目</a></li>
 							<li><a href="myproject.html">我的科研项目</a></li>
 							<li><span></span></li>
-							<li><a href="">修改密码</a></li>
+
 							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
@@ -83,6 +83,46 @@
 			<div class="foot-1">
 				
 			</div>
+
+		<!-- 按钮触发模态框 -->
+		<button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="updateUserModalLabels">修改密码</h4>
+					</div>
+
+					<div class="modal-body">
+						<form role="form"  action="">
+
+							<div class="form-group">
+								<label>新密码:</label>
+								<div>
+									<input type="password" class="form-control" id="research_user_update_old_password"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label>再输一次:</label>
+								<div>
+									<input type="password" id="research_user_update_new_password" name="password" class="form-control"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
 	</footer>
 
 
@@ -150,6 +190,10 @@
 
 		}
 
+
+		function showUpdateUser(){
+			$("#search_user_update_modal").click();
+		}
 	</script>
 </body>
 </html>

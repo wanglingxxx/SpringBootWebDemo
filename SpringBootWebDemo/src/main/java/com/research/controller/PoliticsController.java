@@ -117,7 +117,8 @@ public class PoliticsController {
     }
 
     @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> getPoliticsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions) {
+    ResponseEntity<?> getPoliticsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions,
+                                     @RequestParam(value = "pageIndex",required = false) Integer pageIndex) {
 
         List<Politics> projects = null;
         Pagination pagination = new Pagination();
@@ -132,6 +133,13 @@ public class PoliticsController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String condition = formatter.format(date);
             projects = politicsService.queryProjects(condition ,"");
+        } else if(conditions.equals("top")) {
+            if(pageIndex != null && pageIndex > 0){
+                pagination.setPageIndex(pageIndex);
+            }
+            pagination.setPageSize(7);
+
+            projects = politicsService.getPolitics(pagination);
         }
 
 

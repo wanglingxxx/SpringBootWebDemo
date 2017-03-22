@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>详情页</title>
+	<link rel="stylesheet" href="../public/css/reset.css">
+	<link rel="stylesheet" href="../public/css/details_page.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="application/javascript" src="/js/ajaxfileupload.js"></script>
+</head>
+<body>
+	<header>
+		<div class="header-top-bar">
+			
+			<div class="container">
+				<nav>
+					<ul class="nav-ul">
+						<li class="pull-left"><a href="index.html">首页</a></li>			
+						<li class="pull-left"><a href="policy.html">科技时政</a></li>
+						<li class="pull-left"><a href="notice.html">通知公告</a></li>
+						<li class="pull-left"><a href="achievements.html">科研成果</a></li>
+						<li class="pull-left"><a href="project.html">科研项目</a></li>
+						<li class="pull-left"><a href="info.html">了解我们</a></li>
+					</ul>
+				</nav>
+				<span class="pull-right log"><a href="../login.html">登录</a>&nbsp;|&nbsp;<a href="../register.html">注册</a></span>
+
+			</div>
+		</div>
+		</header>
+    <div class="content container">
+        <div id="details_page">
+
+
+
+
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="href-1 ">
+            <p>友情链接</p>
+        </div>
+        <div class="foot-1">
+
+        </div>
+    </footer>
+    <script>
+        document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+        window.onload=function(){
+
+
+            var title = $.cookie("page_title");
+            var date = $.cookie("page_date");
+            var author = $.cookie("page_author");
+            var origin = $.cookie("page_origin");
+            var content = $.cookie("page_content");
+
+
+
+            if(title == null || title.length ==0 || date == null || date.length ==0 || author == null || author.length ==0 ||
+                    origin == null || origin.length ==0 || content == null || content.length ==0) {
+                //location.href = "index.html";
+            } else {
+                $("#details_page").empty();
+
+                var str = "<h3>"+title+"</h3><div class='info'><p><span>时间：</span><span>"+date+"</span><span>作者：</span><span>"+author+"</span></p><p><span>来源</span>"+origin+"</p> </div><div class='con'><p>"+content.substring(0,content.length/2)+"</p><img src='../public/images/1.jpg' alt='图'><span>（图1）</span><p>"+content.substring(content.length/2, content.length)+"</p></div>";
+
+                $("#details_page").append(str);
+            }
+
+
+
+
+
+        }
+
+    </script>
+</body>

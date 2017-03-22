@@ -63,14 +63,21 @@
 	</select>
 
 	<select id="getNotices" resultMap="NoticeResult">
-		SELECT id,title, content, publisher, publish_date,
+		SELECT id,title, content, publisher, publish_date,`type`,
 			created_date, last_updated
 		FROM research_notice
-			 LIMIT #{pageIndex}, #{pageSize}
+		WHERE 1 = 1
+		<if test="state != null and '' != state">
+			<![CDATA[
+			  AND type = #{state}
+			]]>
+		</if>
+		ORDER BY created_date
+	    LIMIT #{pageIndex}, #{pageSize}
 	</select>
 
 	<select id="queryNotices" resultMap="NoticeResult">
-		SELECT id,title, content, publisher, publish_date,
+		SELECT id,title, content, publisher, publish_date,`type`,
 		created_date, last_updated
 		FROM research_notice
 		WHERE 1 = 1

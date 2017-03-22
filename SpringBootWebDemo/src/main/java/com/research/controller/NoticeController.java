@@ -110,7 +110,9 @@ public class NoticeController {
     }
 
     @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> getNoticesAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions) {
+    ResponseEntity<?> getNoticesAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions,
+                  @RequestParam(value = "pageIndex",required = false)Integer pageIndex,
+                  @RequestParam(value = "type", required =false)String type) {
 
         List<Notice> notices = null;
         Pagination pagination = new Pagination();
@@ -119,13 +121,20 @@ public class NoticeController {
             pagination.setPageSize(100);
             notices = noticeService.getNotices(pagination);
         } else if(conditions.equals("recent")) {
-            Notice project = new Notice();
             Date date = new Date();
             date.setMonth(date.getMonth()-1);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String condition = formatter.format(date);
             notices = noticeService.queryNotices(condition ,"");
+        } else if(conditions.equals("top")) {
+            pagination.setPageIndex(pageIndex);
+            pagination.setPageSize(7);
+            if(type != null && type.length() > 0) {
+                pagination.setState(type);
+            }
+            notices = noticeService.getNotices(pagination);
         }
+
 
 
         logger.info("/notice/queryAll return :{}"+notices);

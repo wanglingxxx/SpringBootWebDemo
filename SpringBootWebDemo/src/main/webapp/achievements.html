@@ -32,21 +32,14 @@
 		</div>
 	</header>
 	<div class="content container">
-		
+
 		<div class="new-achievements">
 			<div class="new-achievements-title">
 				<p class="pull-left title">最新发布</p>
 				<a class="pull-right more" href="">更多>></a>
 			</div>
 			<div class="new-achievements-content">
-				<ul>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+				<ul id="achievement_new">
 				</ul>
 			</div>
 		</div>
@@ -54,36 +47,37 @@
 		<div class="all-achievements">
 			<div class="all-achievements-title">
 				<p class="pull-left title">科研成果展示</p>
-				
+
 			</div>
-			<div class="all-achievements-content">
-				<ul>
-					<li><a href="javascript::"><img src="" alt="图1"><span class="hidden">介绍</span></a></li>
-					<li><a href="javascript::"><img src="" alt="图2"><span class="hidden">介绍</span></a></li>
-					<li><a href="javascript::"><img src="" alt="图3"><span class="hidden">介绍</span></a></li>
-					<li><a href="javascript::"><img src="" alt="图4"><span class="hidden">介绍</span></a></li>
-					<li><a href="javascript::"><img src="" alt="图5"><span class="hidden">介绍</span></a></li>
-					<li><a href="javascript::"><img src="" alt="图6"><span class="hidden">介绍</span></a></li>
-					
+			<div  class="all-achievements-content">
+				<ul id="achievement_images">
+
 				</ul>
 			</div>
 		</div>
-		<button class="get-more" type="button">
-				加载更多
-			</button>
+		<button onclick="showAchievementImages()" class="get-more" type="button">
+			加载更多
+		</button>
 	</div><!-- content end -->
 	<footer>
 		<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
+			<p>友情链接</p>
+		</div>
+		<div class="foot-1">
+
+		</div>
 	</footer>
+
+	<script type="application/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
+
 	<script>
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		window.onload=function(){
 			var oAll=document.getElementsByClassName('all-achievements-content')[0];
-			
+
 			var aLi=oAll.getElementsByTagName('li');
 			var aSpan=oAll.getElementsByTagName('span');
 			for(var i=0;i<aLi.length;i++){
@@ -98,9 +92,104 @@
 					for(var j=0;j<aSpan.length;j++){
 						aSpan[j].className="hidden";
 					}
-					
+
 				}
 			}
+
+			$("#name").text($.cookie("user_name"));
+
+			showAchievementData();
+			showAchievementImages();
+		}
+
+		function showAchievementData(){
+			var conditions = "top"
+
+			$("#achievement_new").empty();
+
+			var noticeUrl = "/achievement/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions},function(data) {
+				if(data != null) {
+					var str = "";
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><a href='#' onclick='pageDetails(`"+data[i].projectName+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].projectMan+"`,`科研成果`,`"+data[i].content+"`)' >"+data[i].projectName+"</a><span>【"+UnixToDate(data[i].publishDate)+"】</span></li>";
+					}
+
+					$("#achievement_new").append(str);
+
+				} else {
+					alert("error!")
+				}
+			});
+		}
+
+		function showAchievementImages(){
+			var tbody=document.getElementById('achievement_images');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#achievement_images").empty();
+			}
+			var pageSize = 6;
+			var noticeUrl = "/achievement/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex,pageSize:pageSize},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+
+						str += "<li><a href='#' onclick='pageDetails(`"+data[i].projectName+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].projectMan+"`,`科研成果`,`"+data[i].content+"`)' ><img src='/upload/achievement/"+data[i].projectMan+"/images/"+data[i].images+"' alt='图'><span class='hidden'>"+data[i].projectName+"</span></a></li>";
+					}
+
+					$("#achievement_images").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			/*ymdhis += " " + time.getUTCHours() + ":";
+			 ymdhis += time.getUTCMinutes() + ":";
+			 ymdhis += time.getUTCSeconds();*/
+			return ymdhis;
+		}
+
+		function UnixToDateTime(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+		function pageDetails(title, date, author, origin, content){
+			$.cookie("page_title",title, { expires: 1})
+			$.cookie("page_date",date, { expires: 1})
+			$.cookie("page_author",author, { expires: 1})
+			$.cookie("page_origin",origin, { expires: 1})
+			$.cookie("page_content",content, { expires: 1})
+
+			location.href = "details_page.html";
 		}
 	</script>
 </body>

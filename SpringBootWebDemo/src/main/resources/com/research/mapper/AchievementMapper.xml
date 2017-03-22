@@ -80,6 +80,7 @@
     	SELECT id, project_name, project_man, award_situation, content_file, publish_date,images,content,
     	created_date, last_updated
     	FROM research_achievement
+    	ORDER BY created_date
     	LIMIT #{pageIndex}, #{pageSize}
     </select>
 

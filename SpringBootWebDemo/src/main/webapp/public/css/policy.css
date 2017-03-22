@@ -185,7 +185,7 @@ a{
 }
 .policy-file-content{
 	width:inherit;
-	height:364px;
+	height:auto;
 	border:1px solid #e8e8e8;
 	font-size:14px;
 }
@@ -203,7 +203,7 @@ a{
 }
 .policy-news{
 	width:inherit;
-	height:500px;
+	height: auto;
 	clear:both;
 	padding-top:50px;
 }

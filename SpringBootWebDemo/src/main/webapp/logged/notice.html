@@ -5,6 +5,12 @@
 	<title>通知公告</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
 	<link rel="stylesheet" href="../public/css/notice.css">
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<header>
@@ -23,14 +29,14 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
 							<li><a href="report.html">申报项目</a></li>
 							<li><a href="myproject.html">我的科研项目</a></li>
 							<li><span></span></li>
-							<li><a href="">修改密码</a></li>
+							<li><a href="#" onclick="showUpdateUser()">修改密码</a></li>
 							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
@@ -51,91 +57,257 @@
 				<li class="pull-left title-li"><a href="javascript::">公告</a><p> </p></li>
 			</ul>
 		</div>
-		<div class="notice-pannal notice-1 show">
-			<ul>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				<li><i>14日7月2016年</i><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
+		<div  class="notice-pannal notice-1 show">
+			<ul id="notice_new">
+
 			</ul>
-			<button class="get-more" type="button">
+			<button onclick="showNoticeNew()" class="get-more" type="button">
 				加载更多
 			</button>
 		</div>
 		<div class="notice-pannal notice-2 hidden">
-			<ul>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
-				<li><i>14日7月2016年</i><a href="">SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</a></li>
+			<ul id="notice_tongzhi">
+
 			</ul>
-			<button class="get-more" type="button">
+			<button onclick="showNoticeTongzhi()" class="get-more" type="button">
 				加载更多
 			</button>
 		</div>
 		<div class="notice-pannal notice-3 hidden">
-			<ul>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
-				<li><i>14日7月2016年</i><a href="">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></li>
+			<ul id="notice_gonggao">
+
 			</ul>
-			<button class="get-more" type="button">
+			<button onclick="showNoticeGonggao()" class="get-more" type="button">
 				加载更多
 			</button>
 		</div>
 	</div>
 	<footer>
 		<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
+			<p>友情链接</p>
+		</div>
+		<div class="foot-1">
+
+		</div>
+
+		<!-- 按钮触发模态框 -->
+		<button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="updateUserModalLabels">修改密码</h4>
+					</div>
+
+					<div class="modal-body">
+						<form role="form"  action="">
+
+							<div class="form-group">
+								<label>新密码:</label>
+								<div>
+									<input type="password" class="form-control" id="research_user_update_old_password"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label>再输一次:</label>
+								<div>
+									<input type="password" id="research_user_update_new_password" name="password" class="form-control"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
 	</footer>
-	
-	 <script type="text/javascript">
-         document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
-    // JS实现选项卡切换
-	    window.onload=function(){
-	        var aLi=document.getElementsByClassName('title-li');
-	        var aDiv=document.getElementsByClassName('notice-pannal');
-	        var aConT=document.getElementsByClassName('content-title')[0];
-	        var aP=aConT.getElementsByTagName('p');
-	        for(i=0;i<aLi.length;i++){
-	            aLi[i].index=i;
-	            aLi[i].onclick=function(){
-	                for(j=0;j<aDiv.length;j++){
-	                    aP[j].className=" ";
-	                    aDiv[j].className="notice-pannal notice-"+(j+1)+" hidden";        
-	                }
-	                aDiv[this.index].className="notice-pannal notice-"+(this.index+1)+" show"; 
-	               aP[this.index].className="choose";
-	               
-	             
-	            }
-	        }
-	    }
-    
-    
-    </script>
+
+
+
+
+
+	<script type="text/javascript">
+		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+		// JS实现选项卡切换
+		window.onload=function(){
+			var aLi=document.getElementsByClassName('title-li');
+			var aDiv=document.getElementsByClassName('notice-pannal');
+			var aConT=document.getElementsByClassName('content-title')[0];
+			var aP=aConT.getElementsByTagName('p');
+			for(i=0;i<aLi.length;i++){
+				aLi[i].index=i;
+				aLi[i].onclick=function(){
+					for(j=0;j<aDiv.length;j++){
+						aP[j].className=" ";
+						aDiv[j].className="notice-pannal notice-"+(j+1)+" hidden";
+					}
+					aDiv[this.index].className="notice-pannal notice-"+(this.index+1)+" show";
+					aP[this.index].className="choose";
+
+
+				}
+			}
+			$("#name").text($.cookie("user_name"));
+
+			showNoticeNew();
+			showNoticeTongzhi();
+			showNoticeGonggao();
+		}
+		function showNoticeNew(){
+			var tbody=document.getElementById('notice_new');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#notice_new").empty();
+			}
+
+			var noticeUrl = "/notice/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><i>"+UnixToDate(data[i].publishDate)+"</i><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].publisher+"`,`通知公告`,`"+data[i].content+"`)'>"+data[i].title+"</a></li>";
+					}
+
+					$("#notice_new").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		function showNoticeTongzhi(){
+			var tbody=document.getElementById('notice_tongzhi');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#notice_tongzhi").empty();
+			}
+			var type="通知";
+			var noticeUrl = "/notice/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex,type:type},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><i>"+UnixToDate(data[i].publishDate)+"</i><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].publisher+"`,`通知公告`,`"+data[i].content+"`)'>"+data[i].title+"</a></li>";
+					}
+
+					$("#notice_tongzhi").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		function showNoticeGonggao(){
+			var tbody=document.getElementById('notice_gonggao');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#notice_gonggao").empty();
+			}
+			var type="公告";
+			var noticeUrl = "/notice/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex,type:type},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><i>"+UnixToDate(data[i].publishDate)+"</i><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].publisher+"`,`通知公告`,`"+data[i].content+"`)'>"+data[i].title+"</a></li>";
+					}
+
+					$("#notice_gonggao").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			/*ymdhis += " " + time.getUTCHours() + ":";
+			 ymdhis += time.getUTCMinutes() + ":";
+			 ymdhis += time.getUTCSeconds();*/
+			return ymdhis;
+		}
+
+		function UnixToDateTime(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+		function pageDetails(title, date, author, origin, content){
+			$.cookie("page_title",title, { expires: 1})
+			$.cookie("page_date",date, { expires: 1})
+			$.cookie("page_author",author, { expires: 1})
+			$.cookie("page_origin",origin, { expires: 1})
+			$.cookie("page_content",content, { expires: 1})
+
+			location.href = "details_page.html";
+		}
+
+
+		function showUpdateUser(){
+
+			$("#search_user_update_modal").click();
+		}
+
+		function updateUserById(){
+			var id = $.cookie("user_id")
+			var oldPassword = $("#research_user_update_old_password").val();
+			var newPassword = $("#research_user_update_new_password").val();
+			if(oldPassword != newPassword) {
+				alert("两次输入密码不一致!")
+			} else {
+				var url="/user/update";
+				$.post(url,{id:id, password:newPassword}, function(data) {
+					if(data != null) {
+						window.location.href = "index.html";
+					} else {
+						alert("该项目不存在");
+						window.location.href = "index.html";
+					}
+				});
+			}
+		}
+
+	</script>
 </body>
 </html>

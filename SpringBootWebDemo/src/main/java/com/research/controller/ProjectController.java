@@ -169,7 +169,9 @@ public class ProjectController {
 
     @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> getProjectsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions,
-                    Integer userId) {
+                                     @RequestParam(value = "userId", required = false) Integer userId,
+                                     @RequestParam(value = "pageIndex",required = false)Integer pageIndex,
+                                     @RequestParam(value = "pageSize",required = false)Integer pageSize) {
 
         List<Project> projects = null;
         Pagination pagination = new Pagination();
@@ -190,6 +192,15 @@ public class ProjectController {
             projects = projectService.queryProjects(pagination);
         } else if(conditions.equals("unpass")) {
             pagination.setState("未通过");
+            projects = projectService.queryProjects(pagination);
+        } else if(conditions.equals("top")) {
+            if(pageSize != null && pageSize >0){
+                pagination.setPageSize(pageSize);
+            }else {
+                pagination.setPageSize(7);
+            }
+            pagination.setPageIndex(pageIndex);
+            pagination.setState("通过");
             projects = projectService.queryProjects(pagination);
         } else {
             logger.info("/project/queryAll return :{}","");

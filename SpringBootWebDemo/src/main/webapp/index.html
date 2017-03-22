@@ -14,245 +14,366 @@
 				<span class="pull-right log"><a href="login.html">登录</a>&nbsp;|&nbsp;<a href="register.html">注册</a></span>
 			</div>
 		</div>
-		<div class="header-buttom">
-			<div class="container">
-				<div class="title pull-left"><p>科研信息管理平台</p></div>
-			</div>
-		</div>
-	</div>
-	<div class="nav container">
-		<ul class="nav-ul">
-			
-				<li class="pull-left"><a href="##">首页</a></li>			
-				<li class="pull-left"><a href="policy.html">科技时政</a></li>
-				<li class="pull-left"><a href="notice.html">通知公告</a></li>
-				<li class="pull-left"><a href="achievements.html">科研成果</a></li>
-				<li class="pull-left"><a href="project.html">科研项目</a></li>
-				<li class="pull-left"><a href="info.html">了解我们</a></li>
-		</ul>
-	</div>
-	<div class="content container">
 
-			<div class="foucus pull-left" id="foucus">
-				    <div id="list" style="left: -480px;">
-				        <img src="../public/images/5.jpg" alt="5"/>
-				        <img src="../public/images/1.jpg" alt="1"/>
-				        <img src="../public/images/2.jpg" alt="2"/>
-				        <img src="../public/images/3.jpg" alt="3"/>
-				        <img src="../public/images/4.jpg" alt="4"/>
-				        <img src="../public/images/5.jpg" alt="5"/>
-				        <img src="../public/images/1.jpg" alt="1"/>
-				    </div>
-				    <div id="buttons">
-				        <span index="1" class="on"></span>
-				        <span index="2"></span>
-				        <span index="3"></span>
-				        <span index="4"></span>
-				        <span index="5"></span>
-				    </div>
-				    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
-				    <a href="javascript:;" id="next" class="arrow">&gt;</a>
-			</div>
-		
+        <div class="header-buttom">
+            <div class="container">
+                <div class="title pull-left"><p>科研信息管理平台</p></div>
+            </div>
+        </div>
+    </div><!-- hewder end -->
 
-			<div class="notice pull-right">
-				<div class="notice-title">
-					<p class="pull-left">通知公告栏</p>
-					<a href="">
-						<div class="meu pull-right">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</a>
-				</div>
-				<div class="notice-content">
-					<ul>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="achievements">
-				<div class="achievements-title">
-					<p class="pull-left">科研成果栏</p>
-					<a href="">	
-						<div class="meu pull-right">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</a>
-				</div>
-				<div class="achievements-content">
-					<ul>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="project ">
-			 	<div class="project-title">
-				<p class="pull-left">科研项目栏</p>
-					<a href="">	
-						<div class="meu pull-right">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</a>
-				</div>
-				<div class="project-content">
-					<ul>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-						<li><span>16年7月14日</span><a href="">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="ban">
-				
-			</div>
-	</div>
+    <div class="nav container">
+        <ul class="nav-ul">
 
-		<div class="footer">
-			<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
-		</div>
-		<script>
-			window.onload = function () {
-			    var foucus = document.getElementById('foucus');
-			    var list = document.getElementById('list');
-			    var buttons = document.getElementById('buttons').getElementsByTagName('span');
-			    var prev = document.getElementById('prev');
-			    var next = document.getElementById('next');
-			    var index = 1;    //用于索引当前按钮
-			    var len = 5;      //图片的数量
-			    var animated = false;   //用于判断切换是否进行
-			    var interval = 3000;    //自动播放定时器秒数，这里是3秒
-			    var timer;             //定时器
+            <li class="pull-left"><a href="##">首页</a></li>
+            <li class="pull-left"><a href="policy.html">科技时政</a></li>
+            <li class="pull-left"><a href="notice.html">通知公告</a></li>
+            <li class="pull-left"><a href="achievements.html">科研成果</a></li>
+            <li class="pull-left"><a href="project.html">科研项目</a></li>
+            <li class="pull-left"><a href="info.html">了解我们</a></li>
+        </ul>
+    </div><!-- nav end -->
+
+    <div class="content container">
+
+        <div class="foucus pull-left" id="foucus">
+            <div id="list" style="left: -480px;">
+                <img src="../public/images/5.jpg" alt="5"/>
+                <img src="../public/images/1.jpg" alt="1"/>
+                <img src="../public/images/2.jpg" alt="2"/>
+                <img src="../public/images/3.jpg" alt="3"/>
+                <img src="../public/images/4.jpg" alt="4"/>
+                <img src="../public/images/5.jpg" alt="5"/>
+                <img src="../public/images/1.jpg" alt="1"/>
+            </div>
+            <div id="buttons">
+                <span index="1" class="on"></span>
+                <span index="2"></span>
+                <span index="3"></span>
+                <span index="4"></span>
+                <span index="5"></span>
+            </div>
+            <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+            <a href="javascript:;" id="next" class="arrow">&gt;</a>
+        </div>
 
 
-			    function animate (offset) {
-			        animated = true;     //切换进行中
-			        var time = 300;     //位移总时间
-			        var inteval = 10;   //位移间隔时间
-			        var speed = offset/(time/inteval);   //每次位移量
-			        var left = parseInt(list.style.left) + offset; //目标值
+        <div class="notice pull-right">
+            <div class="notice-title">
+                <p class="pull-left">通知公告栏</p>
+                <a href="notice.html">
+                    <div class="meu pull-right">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+            <div id="notice_content" class="notice-content">
+                <ul>
 
-			        var go = function (){
-			            //这两种情况表示还在切换中
-			         if ( (speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
-			                list.style.left = parseInt(list.style.left) + speed + 'px';
-			                setTimeout(go, inteval); //继续执行切换go()函数
-			            }
-			            else {
-			                list.style.left = left + 'px';
-			                if(left>-480){
-			                    list.style.left = -480 * len + 'px';
-			                }
-			                if(left<(-480 * len)) {
-			                    list.style.left = '-480px';
-			                }
-			                animated = false; //切换完成
-			            }
-			        }
-			        go();
-			    }
-			    //用于为按钮添加样式
-			    function showButton() {
-			        //先找出原来有.on类的按钮，并移除其类
-			        for (var i = 0; i < buttons.length ; i++) {
-			            if( buttons[i].className == 'on'){
-			                buttons[i].className = '';
-			                break;
-			            }
-			        }
-			        //为当前按钮添加类
-			        buttons[index - 1].className = 'on';
-			    }
-			     //自动播放
-			    function play() {
-			        timer = setTimeout(function () {
-			            next.onclick();
-			            play();
-			        }, interval);
-			    }
-			     //清除定时器
-			    function stop() {
-			        clearTimeout(timer);
-			    }
-			    //右点击
-			    next.onclick = function () {
-			        if (animated) {    //如果切换还在进行，则直接结束，直到切换完成
-			            return;
-			        }
-			        if (index == 5) {
-			            index = 1; 
-			        }
-			        else {
-			            index += 1;
-			        }
-			        animate(-480);
-			        showButton();
-			    }
-			    //左点击
-			    prev.onclick = function () {
-			        if (animated) {       //如果切换还在进行，则直接结束，直到切换完成
-			            return;
-			        }
-			        if (index == 1) {
-			            index = 5;
-			        }
-			        else {
-			            index -= 1;
-			        }
-			        animate(480);
-			        showButton();
-			    }
+                </ul>
+            </div>
+        </div>
 
-			    for (var i = 0; i < buttons.length; i++) {
-			        buttons[i].onclick = function () {
-			            if (animated) {         //如果切换还在进行，则直接结束，直到切换完成
-			                return;
-			            }
-			            if(this.className == 'on') {     //如果点击的按钮是当前的按钮，不切换，结束
-			                return;
-			            }
-			            //获取按钮的自定义属性index，用于得到索引值
-			            var myIndex = parseInt(this.getAttribute('index'));
-			            var offset = -480 * (myIndex - index);   //计算总的位移量
+        <div class="achievements">
+            <div class="achievements-title">
+                <p class="pull-left">科研成果栏</p>
+                <a href="achievements.html">
+                    <div class="meu pull-right">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+            <div id="achievement_content" class="achievements-content">
+                <ul>
 
-			            animate(offset);
-			            index = myIndex;   //将新的索引值赋值index
-			            showButton();
-			        }
-			    }
+                </ul>
+            </div>
+        </div>
+        <div class="project ">
+            <div class="project-title">
+                <p class="pull-left">科研项目栏</p>
+                <a href="project.html">
+                    <div class="meu pull-right">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+            <div id="project_content" class="project-content">
+                <ul>
 
-			    foucus.onmouseover = stop;//父容器的移入移出事件
-			    foucus.onmouseout = play;
+                </ul>
+            </div>
+        </div>
+        <div class="ban">
 
-			    play();  //调用自动播放函数
-			}
-		</script>
+        </div>
+    </div><!-- content end -->
+
+    <div class="footer">
+        <div class="href-1 ">
+            <p>友情链接</p>
+        </div>
+        <div class="foot-1">
+
+        </div>
+    </div><!-- footer end -->
+
+
+
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.cookie.js"></script>
+
+
+
+    <script>
+
+        document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+        window.onload=function(){
+
+            if($.cookie("user_id") == null) {
+                alert("帐号或密码错误!");
+                location.href="/login.html";
+            }
+
+            $("#name").text($.cookie("user_name"));
+
+            var foucus = document.getElementById('foucus');
+            var list = document.getElementById('list');
+            var buttons = document.getElementById('buttons').getElementsByTagName('span');
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            var index = 1;    //用于索引当前按钮
+            var len = 5;      //图片的数量
+            var animated = false;   //用于判断切换是否进行
+            var interval = 3000;    //自动播放定时器秒数，这里是3秒
+            var timer;             //定时器
+
+            function animate (offset) {
+                animated = true;     //切换进行中
+                var time = 300;     //位移总时间
+                var inteval = 10;   //位移间隔时间
+                var speed = offset/(time/inteval);   //每次位移量
+                var left = parseInt(list.style.left) + offset; //目标值
+
+                var go = function (){
+                    //这两种情况表示还在切换中
+                    if ( (speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
+                        list.style.left = parseInt(list.style.left) + speed + 'px';
+                        setTimeout(go, inteval); //继续执行切换go()函数
+                    }
+                    else {
+                        list.style.left = left + 'px';
+                        if(left>-480){
+                            list.style.left = -480 * len + 'px';
+                        }
+                        if(left<(-480 * len)) {
+                            list.style.left = '-480px';
+                        }
+                        animated = false; //切换完成
+                    }
+                }
+                go();
+            }
+            //用于为按钮添加样式
+            function showButton() {
+                //先找出原来有.on类的按钮，并移除其类
+                for (var i = 0; i < buttons.length ; i++) {
+                    if( buttons[i].className == 'on'){
+                        buttons[i].className = '';
+                        break;
+                    }
+                }
+                //为当前按钮添加类
+                buttons[index - 1].className = 'on';
+            }
+            //自动播放
+            function play() {
+                timer = setTimeout(function () {
+                    next.onclick();
+                    play();
+                }, interval);
+            }
+            //清除定时器
+            function stop() {
+                clearTimeout(timer);
+            }
+            //右点击
+            next.onclick = function () {
+                if (animated) {    //如果切换还在进行，则直接结束，直到切换完成
+                    return;
+                }
+                if (index == 5) {
+                    index = 1;
+                }
+                else {
+                    index += 1;
+                }
+                animate(-480);
+                showButton();
+            }
+            //左点击
+            prev.onclick = function () {
+                if (animated) {       //如果切换还在进行，则直接结束，直到切换完成
+                    return;
+                }
+                if (index == 1) {
+                    index = 5;
+                }
+                else {
+                    index -= 1;
+                }
+                animate(480);
+                showButton();
+            }
+
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                    if (animated) {         //如果切换还在进行，则直接结束，直到切换完成
+                        return;
+                    }
+                    if(this.className == 'on') {     //如果点击的按钮是当前的按钮，不切换，结束
+                        return;
+                    }
+                    //获取按钮的自定义属性index，用于得到索引值
+                    var myIndex = parseInt(this.getAttribute('index'));
+                    var offset = -480 * (myIndex - index);   //计算总的位移量
+
+                    animate(offset);
+                    index = myIndex;   //将新的索引值赋值index
+                    showButton();
+                }
+            }
+
+            foucus.onmouseover = stop;//父容器的移入移出事件
+            foucus.onmouseout = play;
+
+            play();  //调用自动播放函数
+
+
+            showNoticeData();
+            showAchievementData();
+            showProjectData();
+        }
+
+        function showNoticeData(){
+            var conditions = "top"
+
+            $("#notice_content").empty();
+
+            var noticeUrl = "/notice/queryAll"
+
+            $.get(noticeUrl,{conditions:conditions},function(data) {
+                if(data != null) {
+                    var str = "";
+                    str += "<ul>";
+                    for(var i=0;i<data.length;i++) {
+                        str += "<li><span>"+UnixToDate(data[i].publishDate)+"</span><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].publisher+"`,`通知公告`,`"+data[i].content+"`)' >"+data[i].title+"</a></li>";
+                    }
+                    str += "</ul>";
+
+                    $("#notice_content").append(str);
+
+                } else {
+                    alert("error!")
+                }
+            });
+        }
+
+        function pageDetails(title, date, author, origin, content){
+            $.cookie("page_title",title, { expires: 1})
+            $.cookie("page_date",date, { expires: 1})
+            $.cookie("page_author",author, { expires: 1})
+            $.cookie("page_origin",origin, { expires: 1})
+            $.cookie("page_content",content, { expires: 1})
+
+            location.href = "details_page.html";
+        }
+
+        function showAchievementData(){
+            var conditions = "top"
+
+            $("#achievement_content").empty();
+
+            var noticeUrl = "/achievement/queryAll"
+
+            $.get(noticeUrl,{conditions:conditions},function(data) {
+                if(data != null) {
+                    var str = "";
+                    str += "<ul>";
+                    for(var i=0;i<data.length;i++) {
+                        str += "<li><span>"+UnixToDate(data[i].publishDate)+"</span><a href='#' onclick='pageDetails(`"+data[i].projectName+"`,`"+UnixToDateTime(data[i].publishDate)+"`,`"+data[i].projectMan+"`,`科研成果`,`"+data[i].content+"`)' >"+data[i].projectName+"</a></li>";
+                    }
+                    str += "</ul>";
+
+                    $("#achievement_content").append(str);
+
+                } else {
+                    alert("error!")
+                }
+            });
+        }
+
+        function showProjectData(){
+            var conditions = "top"
+
+            $("#project_content").empty();
+
+            var noticeUrl = "/project/queryAll"
+
+            $.get(noticeUrl,{conditions:conditions},function(data) {
+                if(data != null) {
+                    var str = "";
+                    str += "<ul>";
+                    for(var i=0;i<data.length;i++) {
+                        str += "<li><span>"+UnixToDate(data[i].declareTime)+"</span><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].declareTime)+"`,`"+data[i].applicant+"`,`科研项目`,`"+data[i].summary+"`)'>"+data[i].title+"</a></li>";
+                    }
+                    str += "</ul>";
+
+                    $("#project_content").append(str);
+
+                } else {
+                    alert("error!")
+                }
+            });
+        }
+
+        /**
+         * @return {string}
+         */
+        function UnixToDate(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += time.getUTCFullYear() + "-";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+            ymdhis += time.getUTCDate();
+
+            /*ymdhis += " " + time.getUTCHours() + ":";
+             ymdhis += time.getUTCMinutes() + ":";
+             ymdhis += time.getUTCSeconds();*/
+            return ymdhis;
+        }
+
+        function UnixToDateTime(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += time.getUTCFullYear() + "-";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+            ymdhis += time.getUTCDate();
+
+            ymdhis += " " + time.getUTCHours() + ":";
+            ymdhis += time.getUTCMinutes() + ":";
+            ymdhis += time.getUTCSeconds();
+            return ymdhis;
+        }
+
+    </script>
+
 </body>
 </html>

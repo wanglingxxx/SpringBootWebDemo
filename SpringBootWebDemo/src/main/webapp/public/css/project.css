@@ -114,7 +114,7 @@ a{
 	line-height:36px;
 }
 .new-project-title .more{
-	color:##727272;
+	color:#727272;
 	font-size:16px;
 	margin-right:50px;
 	line-height:36px;
@@ -162,7 +162,7 @@ a{
 
 .all-project	{
 	width:inherit;
-	height:550px;
+	height:auto;
 	margin-top:20px;
 }
 .all-project-title{
@@ -180,7 +180,7 @@ a{
 }
 .all-project-content{
 	width:inherit;
-	height:500px;
+	height:auto;
 	margin-top:40px;
 
 }
@@ -201,13 +201,13 @@ a{
 	color: #ff3737;
 }
 .all-project-content ul li .title{
-	color:##343434;
+	color:#343434;
 	font-size:18px;
 	line-height:36px;
 
 }
 .all-project-content ul li .con{
-	color:##808080;
+	color:#808080;
 	font-size:14px;
 	line-height:24px;
 	padding-left:20px;

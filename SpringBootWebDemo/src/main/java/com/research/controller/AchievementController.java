@@ -80,7 +80,7 @@ public class AchievementController {
     @RequestMapping(value = "/update", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     ResponseEntity<?> updateAchievementById(Integer id, @RequestParam(value = "projectName", required = false)String projectName,
                 String projectMan, @RequestParam(value = "awardSituation", required = false) String awardSituation,
-                @RequestParam(value = "content", required = false) String content,@RequestParam("images") MultipartFile images) {
+                @RequestParam(value = "content", required = false) String content,@RequestParam(value = "images",required = false) MultipartFile images) {
 
         Preconditions.checkArgument(id != null && id > 0, "Achievement id is null");
         Preconditions.checkArgument(projectMan != null && projectMan.length() > 0, "Achievement projectMan is null");
@@ -136,13 +136,19 @@ public class AchievementController {
 
 
     @RequestMapping(value = "/queryAll", method = RequestMethod.GET,produces = {"application/json;charset=utf-8"})
-    ResponseEntity<?> getAchievementsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions) {
+    ResponseEntity<?> getAchievementsAll(@RequestParam(value = "conditions", defaultValue = "all") String conditions,
+                                         @RequestParam(value = "pageIndex",required = false)Integer pageIndex,
+                                         @RequestParam(value = "pageSize",required = false)Integer pageSize) {
 
         List<Achievement> achievements = null;
         Pagination pagination = new Pagination();
 
         if(conditions.equals("all")) {
-            pagination.setPageSize(100);
+            if(pageSize != null && pageSize >0){
+                pagination.setPageSize(pageSize);
+            }else {
+                pagination.setPageSize(100);
+            }
             achievements = achievementService.getAchievements(pagination);
         } else if(conditions.equals("recent")) {
             Date date = new Date();
@@ -150,6 +156,14 @@ public class AchievementController {
             SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
             String condition = formatter.format(date);
             achievements = achievementService.queryAchievements(condition ,"");
+        }  else if(conditions.equals("top")) {
+            pagination.setPageIndex(pageIndex);
+            if(pageSize != null && pageSize >0){
+                pagination.setPageSize(pageSize);
+            }else {
+                pagination.setPageSize(7);
+            }
+            achievements = achievementService.getAchievements(pagination);
         } else {
             logger.info("/achievement/queryAll return :{}","");
             return ResponseEntity.noContent().build();

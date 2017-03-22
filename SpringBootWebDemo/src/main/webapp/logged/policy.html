@@ -5,6 +5,12 @@
 	<title>科技时政</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
 	<link rel="stylesheet" href="../public/css/policy.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="application/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<header>
@@ -22,14 +28,14 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
 							<li><a href="report.html">申报项目</a></li>
 							<li><a href="myproject.html">我的科研项目</a></li>
 							<li><span></span></li>
-							<li><a href="">修改密码</a></li>
+							<li><a href="#" onclick="showUpdateUser()">修改密码</a></li>
 							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
@@ -42,315 +48,372 @@
 			</div>
 		</div>
 	</header>
-	<div class="content container">
-		<div class="foucus pull-left" id="foucus">
-		    <div id="list" style="left: -480px;">
-		        <img src="public/images/5.jpg" alt="5"/>
-		        <img src="public/images/1.jpg" alt="1"/>
-		        <img src="public/images/2.jpg" alt="2"/>
-		        <img src="public/images/3.jpg" alt="3"/>
-		        <img src="public/images/4.jpg" alt="4"/>
-		        <img src="public/images/5.jpg" alt="5"/>
-		        <img src="public/images/1.jpg" alt="1"/>
-		    </div>
-		    <div id="buttons">
-		        <span index="1" class="on"></span>
-		        <span index="2"></span>
-		        <span index="3"></span>
-		        <span index="4"></span>
-		        <span index="5"></span>
-			</div>
-			<a href="javascript:;" id="prev" class="arrow">&lt;</a>
-			<a href="javascript:;" id="next" class="arrow">&gt;</a>
-		</div>
-		<div class="policy-file pull-right">
-			<div class="policy-file-title">
-				<p class="pull-left title">政策文件</p>
-				<a class="pull-right more" href="">更多>></a>
-			</div>
-			<div class="policy-file-content">
-				<ul>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="policy-news">
-			<div class="policy-news-tilte">
-				<p>时政消息</p>
-			</div>
-			<div class="policy-news-content">
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-				<div class="policy-news-con">
-					<div class="date pull-left">
-						<span class="day pull-left">14日</span>
-						<span class="month pull-right">7月</span>
-					</div>
-					<div class="news">
-						<a href="">
-							<p class="news-title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX<p>
-							<p class="news-summary">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-						</a>
-					</div>
-				</div>
-
-			</div><!-- policy-news-content end -->
-			<button class="get-more" type="button">
-				加载更多
-			</button>
-		</div><!-- policy-news end -->
-	</div><!-- content end -->
-	<footer>
-		<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
-	</footer>
-	
-	
-	
-	<script>
-			document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
-			window.onload = function () {
-			    var foucus = document.getElementById('foucus');
-			    var list = document.getElementById('list');
-			    var buttons = document.getElementById('buttons').getElementsByTagName('span');
-			    var prev = document.getElementById('prev');
-			    var next = document.getElementById('next');
-			    var index = 1;    //用于索引当前按钮
-			    var len = 5;      //图片的数量
-			    var animated = false;   //用于判断切换是否进行
-			    var interval = 3000;    //自动播放定时器秒数，这里是3秒
-			    var timer;             //定时器
+    <div class="content container">
+        <div class="foucus pull-left" id="foucus">
+            <div id="list" style="left: -480px;">
+                <img src="../public/images/5.jpg" alt="5"/>
+                <img src="../public/images/1.jpg" alt="1"/>
+                <img src="../public/images/2.jpg" alt="2"/>
+                <img src="../public/images/3.jpg" alt="3"/>
+                <img src="../public/images/4.jpg" alt="4"/>
+                <img src="../public/images/5.jpg" alt="5"/>
+                <img src="../public/images/1.jpg" alt="1"/>
+            </div>
+            <div id="buttons">
+                <span index="1" class="on"></span>
+                <span index="2"></span>
+                <span index="3"></span>
+                <span index="4"></span>
+                <span index="5"></span>
+            </div>
+            <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+            <a href="javascript:;" id="next" class="arrow">&gt;</a>
+        </div>
+        <div class="policy-file pull-right">
+            <div class="policy-file-title">
+                <p class="pull-left title">政策文件</p>
+                <a class="pull-right more" href="">更多>></a>
+            </div>
+            <div class="policy-file-content">
+                <ul id="politics_files">
 
 
-			    function animate (offset) {
-			        animated = true;     //切换进行中
-			        var time = 300;     //位移总时间
-			        var inteval = 10;   //位移间隔时间
-			        var speed = offset/(time/inteval);   //每次位移量
-			        var left = parseInt(list.style.left) + offset; //目标值
+                </ul>
+            </div>
+        </div>
+        <div class="policy-news">
+            <div class="policy-news-tilte">
+                <p>时政消息</p>
+            </div>
+            <div  class="policy-file-content">
+                <ul id="research_politics_all">
+                </ul>
 
-			        var go = function (){
-			            //这两种情况表示还在切换中
-			         if ( (speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
-			                list.style.left = parseInt(list.style.left) + speed + 'px';
-			                setTimeout(go, inteval); //继续执行切换go()函数
-			            }
-			            else {
-			                list.style.left = left + 'px';
-			                if(left>-480){
-			                    list.style.left = -480 * len + 'px';
-			                }
-			                if(left<(-480 * len)) {
-			                    list.style.left = '-480px';
-			                }
-			                animated = false; //切换完成
-			            }
-			        }
-			        go();
-			    }
-			    //用于为按钮添加样式
-			    function showButton() {
-			        //先找出原来有.on类的按钮，并移除其类
-			        for (var i = 0; i < buttons.length ; i++) {
-			            if( buttons[i].className == 'on'){
-			                buttons[i].className = '';
-			                break;
-			            }
-			        }
-			        //为当前按钮添加类
-			        buttons[index - 1].className = 'on';
-			    }
-			     //自动播放
-			    function play() {
-			        timer = setTimeout(function () {
-			            next.onclick();
-			            play();
-			        }, interval);
-			    }
-			     //清除定时器
-			    function stop() {
-			        clearTimeout(timer);
-			    }
-			    //右点击
-			    next.onclick = function () {
-			        if (animated) {    //如果切换还在进行，则直接结束，直到切换完成
-			            return;
-			        }
-			        if (index == 5) {
-			            index = 1; 
-			        }
-			        else {
-			            index += 1;
-			        }
-			        animate(-480);
-			        showButton();
-			    }
-			    //左点击
-			    prev.onclick = function () {
-			        if (animated) {       //如果切换还在进行，则直接结束，直到切换完成
-			            return;
-			        }
-			        if (index == 1) {
-			            index = 5;
-			        }
-			        else {
-			            index -= 1;
-			        }
-			        animate(480);
-			        showButton();
-			    }
+            </div><!-- policy-news-content end -->
+            <button onclick="showPoliticsAll()" class="get-more" type="button">
+                加载更多
+            </button>
+        </div><!-- policy-news end -->
+    </div><!-- content end -->
 
-			    for (var i = 0; i < buttons.length; i++) {
-			        buttons[i].onclick = function () {
-			            if (animated) {         //如果切换还在进行，则直接结束，直到切换完成
-			                return;
-			            }
-			            if(this.className == 'on') {     //如果点击的按钮是当前的按钮，不切换，结束
-			                return;
-			            }
-			            //获取按钮的自定义属性index，用于得到索引值
-			            var myIndex = parseInt(this.getAttribute('index'));
-			            var offset = -480 * (myIndex - index);   //计算总的位移量
 
-			            animate(offset);
-			            index = myIndex;   //将新的索引值赋值index
-			            showButton();
-			        }
-			    }
+    <!-- 按钮触发模态框 -->
+    <button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+    <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="updateUserModalLabel">修改密码</h4>
+                </div>
 
-			    foucus.onmouseover = stop;//父容器的移入移出事件
-			    foucus.onmouseout = play;
+                <div class="modal-body">
+                    <form role="form" id=""
+                          action="">
 
-			    play();  //调用自动播放函数
-			}
-		</script>
+                        <input type="hidden" class="form-control"  id="research_user_update_id"  name="id" value="" >
+
+
+                        <div class="form-group">
+                            <label>新密码:</label>
+                            <div>
+                                <input type="password" class="form-control" id="research_user_update_old_password"
+                                       value=""  placeholder="请输入你的密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>再输一次:</label>
+                            <div>
+                                <input type="password" id="research_user_update_new_password" name="password" class="form-control"
+                                       value=""  placeholder="请输入你的密码">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <footer>
+        <div class="href-1 ">
+            <p>友情链接</p>
+        </div>
+        <div class="foot-1">
+
+        </div>
+
+    </footer>
+
+
+
+
+    <script>
+        document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
+        window.onload = function () {
+            var foucus = document.getElementById('foucus');
+            var list = document.getElementById('list');
+            var buttons = document.getElementById('buttons').getElementsByTagName('span');
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            var index = 1;    //用于索引当前按钮
+            var len = 5;      //图片的数量
+            var animated = false;   //用于判断切换是否进行
+            var interval = 3000;    //自动播放定时器秒数，这里是3秒
+            var timer;             //定时器
+
+
+            function animate (offset) {
+                animated = true;     //切换进行中
+                var time = 300;     //位移总时间
+                var inteval = 10;   //位移间隔时间
+                var speed = offset/(time/inteval);   //每次位移量
+                var left = parseInt(list.style.left) + offset; //目标值
+
+                var go = function (){
+                    //这两种情况表示还在切换中
+                    if ( (speed > 0 && parseInt(list.style.left) < left) || (speed < 0 && parseInt(list.style.left) > left)) {
+                        list.style.left = parseInt(list.style.left) + speed + 'px';
+                        setTimeout(go, inteval); //继续执行切换go()函数
+                    }
+                    else {
+                        list.style.left = left + 'px';
+                        if(left>-480){
+                            list.style.left = -480 * len + 'px';
+                        }
+                        if(left<(-480 * len)) {
+                            list.style.left = '-480px';
+                        }
+                        animated = false; //切换完成
+                    }
+                }
+                go();
+            }
+            //用于为按钮添加样式
+            function showButton() {
+                //先找出原来有.on类的按钮，并移除其类
+                for (var i = 0; i < buttons.length ; i++) {
+                    if( buttons[i].className == 'on'){
+                        buttons[i].className = '';
+                        break;
+                    }
+                }
+                //为当前按钮添加类
+                buttons[index - 1].className = 'on';
+            }
+            //自动播放
+            function play() {
+                timer = setTimeout(function () {
+                    next.onclick();
+                    play();
+                }, interval);
+            }
+            //清除定时器
+            function stop() {
+                clearTimeout(timer);
+            }
+            //右点击
+            next.onclick = function () {
+                if (animated) {    //如果切换还在进行，则直接结束，直到切换完成
+                    return;
+                }
+                if (index == 5) {
+                    index = 1;
+                }
+                else {
+                    index += 1;
+                }
+                animate(-480);
+                showButton();
+            }
+            //左点击
+            prev.onclick = function () {
+                if (animated) {       //如果切换还在进行，则直接结束，直到切换完成
+                    return;
+                }
+                if (index == 1) {
+                    index = 5;
+                }
+                else {
+                    index -= 1;
+                }
+                animate(480);
+                showButton();
+            }
+
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                    if (animated) {         //如果切换还在进行，则直接结束，直到切换完成
+                        return;
+                    }
+                    if(this.className == 'on') {     //如果点击的按钮是当前的按钮，不切换，结束
+                        return;
+                    }
+                    //获取按钮的自定义属性index，用于得到索引值
+                    var myIndex = parseInt(this.getAttribute('index'));
+                    var offset = -480 * (myIndex - index);   //计算总的位移量
+
+                    animate(offset);
+                    index = myIndex;   //将新的索引值赋值index
+                    showButton();
+                }
+            }
+
+            foucus.onmouseover = stop;//父容器的移入移出事件
+            foucus.onmouseout = play;
+
+            play();  //调用自动播放函数
+
+            $("#name").text($.cookie("user_name"));
+
+            showPoliticsFiles();
+            showPoliticsAll();
+
+        }
+
+
+        function showPoliticsFiles(){
+            var conditions = "top"
+
+            $("#politics_files").empty();
+
+            var politicsUrl = "/politics/queryAll"
+
+            $.get(politicsUrl,{conditions:conditions},function(data) {
+                if(data != null) {
+                    var str = "";
+
+                    for(var i=0;i<data.length;i++) {
+                        str += "<li><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].date)+"`,`"+data[i].author+"`,`科技时政`,`"+data[i].origin+"`)'>"+data[i].title+"</a></li>";
+                    }
+
+                    $("#politics_files").append(str);
+
+                } else {
+                    alert("error!")
+                }
+            });
+        }
+
+        function pageDetails(title, date, author, origin, content){
+            $.cookie("page_title",title, { expires: 1})
+            $.cookie("page_date",date, { expires: 1})
+            $.cookie("page_author",author, { expires: 1})
+            $.cookie("page_origin",origin, { expires: 1})
+            $.cookie("page_content",content, { expires: 1})
+
+            location.href = "details_page.html";
+        }
+
+        function showPoliticsAll(){
+            var tbody=document.getElementById('research_politics_all');
+            var atr=tbody.getElementsByTagName('li');
+            var pageIndex =Math.ceil(atr.length/7);
+            var conditions = "top"
+            if(atr == 0) {
+                $("#research_politics_all").empty();
+            }
+            var politicsUrl = "/politics/queryAll"
+
+            $.get(politicsUrl,{conditions:conditions,pageIndex:pageIndex},function(data) {
+                if(data != null && data.length > 0) {
+
+                    var str ="";
+                    for(var i=0;i<data.length;i++) {
+
+                        str += "<li><span>"+UnixToDate(data[i].date)+"</span><a href='#' onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].date)+"`,`"+data[i].author+"`,`科技时政`,`"+data[i].origin+"`)'>"+data[i].title+"</a></li>";
+                    }
+
+                    $("#research_politics_all").append(str);
+
+                } else {
+                    alert("没有更多了!")
+                }
+            });
+        }
+
+        /**
+         * @return {string}
+         */
+        function UnixToDate(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += time.getUTCFullYear() + "-";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+            ymdhis += time.getUTCDate();
+
+            /*ymdhis += " " + time.getUTCHours() + ":";
+             ymdhis += time.getUTCMinutes() + ":";
+             ymdhis += time.getUTCSeconds();*/
+            return ymdhis;
+        }
+
+        function UnixToMonth(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+
+
+            /*ymdhis += " " + time.getUTCHours() + ":";
+             ymdhis += time.getUTCMinutes() + ":";
+             ymdhis += time.getUTCSeconds();*/
+            return ymdhis;
+        }
+
+        function UnixToDay(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += time.getUTCDate();
+            /*ymdhis += " " + time.getUTCHours() + ":";
+             ymdhis += time.getUTCMinutes() + ":";
+             ymdhis += time.getUTCSeconds();*/
+            return ymdhis;
+        }
+
+        function UnixToDateTime(unixTime) {
+            var time = new Date(unixTime);
+            var ymdhis = "";
+            ymdhis += time.getUTCFullYear() + "-";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+            ymdhis += time.getUTCDate();
+
+            ymdhis += " " + time.getUTCHours() + ":";
+            ymdhis += time.getUTCMinutes() + ":";
+            ymdhis += time.getUTCSeconds();
+            return ymdhis;
+        }
+
+        function showUpdateUser(){
+
+            $("#search_user_update_modal").click();
+        }
+
+        function updateUserById(){
+            var id = $.cookie("user_id")
+            var oldPassword = $("#research_user_update_old_password").val();
+            var newPassword = $("#research_user_update_new_password").val();
+            if(oldPassword != newPassword) {
+                alert("两次输入密码不一致!")
+            } else {
+                var url="/user/update";
+                $.post(url,{id:id, password:newPassword}, function(data) {
+                    if(data != null) {
+                        window.location.href = "index.html";
+                    } else {
+                        alert("该项目不存在");
+                        window.location.href = "index.html";
+                    }
+                });
+            }
+        }
+
+    </script>
 </body>
 </html>

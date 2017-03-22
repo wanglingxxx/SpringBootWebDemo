@@ -414,21 +414,23 @@
         </div>
         <div class="con">
           <div class="pannal-ach pannal-ach-1 show">
-              <form  id="researchAchievementAddForm" enctype="multipart/form-data" method="POST">
+
+              <form id="research_achievement_add_form1" enctype="multipart/form-data">
                   <div class="form-group">
                       <label >文章标题：</label>
                       <input type="text" name="projectName" id="research_achievement_add_project_name" class="con-text">
                   </div>
-                  <div class="form-group">
+
 
                   <div class="form-group">
                       <label for="research_achievement_add_content_file">必要内容文件上传：</label>
                       <input type="file" name="contentFile" id="research_achievement_add_content_file">
                   </div>
-                      <div class="form-group">
-                          <label for="research_achievement_add_images">封面上传：</label>
-                          <input type="file" name="images" id="research_achievement_add_images">
-                      </div>
+
+                  <div class="form-group">
+                      <label for="research_achievement_add_images">封面上传：</label>
+                      <input type="file" name="images" id="research_achievement_add_images">
+                  </div>
 
                     <div class="markdown">
                       <label>内容编辑区：</label>
@@ -444,11 +446,13 @@
                       <label>结果在这儿：</label>
                       <div id="preview-3" class="preview" > </div>
                     </div>
-                  </div>
+
 
 
                 <button type="button" onclick="addAchievement()" class="btn">发布</button>
-             </form>
+              </form>
+
+
           </div>
 
           <div class="pannal-ach pannal-ach-2 hidden">
@@ -635,6 +639,12 @@
              $("#name").text($.cookie("user_name"));
 
              initData();
+
+             var enable = $.cookie("user_enable");
+             if(enable != 1){
+                 location.href = "/login.html";
+             }
+
 
             function Editor(input, preview) {
               this.update = function () {
@@ -2071,10 +2081,10 @@
                      awardSituation == null || awardSituation.length ==0 || content == null || content.length ==0 ) {
                  alert("参数不能为空")
              } else {
-                 //3秒后执行
+                 //1秒后执行
                  setTimeout( function(){
                      addAchievement1();
-                 }, 3 * 1000 );
+                 }, 2 * 1000 );
              }
 
          }

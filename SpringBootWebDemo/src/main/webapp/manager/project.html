@@ -6,6 +6,12 @@
 	<title>科研项目</title>
 	<link rel="stylesheet" href="../public/css/reset.css">
 	<link rel="stylesheet" href="../public/css/project.css">
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="application/javascript" src="/js/jquery.cookie.js"></script>
+	<script type="application/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<header>
@@ -23,7 +29,7 @@
 					</ul>
 				</nav>
 				<div class="pull-right log" id="log">
-					<span>管理员：</span><a href="javascript:;" id="name">李三<img src="../public/images/sanjiao.png" alt=""></a>
+					<span>管理员：</span><a href="javascript:;" id="name"></a><img src="../public/images/sanjiao.png" alt="">
 					
 					<div class="box" id="box">
 						<ul>
@@ -34,7 +40,7 @@
 							<li><a href="review_items.html">审核项目</a></li>
 							<li><a href="platform_manager.html">平台内容管理</a></li>
 							<li><span></span></li>
-							<li><a href="">修改密码</a></li>
+							<li><a href="#" onclick="showUpdateUser()">修改密码</a></li>
 							<li><a href="/login.html">注销</a></li>
 						</ul>
 					</div>
@@ -48,21 +54,15 @@
 		</div>
 	</header>
 	<div class="content container">
-		
+
 		<div class="new-project">
 			<div class="new-project-title">
 				<p class="pull-left title">最新发布</p>
 				<a class="pull-right more" href="">更多>></a>
 			</div>
 			<div class="new-project-content">
-				<ul>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
-					<li><a href="">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</a><span>【2016-07-14】</span></li>
+				<ul id="project_new">
+
 				</ul>
 			</div>
 		</div>
@@ -70,58 +70,197 @@
 		<div class="all-project">
 			<div class="all-project-title">
 				<p class="pull-left title">所有项目展示</p>
-				
+
 			</div>
 			<div class="all-project-content">
-				<ul>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					<li><a href="">
-							<p class="title">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-							<p class="con">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx</p>
-					</a></li>
-					
-					
+				<ul id="project_all">
+
 				</ul>
 			</div>
-		</div>
-		<button class="get-more" type="button">
+			<br>
+			<br>
+			<br>
+
+			<button onclick="showProjectAll()" class="get-more" type="button">
 				加载更多
 			</button>
+		</div>
+
 	</div><!-- content end -->
 	<footer>
 		<div class="href-1 ">
-				<p>友情链接</p>
-			</div>
-			<div class="foot-1">
-				
-			</div>
+			<p>友情链接</p>
+		</div>
+		<div class="foot-1">
+
+		</div>
+
+		<!-- 按钮触发模态框 -->
+		<button class="btn btn-primary btn-lg" style="display: none;" id="search_user_update_modal" data-toggle="modal" data-target="#updateUserModal"></button>
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="UserModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="updateUserModalLabels">修改密码</h4>
+					</div>
+
+					<div class="modal-body">
+						<form role="form"  action="">
+
+							<div class="form-group">
+								<label>新密码:</label>
+								<div>
+									<input type="password" class="form-control" id="research_user_update_old_password"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<label>再输一次:</label>
+								<div>
+									<input type="password" id="research_user_update_new_password" name="password" class="form-control"
+										   value=""  placeholder="请输入你的密码">
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="updateUserById()">提交更改</button>
+					</div>
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
 	</footer>
-	
+
+
 	<script>
 		document.write( "<script language=javascript src='../public/js/box.js'><\/script>");
 		window.onload=function(){
+			$("#name").text($.cookie("user_name"));
 
+			showProjectData();
+			showProjectAll();
 		}
+
+		function showProjectData(){
+			var conditions = "top"
+
+			$("#project_new").empty();
+
+			var noticeUrl = "/project/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions},function(data) {
+				if(data != null) {
+					var str = "";
+
+					for(var i=0;i<data.length;i++) {
+						str += "<li><a href='#'  onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].declareTime)+"`,`"+data[i].applicant+"`,`科研项目`,`"+data[i].summary+"`)'>"+data[i].title+"</a><span>"+UnixToDate(data[i].declareTime)+"</span></li>";
+					}
+
+					$("#project_new").append(str);
+
+				} else {
+					alert("error!")
+				}
+			});
+		}
+
+		function showProjectAll(){
+			var tbody=document.getElementById('project_all');
+			var atr=tbody.getElementsByTagName('li');
+			var pageIndex =Math.ceil(atr.length/7);
+			var conditions = "top"
+			if(atr == 0) {
+				$("#achievement_images").empty();
+			}
+			var pageSize = 7;
+			var noticeUrl = "/project/queryAll"
+
+			$.get(noticeUrl,{conditions:conditions,pageIndex:pageIndex,pageSize:pageSize},function(data) {
+				if(data != null && data.length > 0) {
+					var str = ""
+
+					for(var i=0;i<data.length;i++) {
+
+						str += "<li><a href='#'  onclick='pageDetails(`"+data[i].title+"`,`"+UnixToDateTime(data[i].declareTime)+"`,`"+data[i].applicant+"`,`科研项目`,`"+data[i].summary+"`)'><p class='title'>"+data[i].title+"</p><p class='con'>"+data[i].summary+"</p></a></li>";
+					}
+
+					$("#project_all").append(str);
+
+				} else {
+					alert("没有更多了!")
+				}
+			});
+		}
+
+		/**
+		 * @return {string}
+		 */
+		function UnixToDate(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			/*ymdhis += " " + time.getUTCHours() + ":";
+			 ymdhis += time.getUTCMinutes() + ":";
+			 ymdhis += time.getUTCSeconds();*/
+			return ymdhis;
+		}
+
+		function UnixToDateTime(unixTime) {
+			var time = new Date(unixTime);
+			var ymdhis = "";
+			ymdhis += time.getUTCFullYear() + "-";
+			ymdhis += (time.getUTCMonth()+1) + "-";
+			ymdhis += time.getUTCDate();
+
+			ymdhis += " " + time.getUTCHours() + ":";
+			ymdhis += time.getUTCMinutes() + ":";
+			ymdhis += time.getUTCSeconds();
+			return ymdhis;
+		}
+
+		function pageDetails(title, date, author, origin, content){
+			$.cookie("page_title",title, { expires: 1})
+			$.cookie("page_date",date, { expires: 1})
+			$.cookie("page_author",author, { expires: 1})
+			$.cookie("page_origin",origin, { expires: 1})
+			$.cookie("page_content",content, { expires: 1})
+
+			location.href = "details_page.html";
+		}
+
+		function showUpdateUser(){
+
+			$("#search_user_update_modal").click();
+		}
+
+		function updateUserById(){
+			var id = $.cookie("user_id")
+			var oldPassword = $("#research_user_update_old_password").val();
+			var newPassword = $("#research_user_update_new_password").val();
+			if(oldPassword != newPassword) {
+				alert("两次输入密码不一致!")
+			} else {
+				var url="/user/update";
+				$.post(url,{id:id, password:newPassword}, function(data) {
+					if(data != null) {
+						window.location.href = "index.html";
+					} else {
+						alert("该项目不存在");
+						window.location.href = "index.html";
+					}
+				});
+			}
+		}
+
 	</script>
 </body>
 </html>
